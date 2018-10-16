@@ -1,0 +1,14 @@
+{
+  "ID_HOME": "Home",
+  "ID_PRODUCT": "Product",
+  "ID_SERVICE": "Service",
+  "ID_INTRODUCTION": "Introduction",
+  "ID_CONTACT": "Contact",
+  "ID_SELECT_LANGUAGE": "Select language",
+  "ID_ADDRESS": "Address",
+  "ID_EMAIL": "Email",
+  "ID_HOT_LINE": "Hotline",
+  "ID_TITLE": "Title",
+  "ID_SEND": "Send",
+  "ID_DETAIL": "Detail"
+}

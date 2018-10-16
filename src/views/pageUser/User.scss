@@ -1,0 +1,10 @@
+@import '../../utils/styles/common.scss';
+.home-wrapper {
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+  @include breakpoint(pc) { width: 100%; }
+  @include breakpoint(tablet) { width: 90%; }
+  @include breakpoint(mobile) { width: 80%; }
+}

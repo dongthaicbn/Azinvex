@@ -1,0 +1,38 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.ant-menu, .ant-form, .ant-table, .ant-form-item {
+  font-family: inherit;
+}
+p {
+  margin: 0;
+}
+.content-container {
+  margin: 24px 16px;
+  min-height: 280px;
+  height: calc(100vh - 200px);
+}
+.logo-img {
+  height: 32px;
+  //background: rgba(255,255,255,.2);
+  margin: 16px;
+  .app-title {
+    color: white;
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+}
+.page-header {
+  margin: 0 0 20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

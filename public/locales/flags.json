@@ -1,0 +1,858 @@
+{
+  "Algeria": {
+      "x": 1,
+      "y": 4
+  },
+  "Burundi": {
+      "x": 8,
+      "y": 1
+  },
+  "Comoros": {
+      "x": 10,
+      "y": 7
+  },
+  "Egypt": {
+      "x": 12,
+      "y": 6
+  },
+  "Gambia": {
+      "x": 8,
+      "y": 5
+  },
+  "Lesotho": {
+      "x": 9,
+      "y": 8
+  },
+  "Mali": {
+      "x": 8,
+      "y": 9
+  },
+  "Namibia": {
+      "x": 8,
+      "y": 10
+  },
+  "Sao Tome and Principe": {
+      "x": 12,
+      "y": 13
+  },
+  "South Africa": {
+      "x": 13,
+      "y": 4
+  },
+  "Togo": {
+      "x": 5,
+      "y": 14
+  },
+  "Angola": {
+      "x": 8,
+      "y": 0
+  },
+  "Cameroon": {
+      "x": 1,
+      "y": 3
+  },
+  "Congo": {
+      "x": 9,
+      "y": 2
+  },
+  "Equatorial Guinea": {
+      "x": 11,
+      "y": 5
+  },
+  "Ghana": {
+      "x": 5,
+      "y": 5
+  },
+  "Liberia":{
+      "x": 8,
+      "y": 8
+  },
+  "Mauritania": {
+      "x": 12,
+      "y": 9
+  },
+  "Niger": {
+      "x": 10,
+      "y": 10
+  },
+  "Senegal": {
+      "x": 8,
+      "y": 13
+  },
+  "South Sudan": {
+      "x": 11,
+      "y": 13
+  },
+  "Tunisia": {
+      "x": 10,
+      "y": 14
+  },
+  "Benin": {
+      "x": 9,
+      "y": 1
+  },
+  "Cape Verde": {
+      "x": 6,
+      "y": 3
+  },
+  "Cote D'Ivoire": {
+      "x": 11,
+      "y": 2
+  },
+  "Eritrea": {
+      "x": 5,
+      "y": 4
+  },
+  "Guinea": {
+      "x": 9,
+      "y": 5
+  },
+  "Libya": {
+      "x": 0,
+      "y": 9
+  },
+  "Mauritius": {
+      "x": 2,
+      "y": 10
+  },
+  "Nigeria": {
+      "x": 11,
+      "y": 10
+  },
+  "Seychelles": {
+      "x": 0,
+      "y": 13
+  },
+  "Sudan": {
+      "x": 1,
+      "y": 13
+  },
+  "Uganda": {
+      "x": 5,
+      "y": 15
+  },
+  "Botswana": {
+      "x": 3,
+      "y": 2
+  },
+  "Central African Republic": {
+      "x": 8,
+      "y": 2
+  },
+  "DR Congo": {
+      "x": 7,
+      "y": 2
+  },
+  "Ethiopia": {
+      "x": 7,
+      "y": 4
+  },
+  "Guinea-Bissau": {
+      "x": 1,
+      "y": 6
+  },
+  "Madagascar": {
+      "x": 5,
+      "y": 9
+  },
+  "Morocco": {
+      "x": 1,
+      "y": 9
+  },
+  "Reunion": {
+      "x": 6,
+      "y": 12
+  },
+  "Sierra Leone": {
+      "x": 6,
+      "y": 13
+  },
+  "Swaziland": {
+      "x": 2,
+      "y": 14
+  },
+  "Zambia": {
+      "x": 13,
+      "y": 5
+  },
+  "Burkina Faso": {
+      "x": 5,
+      "y": 1
+  },
+  "Chad": {
+      "x": 7,
+      "y": 12
+  },
+  "Djibouti": {
+      "x": 10,
+      "y": 3
+  },
+  "Gabon": {
+      "x": 0,
+      "y": 5
+  },
+  "Kenya": {
+      "x": 6,
+      "y": 7
+  },
+  "Malawi": {
+      "x": 4,
+      "y": 10
+  },
+  "Mozambique": {
+      "x": 7,
+      "y": 10
+  },
+  "Rwanda": {
+      "x": 10,
+      "y": 12
+  },
+  "Somalia": {
+      "x": 9,
+      "y": 13
+  },
+  "Tanzania, United Republic Of": {
+      "x": 3,
+      "y": 15
+  },
+  "Zimbabwe": {
+      "x": 13,
+      "y": 6
+  },
+  "Australia": {
+      "x": 11,
+      "y": 0
+  },
+  "Cook Islands": {
+      "x": 12,
+      "y": 2
+  },
+  "Indonesia": {
+      "x": 8,
+      "y": 6
+  },
+  "Macao": {
+      "x": 11,
+      "y": 9
+  },
+  "Mongolia": {
+      "x": 10,
+      "y": 9
+  },
+  "New Zealand": {
+      "x": 5,
+      "y": 11
+  },
+  "Philippines": {
+      "x": 11,
+      "y": 11
+  },
+  "Taiwan": {
+      "x": 2,
+      "y": 15
+  },
+  "Turkmenistan": {
+      "x": 9,
+      "y": 14
+  },
+  "Bangladesh": {
+      "x": 3,
+      "y": 1
+  },
+  "Fiji": {
+      "x": 9,
+      "y": 4
+  },
+  "Japan": {
+      "x": 5,
+      "y": 7
+  },
+  "Malaysia": {
+      "x": 6,
+      "y": 10
+  },
+  "Myanmar": {
+      "x": 9,
+      "y": 9
+  },
+  "Niue": {
+      "x": 4,
+      "y": 11
+  },
+  "Samoa": {
+      "x": 13,
+      "y": 2
+  },
+  "Tajikistan": {
+      "x": 7,
+      "y": 14
+  },
+  "Tuvalu": {
+      "x": 1,
+      "y": 15
+  },
+  "Bhutan": {
+      "x": 2,
+      "y": 2
+  },
+  "French Polynesia": {
+      "x": 9,
+      "y": 11
+  },
+  "Kiribati": {
+      "x": 9,
+      "y": 7
+  },
+  "Maldives": {
+      "x": 3,
+      "y": 10
+  },
+  "Nauru": {
+      "x": 3,
+      "y": 11
+  },
+  "Pakistan": {
+      "x": 12,
+      "y": 11
+  },
+  "Singapore": {
+      "x": 3,
+      "y": 13
+  },
+  "Thailand": {
+      "x": 6,
+      "y": 14
+  },
+  "Vanuatu": {
+      "x": 13,
+      "y": 1
+  },
+  "Brunei Darussalam": {
+      "x": 11,
+      "y": 1
+  },
+  "Hong Kong": {
+      "x": 3,
+      "y": 6
+  },
+  "Korea": {
+      "x": 12,
+      "y": 7
+  },
+  "Marshall Islands": {
+      "x": 6,
+      "y": 9
+  },
+  "Nepal": {
+      "x": 2,
+      "y": 11
+  },
+  "Palau": {
+      "x": 3,
+      "y": 12
+  },
+  "Solomon Islands": {
+      "x": 12,
+      "y": 12
+  },
+  "Timor-Leste": {
+      "x": 8,
+      "y": 14
+  },
+  "Vietnam": {
+      "x": 13,
+      "y": 0
+  },
+  "Cambodia": {
+      "x": 8,
+      "y": 7
+  },
+  "India": {
+      "x": 11,
+      "y": 6
+  },
+  "Lao People's Democratic Republic": {
+      "x": 3,
+      "y": 8
+  },
+  "Micronesia, Federated States Of": {
+      "x": 10,
+      "y": 4
+  },
+  "New Caledonia": {
+      "x": 9,
+      "y": 10
+  },
+  "Papua New Guinea": {
+      "x": 10,
+      "y": 11
+  },
+  "Sri Lanka": {
+      "x": 7,
+      "y": 8
+  },
+  "Tonga": {
+      "x": 11,
+      "y": 14
+  },
+  "Albania": {
+      "x": 5,
+      "y": 0
+  },
+  "Belarus": {
+      "x": 4,
+      "y": 2
+  },
+  "Cyprus" :{
+      "x": 7,
+      "y": 3
+  },
+  "Faroe Islands": {
+      "x": 11,
+      "y": 4
+  },
+  "Gibraltar": {
+      "x": 6,
+      "y": 5
+  },
+  "Hungary": {
+      "x": 7,
+      "y": 6
+  },
+  "Kyrgyzstan": {
+      "x": 7,
+      "y": 7
+  },
+  "Malta": {
+      "x": 1,
+      "y": 10
+  },
+  "Norway": {
+      "x": 1,
+      "y": 11
+  },
+  "San Marino": {
+      "x": 7,
+      "y": 13
+  },
+  "Sweden": {
+      "x": 2,
+      "y": 13
+  },
+  "Uzbekistan": {
+      "x": 8,
+      "y": 15
+  },
+  "Andorra": {
+      "x": 0,
+      "y": 0
+  },
+  "Belgium": {
+      "x": 4,
+      "y": 1
+  },
+  "Czech": {
+      "x": 8,
+      "y": 3
+  },
+  "Finland": {
+      "x": 8,
+      "y": 4
+  },
+  "Greece": {
+      "x": 12,
+      "y": 5
+  },
+  "Iceland": {
+      "x": 1,
+      "y": 7
+  },
+  "Latvia": {
+      "x": 12,
+      "y": 8
+  },
+  "Moldova": {
+      "x": 3,
+      "y": 9
+  },
+  "Poland": {
+      "x": 0,
+      "y": 12
+  },
+  "Serbia": {
+      "x": 8,
+      "y": 12
+  },
+  "Switzerland": {
+      "x": 10,
+      "y": 2
+  },
+  "Armenia": {
+      "x": 6,
+      "y": 0
+  },
+  "Bosnia and Herzegovina": {
+      "x": 1,
+      "y": 1
+  },
+  "Denmark": {
+      "x": 11,
+      "y": 3
+  },
+  "France": {
+      "x": 10,
+      "y": 5
+  },
+  "Greenland": {
+      "x": 7,
+      "y": 5
+  },
+  "Ireland": {
+      "x": 9,
+      "y": 6
+  },
+  "Liechtenstein": {
+      "x": 6,
+      "y": 8
+  },
+  "Monaco": {
+      "x": 2,
+      "y": 9
+  },
+  "Portugal": {
+      "x": 2,
+      "y": 12
+  },
+  "Slovakia": {
+      "x": 5,
+      "y": 14
+  },
+  "Turkey": {
+      "x": 12,
+      "y": 14
+  },
+  "Austria": {
+      "x": 10,
+      "y": 0
+  },
+  "Bulgaria": {
+      "x": 6,
+      "y": 1
+  },
+  "Estonia": {
+      "x": 3,
+      "y": 4
+  },
+  "Georgia": {
+      "x": 3,
+      "y": 5
+  },
+  "Guadeloupe": {
+      "x": 10,
+      "y": 5
+  },
+  "Italy": {
+      "x": 2,
+      "y": 7
+  },
+  "Lithuania": {
+      "x": 10,
+      "y": 8
+  },
+  "Montenegro": {
+      "x": 4,
+      "y": 9
+  },
+  "Romania": {
+      "x": 4,
+      "y": 14
+  },
+  "Slovenia": {
+      "x": 4,
+      "y": 13
+  },
+  "Ukraina": {
+      "x": 4,
+      "y": 15
+  },
+  "Azerbaijan": {
+      "x": 0,
+      "y": 1
+  },
+  "Croatia": {
+      "x": 5,
+      "y": 6
+  },
+  "FYROM": {
+      "x": 7,
+      "y": 9
+  },
+  "Germany": {
+      "x": 9,
+      "y": 3
+  },
+  "Holy See (Vatican City State)": {
+      "x": 9,
+      "y": 15
+  },
+  "Kazakhstan": {
+      "x": 2,
+      "y": 8
+  },
+  "Luxembourg": {
+      "x": 11,
+      "y": 8
+  },
+  "Netherlands": {
+      "x": 0,
+      "y": 11
+  },
+  "Russia": {
+      "x": 9,
+      "y": 12
+  },
+  "Spain": {
+      "x": 6,
+      "y": 4
+  },
+  "United Kingdom": {
+      "x": 1,
+      "y": 5
+  },
+  "Anguilla": {
+      "x": 4,
+      "y": 0
+  },
+  "Barbados": {
+      "x": 2,
+      "y": 1
+  },
+  "British Virgin Islands": {
+      "x": 12,
+      "y": 15
+  },
+  "Costa Rica": {
+      "x": 4,
+      "y": 3
+  },
+  "El Salvador": {
+      "x": 0,
+      "y": 14
+  },
+  "Haiti": {
+      "x": 6,
+      "y": 6
+  },
+  "Netherlands Antilles": {
+      "x": 7,
+      "y": 0
+  },
+  "Puerto Rico": {
+      "x": 1,
+      "y": 12
+  },
+  "Trinidad and Tobago": {
+      "x": 0,
+      "y": 15
+  },
+  "Antigua and Barbuda": {
+      "x": 3,
+      "y": 0
+  },
+  "Belize": {
+      "x": 5,
+      "y": 2
+  },
+  "Canada": {
+      "x": 6,
+      "y": 2
+  },
+  "Cuba": {
+      "x": 5,
+      "y": 3
+  },
+  "French Guiana": {
+      "x": 4,
+      "y": 5
+  },
+  "Honduras": {
+      "x": 4,
+      "y": 6
+  },
+  "Nicaragua": {
+      "x": 0,
+      "y": 14
+  },
+  "Saint Kitts and Nevis": {
+      "x": 11,
+      "y": 7
+  },
+  "Turks and Caicos Islands": {
+      "x": 3,
+      "y": 14
+  },
+  "Argentina": {
+      "x": 9,
+      "y": 0
+  },
+  "Bermuda": {
+      "x": 10,
+      "y": 1
+  },
+  "Cayman Islands": {
+      "x": 1,
+      "y": 8
+  },
+  "Dominica": {
+      "x": 12,
+      "y": 3
+  },
+  "Grenada": {
+      "x": 2,
+      "y": 5
+  },
+  "Jamaica": {
+      "x": 3,
+      "y": 7
+  },
+  "Panama": {
+      "x": 7,
+      "y": 11
+  },
+  "Saint Lucia": {
+      "x": 5,
+      "y": 8
+  },
+  "USA": {
+      "x": 6,
+      "y": 15
+  },
+  "Aruba": {
+      "x": 12,
+      "y": 0
+  },
+  "Bolivia": {
+      "x": 12,
+      "y": 1
+  },
+  "Chile": {
+      "x": 0,
+      "y": 3
+  },
+  "Dominican Republic": {
+      "x": 0,
+      "y": 4
+  },
+  "Guatemala": {
+      "x": 0,
+      "y": 6
+  },
+  "Mexico" : {
+      "x": 5,
+      "y": 10
+  },
+  "Paraguay": {
+      "x": 4,
+      "y": 12
+  },
+  "Saint Vincent and The Grenadines": {
+      "x": 10,
+      "y": 15
+  },
+  "Uruguay": {
+      "x": 7,
+      "y": 15
+  },
+  "Bahamas": {
+      "x": 1,
+      "y": 2
+  },
+  "Brazil": {
+      "x": 0,
+      "y": 2
+  },
+  "Colombia": {
+      "x": 3,
+      "y": 3
+  },
+  "Ecuador": {
+      "x": 2,
+      "y": 4
+  },
+  "Guyana": {
+      "x": 2,
+      "y": 6
+  },
+  "Montserrat": {
+      "x": 0,
+      "y": 10
+  },
+  "Peru": {
+      "x": 8,
+      "y": 11
+  },
+  "Suriname": {
+      "x": 10,
+      "y": 13
+  },
+  "Venezuela": {
+      "x": 11,
+      "y": 15
+  },
+  "Afghanistan": {
+      "x": 2,
+      "y": 0
+  },
+  "Israel": {
+      "x": 10,
+      "y": 6
+  },
+  "Qatar": {
+      "x": 5,
+      "y": 12
+  },
+  "Bahrain": {
+      "x": 7,
+      "y": 1
+  },
+  "Jordan": {
+      "x": 4,
+      "y": 7
+  },
+  "Saudi Arabia": {
+      "x": 11,
+      "y": 12
+  },
+  "Kuwait": {
+      "x": 0,
+      "y": 8
+  },
+  "Syria": {
+      "x": 1,
+      "y": 14
+  },
+  "Iran": {
+      "x": 0,
+      "y": 7
+  },
+  "Lebanon": {
+      "x": 4,
+      "y": 8
+  },
+  "United Arab Emirates": {
+      "x": 1,
+      "y": 0
+  },
+  "Iraq": {
+      "x": 12,
+      "y": 6
+  },
+  "Oman": {
+      "x": 6,
+      "y": 11
+  },
+  "Yemen": {
+      "x": 13,
+      "y": 3
+  }
+}

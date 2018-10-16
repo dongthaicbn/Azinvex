@@ -1,0 +1,24 @@
+.login-wrapper {
+  width: 100%;
+  background: #FAFAFA;
+  .login-form-container {
+    width: 480px;
+    background-color: white;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    .login-form-forgot {
+      float: right;
+    }
+    .ant-btn-primary {
+      width: 100%;
+    }
+    .ant-form-item {
+      margin-bottom: 5px;
+    }
+  }
+}
