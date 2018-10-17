@@ -1,0 +1,15 @@
+.loading-container {
+  background-color: rgba(255, 255, 255, .5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50000;
+  width: 100vw;
+  height: 100vh;
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+  }
+}

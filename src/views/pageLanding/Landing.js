@@ -1,6 +1,7 @@
 /*eslint-disable */
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import $ from 'jquery';
 import Footer from './LandingComponent/Footer';
 import MenuLanding from './LandingComponent/MenuLanding';
@@ -24,12 +25,12 @@ class Landing extends Component {
   }
 
   render() {
-    // const { profileUser, isAuthenticated } = this.props;
+    const { profileUser, isAuthenticated } = this.props;
     return (
       <div className="landing-page sidebar-collapse">
         <MenuLanding
-          profileUser={{role: 'expert'}}
-          isAuthenticated={false}
+          profileUser={profileUser}
+          isAuthenticated={isAuthenticated}
           firebase={this.props.firebase}
         />
         <HeaderContent />
@@ -40,4 +41,11 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default compose(
+  connect(
+    state => ({
+      isAuthenticated: !state.firebase.auth.isEmpty,
+      profileUser: state.firebase.profile
+    })
+  )
+)(Landing);

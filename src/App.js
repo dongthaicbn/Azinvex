@@ -11,6 +11,7 @@ import ScrollBar from './views/components/ScrollBar/ScrollBar';
 import LandingPage from './views/pageLanding/Landing';
 import LoginPage from './views/pageLogin/Login';
 import Header from './views/components/Header/Header';
+import Loading from './views/components/Loading/Loading';
 
 import Logo from './assets/logo.png';
 import * as routes from './utils/constants/routes';
@@ -69,47 +70,48 @@ class App extends React.Component {
   };
 
   render() {
-    const { location, isAuthenticated, role, isInitializing } = this.props;
-    if (isInitializing) {
-      return <div>loading...</div>
-    }
-    // if(isAuthenticated && location.type === routes.ROUTE_HOME) {
-    //   this.props.actionNavigateTo(location.prev.type);
-    //   return null;
-    // }
-    switch (location.type) {
-      case routes.ROUTE_LOGIN:
-        return <LoginPage />;
-      case routes.ROUTE_REGISTER:
-        // return <RegisterPage />;
-        return <div>RegisterPage</div>;
-      case routes.ROUTE_ERROR_403:
-        // return <ErrorPage />;
-        return <div>Not asscess role</div>;
-      case routes.ROUTE_HOME:
-        return <LandingPage />;
-      case routes.ROUTE_DASHBOARD:
-      case routes.ROUTE_EXPERTS:
-      case routes.ROUTE_INFORMATION:
-      case routes.ROUTE_CHANGEPASSWORD:
-      case routes.ROUTE_MANAGESIGNAL:
-      case routes.ROUTE_SIGNAL:
-      case routes.ROUTE_ADMIN_USER:
-      case routes.ROUTE_HELP:
-      case routes.ROUTE_SUPPORT:
-      {
-        if (isAuthenticated) {
-          if(!this.checkRole(role, location)) {
-            return this.commonComponents();
-          }
-          this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
-        } else {
-          this.props.actionNavigateTo(routes.ROUTE_HOME);
-          return null;
-        }
+    const { location, isAuthenticated, role, isLoaded } = this.props;
+    if (!isLoaded) {
+      return <Loading />
+    } else {
+      if(isAuthenticated && location.type === routes.ROUTE_LOGIN) {
+        this.props.actionNavigateTo(routes.ROUTE_HOME);
+        return null;
       }
-      default:
-        return <div>ErrorPage</div>;
+      switch (location.type) {
+        case routes.ROUTE_LOGIN:
+          return <LoginPage />;
+        case routes.ROUTE_REGISTER:
+          // return <RegisterPage />;
+          return <div>RegisterPage</div>;
+        case routes.ROUTE_ERROR_403:
+          // return <ErrorPage />;
+          return <div>Not asscess role</div>;
+        case routes.ROUTE_HOME:
+          return <LandingPage />;
+        case routes.ROUTE_DASHBOARD:
+        case routes.ROUTE_EXPERTS:
+        case routes.ROUTE_INFORMATION:
+        case routes.ROUTE_CHANGEPASSWORD:
+        case routes.ROUTE_MANAGESIGNAL:
+        case routes.ROUTE_SIGNAL:
+        case routes.ROUTE_ADMIN_USER:
+        case routes.ROUTE_HELP:
+        case routes.ROUTE_SUPPORT:
+        {
+          if (isAuthenticated) {
+            if(!this.checkRole(role, location)) {
+              return this.commonComponents();
+            }
+            this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
+          } else {
+            this.props.actionNavigateTo(routes.ROUTE_HOME);
+            return null;
+          }
+        }
+        default:
+          return <div>ErrorPage</div>;
+      }
     }
   }
 }
@@ -117,9 +119,9 @@ class App extends React.Component {
 export default compose(
   connect(state => ({
     location: state.location,
+    isLoaded: state.firebase.profile.isLoaded,
     isAuthenticated: !state.firebase.auth.isEmpty,
-    role: state.firebase.profile.role,
-    isInitializing: state.firebase.isInitializing
+    role: state.firebase.profile.role
   }),
   {
     actionNavigateTo
