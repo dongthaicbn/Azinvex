@@ -22,14 +22,21 @@ const MenuLanding = props => {
       {props.profileUser.role === 'expert' &&
         <Menu.Item>
           <a href="#/managesignal" className="dropdown-item">
-            <i className="material-icons">account_balance</i> Manage Signal
+            <i className="material-icons">account_balance</i> Bắn Tín Hiệu
+          </a>
+        </Menu.Item>
+      }
+      {props.profileUser.role === 'expert' &&
+        <Menu.Item>
+          <a href={'#/expert/' + props.uid} className="dropdown-item">
+            <i className="material-icons">view_quilt</i> Trang Cá Nhân
           </a>
         </Menu.Item>
       }
       {props.profileUser.role === 'member' &&
         <Menu.Item>
           <a href="#/dashboard" className="dropdown-item">
-            <i className="material-icons">art_track</i> Room Tín Hiệu
+            <i className="material-icons">art_track</i> Dashboard
           </a>
         </Menu.Item>
       }
@@ -39,6 +46,11 @@ const MenuLanding = props => {
             <i className="material-icons">view_quilt</i> Danh Sách Chuyên Gia
           </a>
         </Menu.Item>
+      }
+      {props.profileUser.role === 'member' &&
+        <a href="#/signals" className="dropdown-item">
+          <i className="material-icons">art_track</i> Room Tín Hiệu
+        </a>
       }
       {props.isAuthenticated &&
         <Menu.Item>
@@ -108,52 +120,11 @@ const MenuLanding = props => {
               </a>
             </li>
             <li className="dropdown nav-item">
-              {/*<a className="dropdown-toggle nav-link" data-toggle="dropdown">
-                <i className="material-icons">apps</i> Danh Mục
-              </a>*/}
               <Dropdown overlay={menu}>
                 <a className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <i className="material-icons">apps</i> Danh Mục
                 </a>
               </Dropdown>
-              {/*<div className="dropdown-menu dropdown-with-icons">
-                {props.profileUser.role === 'expert' &&
-                  <a href="#/managesignal" className="dropdown-item">
-                    <i className="material-icons">account_balance</i> Manage Signal
-                  </a>
-                }
-                {props.profileUser.role === 'member' &&
-                  <a href="#/dashboard" className="dropdown-item">
-                    <i className="material-icons">art_track</i> Room Tín Hiệu
-                  </a>
-                }
-                {props.profileUser.role === 'member' &&
-                  <a href="#/experts" className="dropdown-item">
-                    <i className="material-icons">view_quilt</i> Danh Sách Chuyên Gia
-                  </a>
-                }
-                {props.isAuthenticated &&
-                  <a href="#/information" className="dropdown-item">
-                    <i className="material-icons">location_on</i> Thông Tin Cá Nhân
-                  </a>
-                }
-                {props.isAuthenticated &&
-                  <a href="#/changepassword" className="dropdown-item">
-                    <i className="material-icons">view_day</i> Đổi Mật Khẩu
-                  </a>
-                }
-                {props.isAuthenticated &&
-                  <a href="#/account" className="dropdown-item">
-                    <i className="material-icons">fingerprint</i> Thông Tin Tài Khoản
-                  </a>
-                }
-                <a href="#/help" className="dropdown-item">
-                  <i className="material-icons">shopping_basket</i> Hướng Dẫn Sử Dụng
-                </a>
-                <a href="#/support" className="dropdown-item">
-                  <i className="material-icons">attach_money</i> Hỗ Trợ
-                </a>
-              </div>*/}
             </li>
           </ul>
           <ul className="navbar-nav ml-auto" style={{ float: 'right' }}>
@@ -173,7 +144,9 @@ const MenuLanding = props => {
 
 export default withFirebase(
   connect(
-    null,
+    state => ({
+      uid: state.firebase.auth.uid
+    }),
     {
       actionNavigateTo
     }

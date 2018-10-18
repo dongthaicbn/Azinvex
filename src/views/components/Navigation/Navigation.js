@@ -16,7 +16,7 @@ class Navigation extends React.Component {
   };
 
   render() {
-    const { collapsed } = this.props;
+    const { collapsed, role, uid } = this.props;
     return (
       <ScrollBar>
         <div className="navigation-container">
@@ -26,12 +26,23 @@ class Navigation extends React.Component {
             onClick={this.onChangeMenu}
             inlineCollapsed={collapsed}
           >
-            <Menu.Item key="home"><Icon type="home" /><span>Trang Cá Nhân</span></Menu.Item>
-            <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>
-            <Menu.Item key="dashboard"><Icon type="home" /><span>Dashboard</span></Menu.Item>
-            <Menu.Item key="signals"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
-            <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
-
+            <Menu.Item key="home"><Icon type="home" /><span>LadingPage</span></Menu.Item>
+            {
+              role === 'expert' && <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>
+            }
+            {
+              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>
+            }
+            {
+              role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Dashboard</span></Menu.Item>
+            }
+            {
+              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
+            }
+            {
+              role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
+            }
+            
             <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span><i>Quản Lý</i></span></span>}>
               <Menu.Item key="information">Thông Tin Cá Nhân</Menu.Item>
               <Menu.Item key="account">Thông Tin Tài Khoản</Menu.Item>
@@ -47,5 +58,8 @@ class Navigation extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  role: state.firebase.profile.role,
+  uid: state.firebase.auth.uid
+});
 export default connect(mapStateToProps, null)(Navigation);

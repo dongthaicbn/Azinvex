@@ -20,6 +20,10 @@ const routesMap = {
     path: '/experts',
     thunk: combineThunks()
   },
+  '@route/EXPERT/DETAIL': {
+    path: '/expert/:id',
+    thunk: combineThunks()
+  },
   '@route/INFORMATION': {
     path: '/information',
     thunk: combineThunks()

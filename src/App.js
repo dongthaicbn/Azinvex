@@ -62,8 +62,9 @@ class App extends React.Component {
   );
 
   checkRole = (role, location) => {
-    if((role === 'expert' && (location.type === routes.ROUTE_DASHBOARD || location.type === routes.ROUTE_EXPERTS ))
-    || (role === 'member' && (location.type === routes.ROUTE_MANAGESIGNAL ))) {
+    if((role === 'expert' && (location.type === routes.ROUTE_DASHBOARD || location.type === routes.ROUTE_EXPERTS
+    || location.type === routes.ROUTE_SIGNAL))
+    || (role === 'member' && (location.type === routes.ROUTE_MANAGESIGNAL || location.type === routes.ROUTE_EXPERT_DETAIL))) {
       return true;
     }
     return false;
@@ -91,6 +92,7 @@ class App extends React.Component {
           return <LandingPage />;
         case routes.ROUTE_DASHBOARD:
         case routes.ROUTE_EXPERTS:
+        case routes.ROUTE_EXPERT_DETAIL:
         case routes.ROUTE_INFORMATION:
         case routes.ROUTE_CHANGEPASSWORD:
         case routes.ROUTE_MANAGESIGNAL:

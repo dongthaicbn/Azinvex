@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import $ from 'jquery';
-// import Footer from './LandingComponent/Footer';
-// import MenuLanding from './LandingComponent/MenuLanding';
-// import HeaderContent from './LandingComponent/HeaderContent';
-// import MainContent from './LandingComponent/MainContent';
+import Footer from './LandingComponent/Footer';
+import MenuLanding from './LandingComponent/MenuLanding';
+import HeaderContent from './LandingComponent/HeaderContent';
+import MainContent from './LandingComponent/MainContent';
 import './Landing.scss';
 
 class Landing extends Component {
@@ -28,14 +28,14 @@ class Landing extends Component {
     const { profileUser, isAuthenticated } = this.props;
     return (
       <div className="landing-page sidebar-collapse">
-        {/*<MenuLanding*/}
-          {/*profileUser={profileUser}*/}
-          {/*isAuthenticated={isAuthenticated}*/}
-          {/*firebase={this.props.firebase}*/}
-        {/*/>*/}
-        {/*<HeaderContent />*/}
-        {/*<MainContent />*/}
-        {/*<Footer />*/}
+        <MenuLanding
+          profileUser={profileUser}
+          isAuthenticated={isAuthenticated}
+          firebase={this.props.firebase}
+        />
+        <HeaderContent />
+        <MainContent />
+        <Footer />
       </div>
     )
   }

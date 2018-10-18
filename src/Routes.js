@@ -19,6 +19,8 @@ const Routes = ({ location }) => {
       return <Dashboard />;
     case routes.ROUTE_EXPERTS:
       return <Experts />;
+    case routes.ROUTE_EXPERT_DETAIL:
+      return <Experts />;
     case routes.ROUTE_INFORMATION:
       return <Information />;
     case routes.ROUTE_CHANGEPASSWORD:

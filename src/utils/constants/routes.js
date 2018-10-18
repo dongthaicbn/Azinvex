@@ -7,6 +7,7 @@ export const ROUTE_TIMEOUT = '@route/TIMEOUT';
 
 export const ROUTE_DASHBOARD = '@route/DASHBOARD';
 export const ROUTE_EXPERTS = '@route/EXPERTS';
+export const ROUTE_EXPERT_DETAIL = '@route/EXPERT/DETAIL';
 export const ROUTE_INFORMATION = '@route/INFORMATION';
 export const ROUTE_CHANGEPASSWORD = '@route/CHANGEPASSWORD';
 export const ROUTE_MANAGESIGNAL = '@route/MANAGESIGNAL';
