@@ -51,9 +51,11 @@ class HeaderLanding extends Component {
           </Menu.Item>
         }
         {profileUser.role === 'member' &&
-          <a href="#/signals" className="dropdown-item">
-            Room Tín Hiệu
-          </a>
+          <Menu.Item>
+            <a href="#/signals" className="dropdown-item">
+              Room Tín Hiệu
+            </a>
+          </Menu.Item>
         }
         {isAuthenticated &&
           <Menu.Item>
