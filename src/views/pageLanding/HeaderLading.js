@@ -127,8 +127,8 @@ class HeaderLanding extends Component {
           {isAuthenticated && <span className="name-user">Xin chào {profileUser.displayName}&nbsp;</span>}
           {
             !isAuthenticated ?
-              <Button type="primary" className="btn-login" onClick={this.handleLog('login')}>Login</Button>
-              : <Button type="primary" className="btn-login" onClick={this.handleLog('logout')}>Logout</Button>
+              <Button type="primary" onClick={this.handleLog('login')}>Login</Button>
+              : <Button type="primary" onClick={this.handleLog('logout')}>Logout</Button>
           }
         </div>
       </React.Fragment>
