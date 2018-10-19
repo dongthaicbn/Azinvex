@@ -1,0 +1,171 @@
+.dashboard-container {
+  .card-dashboard {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    .card-item {
+      max-width: 25%;
+      flex: 0 0 25%;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      .card {
+        margin: 18px 0;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+        font-size: 1rem;
+        font-weight: normal;
+        position: relative;
+        display: flex;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        .card-body {
+          height: auto;
+          padding: 0;
+          flex: 1 1 auto;
+          .card-block {
+            padding: .5rem 1.5rem 1.5rem;
+            padding-top: .75rem !important;
+            .media {
+              display: flex;
+              align-items: flex-start;
+              .media-left {
+                padding-top: 0;
+                color: #fff !important;
+                text-align: left !important;
+                flex: 1;
+                .value {
+                  font-size: 32px;
+                  line-height: 36px;
+                  margin-bottom: 0 !important;
+                  font-family: 'Montserrat', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                  font-weight: 300;
+                  color: inherit;
+                }
+                .title {
+                  font-size: 18px;
+                  line-height: 36px;
+                  height: 36px;
+                }
+              }
+              .media-right {
+                padding-top: 0;
+                color: #fff !important;
+                text-align: right !important;
+                .font-large-1 {
+                  font-size: 2rem !important;
+                  line-height: 2rem;
+                  font-family: 'Simple-Line-Icons' !important;
+                  speak: none;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-variant: normal;
+                  text-transform: none;
+                  -webkit-font-smoothing: antialiased;
+                }
+                .icon-pie-chart {
+                  &:before {
+                    content: "\e05e";
+                  }
+                }
+                .icon-bulb {
+                  &:before {
+                    content: "\e076";
+                  }
+                }
+                .icon-graph {
+                  &:before {
+                    content: "\e06b";
+                  }
+                }
+                .icon-wallet {
+                  &:before {
+                    content: "\e02a";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .gradient-blackberry {
+        background-image: linear-gradient(45deg, #843cf7, #38b8f2);
+      }
+      .gradient-ibiza-sunset {
+        background-image: linear-gradient(45deg, #ee0979, #ff6a00);
+      }
+      .gradient-green-tea {
+        background-image: linear-gradient(45deg, #004b91, #78cc37);
+      }
+      .gradient-pomegranate {
+        background-image: linear-gradient(45deg, #9b3cb7, #ff396f);
+      }
+    }
+  }
+  .top-users {
+    display: flex;
+    margin-right: -15px;  
+    margin-left: -15px;
+    flex-wrap: wrap;
+    .gradient-indigo-dark-blue {
+      background-repeat: repeat !important;
+      margin: 18px 0;
+      border: 0;
+      border-radius: 4px;
+      box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+      font-size: 1rem;
+      font-weight: normal;
+      color: #fff !important;
+      background-image: linear-gradient(45deg, #3949ab, #4fc3f7);
+      display: flex;
+      position: relative;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      .header {
+        padding: 1.5rem;
+        border-bottom: none;
+        background-color: initial;
+        margin-bottom: 0;
+        .title {
+          font-size: 1.25rem;
+          font-weight: 500;
+          letter-spacing: .05rem;
+          text-transform: uppercase;
+          margin-bottom: 0 !important;
+        }
+      }
+      .card-body {
+        height: auto;
+        padding: 0;
+        flex: 1 1 auto;
+        .card-block {
+          padding: .5rem 1.5rem 1.5rem;
+          .expert-card {
+            margin-bottom: 1.5rem !important;
+            display: flex;
+            align-items: flex-start;
+            .body-expert-card {
+              padding-top: 0;
+              flex: 1;
+              .name {
+                font-size: 1.1rem !important;
+                margin-top: .75rem !important;
+                margin-bottom: 0 !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

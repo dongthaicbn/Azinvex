@@ -152,7 +152,7 @@ module.exports = {
             },
           },          
           {
-            test: /\.(scss|css)$/,
+            test: /\.scss$/,
             use: [
               require.resolve('style-loader'),
               {
