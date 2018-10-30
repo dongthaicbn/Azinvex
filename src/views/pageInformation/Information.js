@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import moment from 'moment';
 import { compose, branch, renderNothing } from 'recompose';
 import { connect } from 'react-redux';
-import { Form, Input, Tooltip, Icon, Button, Upload, Modal } from 'antd';
+import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker } from 'antd';
+import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
 
+const FormData = require('form-data');
 
+const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +21,7 @@ class Information extends Component {
           uid: '-1',
           name: 'default.png',
           status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+          url: this.props.profile.photoURL
         }
       ],
       isEdit: false
@@ -24,10 +29,31 @@ class Information extends Component {
   }
   handleCancel = () => this.setState({ previewVisible: false });
   handleSubmit = e => {
+    const { currentUser, firestore } = this.props;
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      const { birthday, ...updatedUser } = values;
+      const newData = { ...updatedUser, birthday: moment(values.birthday).toDate().getTime(), updatedAt: firestore.FieldValue.serverTimestamp() };
+      firestore.update({ collection: 'users', doc: currentUser.uid }, newData);
+    });
     this.setState({ isEdit: false });
   };
-  handleChange = ({ fileList }) => {
+  handleChange = async ({ fileList }) => {
+    const { firestore, currentUser } = this.props;
     this.setState({ fileList: [fileList[fileList.length - 1]] });
+    const image = fileList[fileList.length - 1];
+    const formData = new FormData();
+    formData.append('photo', image);
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*'
+      }
+    };
+    const url = 'http://api.congtruyendich.com/upload';
+    console.log(formData);
+    const data = await axios.post(url, formData, axiosConfig);
+    firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
   };
   handleCancelEdit = () => {
     const { profile } = this.props;
@@ -35,7 +61,7 @@ class Information extends Component {
     this.props.form.setFieldsValue({
       displayName: profile.displayName,
       email: profile.email,
-      birthday: profile.information.birthday.seconds,
+      birthday: moment(profile.birthday),
       phone: profile.information.phone,
       sex: profile.information.sex,
       address: profile.information.address,
@@ -92,6 +118,7 @@ class Information extends Component {
                   {...props}
                   listType="picture-card"
                   showUploadList={showUpload}
+                  multiple={false}
                   fileList={fileList}
                   onChange={this.handleChange}
                   onPreview={this.handlePreview}
@@ -138,29 +165,29 @@ class Information extends Component {
                       whitespace: true
                     }
                   ]
-                })(<Input disabled={!isEdit} />)}
+                })(<Input disabled />)}
               </Form.Item>
               <p className="title-input-profile"><b>E-mail</b></p>
               <Form.Item>
                 {getFieldDecorator('email', {
                   initialValue: profile.email
-                })(<Input disabled={!isEdit} />)}
+                })(<Input disabled />)}
               </Form.Item>
               <p className="title-input-profile"><b>Ngày sinh</b></p>
               <Form.Item>
                 {getFieldDecorator('birthday', {
-                  initialValue: profile.information.birthday.seconds
-                })(<Input disabled={!isEdit} />)}
+                initialValue: moment(profile.birthday)
+                })(<DatePicker format={dateFormat} disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Số điện thoại</b></p>
               <Form.Item>
-                {getFieldDecorator('phone', {
+              {getFieldDecorator('information.phone', {
                   initialValue: profile.information.phone
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Giới tính</b></p>
               <Form.Item>
-                {getFieldDecorator('sex', {
+              {getFieldDecorator('information.sex', {
                   initialValue: profile.information.sex ? 'Nam' : 'Nữ'
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
@@ -168,19 +195,19 @@ class Information extends Component {
             <div className="end-card-info">
               <p className="title-input-profile"><b>Địa chỉ</b></p>
               <Form.Item>
-                {getFieldDecorator('address', {
+              {getFieldDecorator('information.address', {
                   initialValue: profile.information.address
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Nghề nghiệp</b></p>
               <Form.Item>
-                {getFieldDecorator('occupation', {
+              {getFieldDecorator('information.occupation', {
                   initialValue: profile.information.occupation
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Quê quán</b></p>
               <Form.Item>
-                {getFieldDecorator('birthplace', {
+              {getFieldDecorator('information.birthplace', {
                   initialValue: profile.information.birthplace
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
@@ -188,13 +215,13 @@ class Information extends Component {
                 <b>Kinh nghiệm giao dịch</b>
               </p>
               <Form.Item>
-                {getFieldDecorator('experience', {
+              {getFieldDecorator('information.experience', {
                   initialValue: profile.information.experience
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Website</b></p>
               <Form.Item>
-                {getFieldDecorator('website', {
+              {getFieldDecorator('information.website', {
                   initialValue: profile.information.website
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
@@ -223,6 +250,7 @@ export default compose(
   connect(
     state => ({
       profile: state.firebase.profile,
+      currentUser: state.firebase.auth,
       isEmpty: state.firebase.profile.isEmpty
     }),
     {
@@ -233,4 +261,4 @@ export default compose(
     (props => props.isLoaded),
     renderNothing
   )
-)(Form.create()(Information));
+)(Form.create()(withFirestore(Information)));
