@@ -12,7 +12,7 @@ class User extends Component {
   render() {
     return (
       <div>
-        Home
+        User
       </div>
     );
   }

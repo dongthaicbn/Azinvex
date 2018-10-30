@@ -26,7 +26,7 @@ class Navigation extends React.Component {
             onClick={this.onChangeMenu}
             inlineCollapsed={collapsed}
           >
-            <Menu.Item key="home"><Icon type="home" /><span>Home</span></Menu.Item>
+            <Menu.Item key="home"><Icon type="home" /><span>LadingPage</span></Menu.Item>
             {
               role === 'expert' && <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>
             }

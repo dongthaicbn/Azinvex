@@ -28,7 +28,7 @@ const MenuLanding = props => {
       }
       {props.profileUser.role === 'expert' &&
         <Menu.Item>
-          <a href={`#/expert/${props.uid}`} className="dropdown-item">
+          <a href={'#/expert/' + props.uid} className="dropdown-item">
             <i className="material-icons">view_quilt</i> Trang Cá Nhân
           </a>
         </Menu.Item>
@@ -48,11 +48,9 @@ const MenuLanding = props => {
         </Menu.Item>
       }
       {props.profileUser.role === 'member' &&
-        <Menu.Item>
-          <a href="#/signals" className="dropdown-item">
-            <i className="material-icons">art_track</i> Room Tín Hiệu
-          </a>
-        </Menu.Item>
+        <a href="#/signals" className="dropdown-item">
+          <i className="material-icons">art_track</i> Room Tín Hiệu
+        </a>
       }
       {props.isAuthenticated &&
         <Menu.Item>

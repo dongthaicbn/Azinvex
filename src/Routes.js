@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as routes from './utils/constants/routes';
 import Dashboard from './views/pageDashboard/Dashboard';
 import Experts from './views/pageExperts/Experts';
+import ExpertDetail from './views/pageExpertDetail/ExpertDetail';
 import Information from './views/pageInformation/Information';
 import Signal from './views/pageSignal/Signal';
 import ManageSignal from './views/pageManageSignal/ManageSignal';
@@ -20,7 +21,7 @@ const Routes = ({ location }) => {
     case routes.ROUTE_EXPERTS:
       return <Experts />;
     case routes.ROUTE_EXPERT_DETAIL:
-      return <Experts />;
+      return <ExpertDetail />;
     case routes.ROUTE_INFORMATION:
       return <Information />;
     case routes.ROUTE_CHANGEPASSWORD:
