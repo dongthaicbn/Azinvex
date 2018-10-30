@@ -1,0 +1,5 @@
+export const CREATE_SIGNAL = 'CREATE_SIGNAL';
+export const UPDATE_SIGNAL = 'UPDATE_SIGNAL';
+export const DELETE_SIGNAL = 'DELETE_SIGNAL';
+export const FETCH_SIGNAL = 'FETCH_SIGNAL';
+export const SELECTED_SIGNAL = 'SELECTED_SIGNAL';

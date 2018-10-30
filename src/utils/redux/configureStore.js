@@ -4,6 +4,10 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase , firebaseReducer } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore, firestoreReducer } from 'redux-firestore';
+import { reducer as FormReducer } from 'redux-form';
+
+import SignalReducers from 'reduxModules/pageManageSignal/signalReducers';
+import AsyncReducers from 'reduxModules/async/asyncReducer';
 
 import firebase from './configureFirebase';
 import createHistory from 'history/createHashHistory';
@@ -26,10 +30,13 @@ const rootReducer = combineReducers({
   ...reducers, 
   location: reducer,
   firebase : firebaseReducer,
-  firestore : firestoreReducer
+  form: FormReducer,
+  async: AsyncReducers,
+  firestore : firestoreReducer,
+  signal: SignalReducers
 });
 
-const middlewares = applyMiddleware(thunk.withExtraArgument(getFirebase), middleware);
+const middlewares = applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }), middleware);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer, 

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+import 'moment/locale/vi';
 import { connect } from 'react-redux';
-import { Form, Input, Button, Table } from 'antd';
+import { Form, Input, Button, Table, Radio, Divider, InputNumber } from 'antd';
+import { compose } from 'redux';
+import { withFirestore } from 'react-redux-firebase';
+import { createSignal, updateSignal, selectSignal, closeSignal } from './../../reduxModules/pageManageSignal/signalActions';
 import './ManageSignal.scss';
 
+const { Column, ColumnGroup } = Table;
 class ManageSignal extends Component {
   constructor(props) {
     super(props);
@@ -10,63 +16,39 @@ class ManageSignal extends Component {
       // data: []
     };
   }
+  componentDidMount() {
+    const { firestore, currentUser } = this.props;
+    firestore.setListener(
+      {
+        collection: 'signals',
+        where: [['expert.id', '==', currentUser.uid], ['status', '==', 'active']],
+        storeAs: 'myActiveSignals'
+      }
+    );
+  }
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (this.props.selectedSignal) {
+        this.props.updateSignal(this.props.selectedSignal.id, values);
+      } else {
+        this.props.createSignal(values);
+      }
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
-    const data = [{
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      tel: '0571-22098909',
-      phone: 18889898989,
-      address: 'New York No. 1 Lake Park'
-    }, {
-      key: '2',
-      name: 'Jim Green',
-      tel: '0571-22098333',
-      phone: 18889898888,
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    }, {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      tel: '0575-22098909',
-      phone: 18900010002,
-      address: 'Sidney No. 1 Lake Park'
-    }, {
-      key: '4',
-      name: 'Jim Red',
-      age: 18,
-      tel: '0575-22098909',
-      phone: 18900010002,
-      address: 'London No. 2 Lake Park'
-    }, {
-      key: '5',
-      name: 'Jake White',
-      age: 18,
-      tel: '0575-22098909',
-      phone: 18900010002,
-      address: 'Dublin No. 2 Lake Park'
-    }];
-    const columns = [{
-      title: 'Lệnh',
-      dataIndex: 'name'
-    }, {
-      title: 'Cặp Tiền',
-      dataIndex: 'age'
-    }, {
-      title: 'TL/TP',
-      dataIndex: 'phone'
-    }, {
-      title: 'Thời Gian Vào',
-      dataIndex: 'address'
-    }, {
-      title: 'Trạng Thái',
-      dataIndex: 'tel'
-    }, {
-      title: 'Hành Động',
-      dataIndex: 'key'
-    }];
+    const {
+      myActiveSignals,
+      selectedSignal,
+      selectSignal,
+      closeSignal,
+      loading
+    } = this.props;
     return (
       <div>
         <div className="manage-left-container">
@@ -74,8 +56,8 @@ class ManageSignal extends Component {
           <Form onSubmit={this.handleSubmit}>
             <p className="title-input">Cặp tiền</p>
             <Form.Item>
-              {getFieldDecorator('currency', {
-                initialValue: '',
+              {getFieldDecorator('symbol', {
+                initialValue: selectedSignal ? selectedSignal.symbol : '',
                 rules: [
                   {
                     required: true,
@@ -83,65 +65,120 @@ class ManageSignal extends Component {
                     whitespace: true
                   }
                 ]
-              })(<Input />)}
+              })(<Input disabled={selectedSignal} />)}
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
-                BUY
-              </Button>
-              <Button type="primary" htmlType="submit" className="sell-btn">
-                SELL
-              </Button>
+              {getFieldDecorator('type', {
+                initialValue: 0,
+                rules: [{ required: true, message: 'Please select your type signal!' }],
+                required: true
+              })(
+                <Radio.Group disabled={selectedSignal} buttonStyle="solid">
+                  <Radio.Button value="0">BUY</Radio.Button>
+                  <Radio.Button value="1">SELL</Radio.Button>
+                </Radio.Group>
+              )}
             </Form.Item>
           </Form>
           <Form onSubmit={this.handleSubmit}>
             <p className="title-input">STOP LOSS</p>
             <Form.Item>
-              {getFieldDecorator('stopLoss', {
-                initialValue: '',
+              {getFieldDecorator('stoploss', {
+                initialValue: selectedSignal ? selectedSignal.stoploss : 0,
                 rules: [
                   {
                     required: true,
-                    message: 'Cần nhập stop loss!',
-                    whitespace: true
+                    type: 'number',
+                    min: 0
                   }
                 ]
-              })(<Input />)}
+              })(<InputNumber />)}
             </Form.Item>
             <p className="title-input">TAKE PROFIT</p>
             <Form.Item>
-              {getFieldDecorator('takeProfit', {
-                initialValue: '',
+              {getFieldDecorator('takeprofit', {
+                initialValue: selectedSignal ? selectedSignal.takeprofit : 0,
                 rules: [
                   {
                     required: true,
-                    message: 'Cần nhập take profit!',
-                    whitespace: true
+                    type: 'number',
+                    min: 0
                   }
                 ]
-              })(<Input />)}
+              })(<InputNumber />)}
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Bắn tín hiệu
+              <Button loading={loading} type="primary" htmlType="submit">
+                {!selectedSignal ? 'Bắn tín hiệu' : 'Cập nhật'}
               </Button>
+              <Divider type="vertical" />
+              {selectedSignal && <Button onClick={() => selectSignal(null)} loading={loading} type="danger"> Hủy </Button>}
             </Form.Item>
           </Form>
         </div>
         <div className="manage-right-container">
           <p className="header-manage-box">Các lệnh đang chạy</p>
-          <Table columns={columns} dataSource={data} bordered />
+          <Table dataSource={myActiveSignals} bordered>
+            <Column
+              title="Ticket"
+              dataIndex="ticket"
+              key="ticket"
+            />
+            <Column
+              title="Lệnh"
+              key="symbol"
+              render={signal => signal.typeSignal ? 'SELL ' + signal.symbol : 'BUY ' + signal.symbol}
+            />
+            <Column
+              title="Mở lệnh lúc"
+              dataIndex="startAt"
+              key="startAt"
+              render={startAt => moment(startAt.seconds * 1000).format('HH:mm DD/MM')}
+            />
+            <Column
+              title="Mở tại"
+              dataIndex="openPrice"
+              key="openPrice"
+            />
+            <Column
+              title="Chốt lời"
+              dataIndex="takeprofit"
+              key="takeprofit"
+            />
+            <Column
+              title="Cắt lỗ"
+              dataIndex="stoploss"
+              key="stoploss"
+            />
+            <Column
+              title="Action"
+              key="action"
+              render={record => (
+                <span>
+                  <button className="ant-btn ant-btn-primary" onClick={() => selectSignal(record)}>Sửa</button>
+                  <Divider type="vertical" />
+                  <button className="ant-btn ant-btn-primary" onClick={() => closeSignal(record.id)} >Đóng</button>
+                </span>
+              )}
+            />
+          </Table>
         </div>
       </div>
     );
   }
 }
 
-export default connect(
+export default compose(connect(
   state => ({
-    // state redux
+    currentUser: state.firebase.auth,
+    selectedSignal: state.signal.selectedSignal ? state.signal.selectedSignal : null,
+    loading: state.async.loading,
+    myActiveSignals: state.firestore.ordered.myActiveSignals ? state.firestore.ordered.myActiveSignals : []
   }),
   {
-    // action
-  }
-)(Form.create()(ManageSignal));
+    createSignal,
+    updateSignal,
+    selectSignal,
+    closeSignal
+  })
+)(Form.create()(withFirestore(ManageSignal)));
