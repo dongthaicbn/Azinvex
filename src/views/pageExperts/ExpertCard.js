@@ -1,8 +1,11 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Button } from 'antd';
-import { follow, unfollow, isFollowed } from './../../reduxModules/follow/followActions'
+import {Card, Button} from 'antd';
+import { follow, unfollow, isFollowed } from './../../reduxModules/follow/followActions';
+import './Experts.scss';
+import avatarUser from '../../assets/user.png';
+
 class ExpertCard extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +31,7 @@ class ExpertCard extends Component {
       <Card
         hoverable
         style={{ width: 'calc(25% - 20px)', padding: 20, display: 'inline-block', margin: '0 10px' }}
-        cover={<img alt="avatar" src={expert.photoURL} />}
+        cover={<img alt="avatar" src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL} className="avatar-image" />}
       >
         <Card.Meta
           title={

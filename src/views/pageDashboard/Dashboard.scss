@@ -181,6 +181,14 @@
       border-radius: 30px;
       float: right;
     }
+    .avatar-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 300px;
+      border: solid 1px #52c41a;
+      padding: 5px;
+      margin-left: calc(50% - 100px);
+    }
   }
   .header-text {
     padding: 10px;

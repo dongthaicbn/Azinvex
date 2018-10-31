@@ -42,7 +42,7 @@ class Experts extends Component {
     const { experts } = this.props;
     return (
       <div className="expert-container">
-        <div className="content-container">
+        <div className="content-expert-container">
           <p className="header-text">Danh Sách Chuyên Gia</p>
           <p className="sub-header-text">Tổng Hợp Những Chuyên gia forex hàng đầu từ khắp mọi nơi</p>
           {experts && experts.map(expert => (

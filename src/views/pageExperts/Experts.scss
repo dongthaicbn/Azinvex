@@ -1,5 +1,5 @@
 .expert-container {
-  .content-container {
+  .content-expert-container {
     background: white;
     border-radius: 4px;
     box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
@@ -23,6 +23,14 @@
     }
     .description-text-left {
       color: #009da0;
+    }
+    .avatar-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 300px;
+      border: solid 1px #52c41a;
+      padding: 5px;
+      margin-left: calc(50% - 100px);
     }
   }
   .header-text {
