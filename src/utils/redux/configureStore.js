@@ -6,9 +6,6 @@ import { reactReduxFirebase, getFirebase , firebaseReducer } from 'react-redux-f
 import { reduxFirestore, getFirestore, firestoreReducer } from 'redux-firestore';
 import { reducer as FormReducer } from 'redux-form';
 
-import SignalReducers from 'reduxModules/pageManageSignal/signalReducers';
-import AsyncReducers from 'reduxModules/async/asyncReducer';
-
 import firebase from './configureFirebase';
 import createHistory from 'history/createHashHistory';
 import options from '../../options';
@@ -31,9 +28,7 @@ const rootReducer = combineReducers({
   location: reducer,
   firebase : firebaseReducer,
   form: FormReducer,
-  async: AsyncReducers,
-  firestore : firestoreReducer,
-  signal: SignalReducers
+  firestore : firestoreReducer
 });
 
 const middlewares = applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }), middleware);

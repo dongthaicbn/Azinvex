@@ -12,6 +12,7 @@ import LandingPage from './views/pageLanding/Landing';
 import LoginPage from './views/pageLogin/Login';
 import Header from './views/components/Header/Header';
 import Loading from './views/components/Loading/Loading';
+import Register from './views/pageRegister/Register';
 
 import Logo from './assets/logo.png';
 import * as routes from './utils/constants/routes';
@@ -94,8 +95,7 @@ class App extends React.Component {
         case routes.ROUTE_LOGIN:
           return <LoginPage />;
         case routes.ROUTE_REGISTER:
-          // return <RegisterPage />;
-          return <div>RegisterPage</div>;
+          return <Register />;
         case routes.ROUTE_ERROR_403:
           // return <ErrorPage />;
           return <div>Not asscess role</div>;

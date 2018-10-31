@@ -7,6 +7,8 @@ import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker } from 'a
 import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
 
+const FormData = require('form-data');
+
 const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
   constructor(props) {
@@ -40,18 +42,18 @@ class Information extends Component {
     const { firestore, currentUser } = this.props;
     this.setState({ fileList: [fileList[fileList.length - 1]] });
     const image = fileList[fileList.length - 1];
-    // const formData = new FormData();
-    // formData.append('photo', image);
-    // const axiosConfig = {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //     'Access-Control-Allow-Origin': '*'
-    //   }
-    // };
-    // const url = 'http://api.congtruyendich.com/upload';
-    // console.log(formData);
-    // const data = await axios.post(url, formData, axiosConfig);
-    // firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
+    const formData = new FormData();
+    formData.append('photo', image);
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*'
+      }
+    };
+    const url = 'http://api.congtruyendich.com/upload';
+    console.log(formData);
+    const data = await axios.post(url, formData, axiosConfig);
+    firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
   };
   handleCancelEdit = () => {
     const { profile } = this.props;
