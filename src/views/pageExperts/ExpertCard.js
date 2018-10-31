@@ -11,18 +11,19 @@ class ExpertCard extends Component {
     };
   }
   follow = expert => {
-    this.props.follow(expert)
+    this.props.follow(expert);
     this.setState({ isFollowed: true })
-  }
+  };
   unfollow = followedId => {
-    this.props.unfollow(followedId)
+    this.props.unfollow(followedId);
     this.setState({ isFollowed: false })
-  }
+  };
   async componentDidMount() {
     this.setState({ isFollowed: await this.props.isFollowed(this.props.expert.id) })
   }
   render() {
     const { expert } = this.props;
+    const { isFollowed } = this.state;
     return (
       <Card
         hoverable
@@ -35,15 +36,23 @@ class ExpertCard extends Component {
               <span>{expert.displayName}</span>
               <span style={{ float: 'right' }}>
                 <Button type="primary" className="detail-btn" onClick={() => this.handleDetail(expert.id)}>Chi tiết</Button>
-                {this.state.isFollowed !== null ? (!this.state.isFollowed ? <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">Follow</Button> : <Button onClick={() => this.unfollow(expert.id)} type="default" className="follow-btn">Unfollow</Button>) : null}
+                {isFollowed !== null &&
+                  !isFollowed ?
+                  <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">Follow</Button> :
+                  <Button onClick={() => this.unfollow(expert.id)} type="default" className="follow-btn">Unfollow</Button>
+                }
               </span>
             </p>
           }
           description={
             <div>
-              <p><span className="description-text-left">Tỉ lệ thắng</span><span className="description-text-right">{
-                (expert.signalLoss + expert.signalWin) !== 0 ?
-                  Math.round((expert.signalWin / (expert.signalLoss + expert.signalWin)) * 100) : 0} %</span></p>
+              <p>
+                <span className="description-text-left">Tỉ lệ thắng</span><span className="description-text-right">
+                  {(expert.signalLoss + expert.signalWin) !== 0 ?
+                    Math.round((expert.signalWin / (expert.signalLoss + expert.signalWin)) * 100) : 0
+                  } %
+                </span>
+              </p>
               <p><span className="description-text-left">Số Pips đạt</span><span className="description-text-right">{expert.totalpips.toFixed(1)}</span></p>
             </div>
           }
