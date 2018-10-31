@@ -51,6 +51,7 @@ class Register extends Component {
     return (
       <div className="register-wrapper">
         <div className="register-form-container">
+          <h3>Azinvex</h3>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <p><b>Email<span style={{ color: 'red' }}>*</span></b></p>
             <Form.Item>
