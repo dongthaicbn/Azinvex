@@ -1,8 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Table, Button } from 'antd';
-const { Column, ColumnGroup  } = Table;
+
+/*eslint-disable*/
 
 class Timeline extends Component {
   render() {
@@ -24,7 +24,7 @@ class Timeline extends Component {
         render: (text, signal) =>
           signal.type === 1 ?
             `Mở lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.openPrice}` :
-              signal.type === 2 ? 'Sửa lệnh' :
+            signal.type === 2 ? 'Sửa lệnh' :
               `Đóng lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`,
         key: 'signal'
       },
