@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker, Radio } from 'antd';
 import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
+import avatarUser from '../../assets/user.png';
 
 const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
@@ -19,7 +20,7 @@ class Information extends Component {
           uid: '-1',
           name: 'default.png',
           status: 'done',
-          url: this.props.profile.photoURL
+          url: props.profile.photoURL === '/assets/user.png' ? avatarUser : props.profile.photoURL
         }
       ],
       isEdit: false
