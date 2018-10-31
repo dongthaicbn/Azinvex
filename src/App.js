@@ -105,6 +105,7 @@ class App extends React.Component {
         case routes.ROUTE_EXPERTS:
         case routes.ROUTE_EXPERT_DETAIL:
         case routes.ROUTE_INFORMATION:
+        case routes.ROUTE_ACCOUNT:
         case routes.ROUTE_CHANGEPASSWORD:
         case routes.ROUTE_MANAGESIGNAL:
         case routes.ROUTE_SIGNAL:

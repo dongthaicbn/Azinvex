@@ -28,6 +28,10 @@ const routesMap = {
     path: '/information',
     thunk: combineThunks()
   },
+  '@route/ACCOUNT': {
+    path: '/account',
+    thunk: combineThunks()
+  },
   '@route/CHANGEPASSWORD': {
     path: '/changepassword',
     thunk: combineThunks()
