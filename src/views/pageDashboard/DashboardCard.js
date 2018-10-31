@@ -36,7 +36,7 @@ class DashboardCard extends Component {
               <div className="card-block">
                 <div className="media">
                   <div className="media-left">
-                    <h3 className="value">{statistics.pips.toFixed(2)}</h3>
+                    <h3 className="value">{statistics.pips.toFixed(1)}</h3>
                     <span className="title">Tổng Số Pips</span>
                   </div>
                   <div className="media-right">
