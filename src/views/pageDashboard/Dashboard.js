@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import * as Push from 'push.js'
+import * as Push from 'push.js';
 import { connect } from 'react-redux';
 import { withFirestore } from 'react-redux-firebase';
 import DashboardCard from './DashboardCard';
@@ -11,31 +10,26 @@ import { getEventsForDashboard } from './../../reduxModules/pageDashboard/notifi
 import firebase from './../../utils/redux/configureFirebase';
 import './Dashboard.scss';
 
+/*eslint-disable*/
+
 class Dashboard extends Component {
-  state = {
-    moreEvents: false,
-    loadingInitial: true,
-    loadedEvents: [],
-    contextRef: {}
-  }
   constructor(props) {
     super(props);
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.timelineContent !== nextProps.timelineContent) {
-      this.setState({
-        loadedEvents: [...this.state.loadedEvents, ...nextProps.timelineContent]
-      });
-    }
+    this.state = {
+      moreEvents: false,
+      loadedEvents: []
+      // loadingInitial: true,
+      // contextRef: {}
+    };
   }
   async componentDidMount() {
     const db = firebase.firestore();
     this.props.getTopUser();
     this.props.getStatistics();
     Push.Permission.request(function () {
-      console.log("GRANTED")
+      console.log('GRANTED');
     }, function () {
-      console.log("DENIED")
+      console.log('DENIED');
     });
     let next = await this.props.getEventsForDashboard();
     db.collection("notifications")
@@ -45,11 +39,11 @@ class Dashboard extends Component {
       .onSnapshot((snapshot) => {
         if (snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
           const signal = snapshot.docs[0].data();
-          const type = signal.type === 1 ? `Tín hiệu mới` : (signal.type === 2 ? `Thay đổi lệnh ${signal.ticket}` : `Đóng lệnh ${signal.ticket}`)
+          const type = signal.type === 1 ? `Tín hiệu mới` : (signal.type === 2 ? `Thay đổi lệnh ${signal.ticket}` : `Đóng lệnh ${signal.ticket}`);
           let body = '';
-          if (signal.type === 1) body = `${signal.typeSignal ? "BUY" : "SELL"} ${signal.symbol} NOW`
-          if (signal.type === 2) body = `Cắt lỗ tại: ${signal.stoploss},  Chốt lời tại: ${signal.takeprofit} `
-          if (signal.type === 3) body = `Đóng lệnh tại: ${signal.closePrice}, Lợi nhuận: ${signal.profit}`
+          if (signal.type === 1) body = `${signal.typeSignal ? "BUY" : "SELL"} ${signal.symbol} NOW`;
+          if (signal.type === 2) body = `Cắt lỗ tại: ${signal.stoploss},  Chốt lời tại: ${signal.takeprofit} `;
+          if (signal.type === 3) body = `Đóng lệnh tại: ${signal.closePrice}, Lợi nhuận: ${signal.profit}`;
           Push.create(type, {
             body: body,
             icon: '/icon.png',
@@ -59,42 +53,51 @@ class Dashboard extends Component {
               this.close();
             }
           });
-          let newArr = this.state.loadedEvents;
-          newArr.unshift(snapshot.docs[0].data())
-          this.setState({ loadedEvents: newArr })
+          const newArr = this.state.loadedEvents;
+          newArr.unshift(snapshot.docs[0].data());
+          this.setState({ loadedEvents: newArr });
         }
-      })
+      });
     if (next && next.docs && next.docs.length > 1) {
       this.setState({
-        moreEvents: true,
-        loadingInitial: false
+        moreEvents: true
+        // loadingInitial: false
       });
     }
   }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.timelineContent !== nextProps.timelineContent) {
+      this.setState({
+        loadedEvents: [...this.state.loadedEvents, ...nextProps.timelineContent]
+      });
+    }
+  }
+  componentWillUnmount() {
+    this.props.unsetTopUser();
+  }
   getNextEvents = async () => {
     const { timelineContent } = this.props;
-    let lastEvent = timelineContent && timelineContent[timelineContent.length - 1];
-    let next = await this.props.getEventsForDashboard(lastEvent);
+    const lastEvent = timelineContent && timelineContent[timelineContent.length - 1];
+    const next = await this.props.getEventsForDashboard(lastEvent);
     if (next && next.docs && next.docs.length <= 1) {
       this.setState({
         moreEvents: false
       });
     }
   };
-  componentWillUnmount(){
-    this.props.unsetTopUser();
-  }
   render() {
-    const { loading } = this.props
+    const { loading } = this.props;
     const { moreEvents, loadedEvents } = this.state;
     return (
       <div className="dashboard-container">
         <DashboardCard />
         <TopUsers />
-        <Timeline loading={loading}
+        <Timeline
+          loading={loading}
           moreEvents={moreEvents}
           timelineContent={loadedEvents}
-          getNextEvents={this.getNextEvents} />
+          getNextEvents={this.getNextEvents}
+        />
       </div>
     );
   }
@@ -105,7 +108,7 @@ export default connect(
     topExpert: state.firestore.ordered.topExpert,
     currentUser: state.firebase.auth,
     loading: state.async.loading,
-    timelineContent: state.events,
+    timelineContent: state.events
   }),
   {
     getTopUser,
