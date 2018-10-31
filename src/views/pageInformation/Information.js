@@ -108,7 +108,7 @@ class Information extends Component {
             Chỉnh sửa
           </Button>
         )}
-        {profile && profile.information &&
+        {profile &&
           <Form onSubmit={this.handleSubmit}>
             <div className="card-info-contain">
               <div className="clearfix avatar-img">
@@ -174,19 +174,19 @@ class Information extends Component {
               <p className="title-input-profile"><b>Ngày sinh</b></p>
               <Form.Item>
                 {getFieldDecorator('birthday', {
-                initialValue: moment(profile.birthday)
+                initialValue: profile.birthday ? moment(profile.birthday) : moment('1/1/1960')
                 })(<DatePicker format={dateFormat} disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Số điện thoại</b></p>
               <Form.Item>
               {getFieldDecorator('information.phone', {
-                  initialValue: profile.information.phone
+                initialValue: profile.information ? profile.information.phone : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Giới tính</b></p>
               <Form.Item>
               {getFieldDecorator('information.sex', {
-                  initialValue: profile.information.sex ? 'Nam' : 'Nữ'
+                initialValue: profile.information && (profile.information.sex ? 'Nam' : 'Nữ')
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
             </div>
@@ -194,19 +194,19 @@ class Information extends Component {
               <p className="title-input-profile"><b>Địa chỉ</b></p>
               <Form.Item>
               {getFieldDecorator('information.address', {
-                  initialValue: profile.information.address
+                initialValue: profile.information ? profile.information.address : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Nghề nghiệp</b></p>
               <Form.Item>
               {getFieldDecorator('information.occupation', {
-                  initialValue: profile.information.occupation
+                initialValue: profile.information ? profile.information.occupation : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Quê quán</b></p>
               <Form.Item>
               {getFieldDecorator('information.birthplace', {
-                  initialValue: profile.information.birthplace
+                initialValue: profile.information ? profile.information.birthplace : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile">
@@ -214,13 +214,13 @@ class Information extends Component {
               </p>
               <Form.Item>
               {getFieldDecorator('information.experience', {
-                  initialValue: profile.information.experience
+                initialValue: profile.information ? profile.information.experience : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile"><b>Website</b></p>
               <Form.Item>
               {getFieldDecorator('information.website', {
-                  initialValue: profile.information.website
+                initialValue: profile.information ? profile.information.website : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               {isEdit && (
