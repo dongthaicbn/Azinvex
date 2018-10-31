@@ -17,8 +17,8 @@ class TopUsers extends Component {
     return (
       <div className="content-dashboard-container">
         <p className="header-text">Top Chuyên Gia FOREX</p>
-        {topExpert && topExpert.map(item => (
-          <ExpertCard expert={item} />
+        {topExpert && topExpert.map((item, index) => (
+          <ExpertCard expert={item} key={index} />
         ))}
       </div>
     );
