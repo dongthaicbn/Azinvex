@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase , firebaseReducer } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore, firestoreReducer } from 'redux-firestore';
 import { reducer as FormReducer } from 'redux-form';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 
 import firebase from './configureFirebase';
 import createHistory from 'history/createHashHistory';
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   location: reducer,
   firebase : firebaseReducer,
   form: FormReducer,
-  firestore : firestoreReducer
+  firestore : firestoreReducer,
+  toastr: toastrReducer,
 });
 
 const middlewares = applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }), middleware);

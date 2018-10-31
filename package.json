@@ -60,7 +60,7 @@
     "react-loading": "^2.0.3",
     "react-redux": "^5.0.6",
     "react-redux-firebase": "^2.1.8",
-    "react-redux-toastr": "^7.4.0",
+    "react-redux-toastr": "^7.4.1",
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "recompose": "^0.28.2",

@@ -3,11 +3,9 @@ import axios from 'axios';
 import moment from 'moment';
 import { compose, branch, renderNothing } from 'recompose';
 import { connect } from 'react-redux';
-import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker } from 'antd';
+import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker, Radio } from 'antd';
 import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
-
-const FormData = require('form-data');
 
 const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
@@ -41,19 +39,19 @@ class Information extends Component {
   handleChange = async ({ fileList }) => {
     const { firestore, currentUser } = this.props;
     this.setState({ fileList: [fileList[fileList.length - 1]] });
-    const image = fileList[fileList.length - 1];
-    const formData = new FormData();
-    formData.append('photo', image);
-    const axiosConfig = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*'
-      }
-    };
-    const url = 'http://api.congtruyendich.com/upload';
-    console.log(formData);
-    const data = await axios.post(url, formData, axiosConfig);
-    firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
+    // const image = fileList[fileList.length - 1];
+    // const formData = new FormData();
+    // formData.append('photo', image);
+    // const axiosConfig = {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // };
+    // const url = 'http://api.congtruyendich.com/upload';
+    // console.log(formData);
+    // const data = await axios.post(url, formData, axiosConfig);
+    // firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
   };
   handleCancelEdit = () => {
     const { profile } = this.props;
@@ -187,9 +185,14 @@ class Information extends Component {
               </Form.Item>
               <p className="title-input-profile"><b>Giới tính</b></p>
               <Form.Item>
-              {getFieldDecorator('information.sex', {
-                initialValue: profile.information && (profile.information.sex ? 'Nam' : 'Nữ')
-                })(<Input disabled={!isEdit} />)}
+                {getFieldDecorator('information.sex', {
+                  initialValue: 0
+                })(
+                <Radio.Group disabled={!isEdit}>
+                    <Radio.Button value="0">Nam</Radio.Button>
+                    <Radio.Button value="1">Nữ</Radio.Button>
+                </Radio.Group>
+                )}
               </Form.Item>
             </div>
             <div className="end-card-info">

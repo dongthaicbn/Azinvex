@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withFirebase } from 'react-redux-firebase';
 import { Form, Input, Button } from 'antd';
+import { toastr } from 'react-redux-toastr';
+import { updatePassword } from '../../reduxModules/auth/authAction';
+
 import './ChangePassword.scss';
 
 /* eslint-disable */
@@ -10,15 +14,47 @@ class ChangePassword extends Component {
     this.state = {
     };
   }
+  state = {
+    confirmDirty: false,
+    autoCompleteResult: [],
+  };
+  validateToNextPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && this.state.confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
+    }
+    callback();
+  }
+  reauthenticate = (currentPassword) => {
+    const { firebase } = this.props;
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+      user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+  }
+  compareToFirstPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
+  }
   handleSubmit = e => {
-    // implement change password
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+        this.reauthenticate(values.currentPassword).then(async () => {
+          await this.props.updatePassword({ password: values.password });
+          this.props.form.resetFields()
+        }).catch(() => {
+          this.props.form.setFieldsValue({
+            currentPassword: '',
+          });
+          toastr.error('Error', "Mật khẩu cũ không chính xác"); });
+    })
   };
   handleCancelEdit = () => {
-    this.props.form.setFieldsValue({
-      passOld: '',
-      passNew: '',
-      passConfirm: ''
-    });
+    this.props.form.resetFields()
   };
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -31,7 +67,7 @@ class ChangePassword extends Component {
               <b>Mật khẩu cũ</b>
             </p>
             <Form.Item>
-              {getFieldDecorator("passOld", {
+              {getFieldDecorator("currentPassword", {
                 initialValue: '',
                 rules: [
                   {
@@ -39,35 +75,45 @@ class ChangePassword extends Component {
                     message: "Hãy nhập mật khẩu cũ!"
                   }
                 ]
-              })(<Input />)}
+              })(<Input type="password" />)}
             </Form.Item>
             <p className="title-input-profile">
               <b>Mật khẩu mới</b>
             </p>
             <Form.Item>
-              {getFieldDecorator("passNew", {
+              {getFieldDecorator("password", {
                 initialValue: '',
                 rules: [
                   {
                     required: true,
                     message: "Hãy nhập mật khẩu mới!"
+                  },
+                  {
+                    min: 6,
+                    message: "Mật khẩu phải dài hơn 6 ký tự!"
+                  },
+                  {
+                    validator: this.validateToNextPassword,
                   }
                 ]
-              })(<Input />)}
+              })(<Input type="password"  />)}
             </Form.Item>
             <p className="title-input-profile">
               <b>Nhập lại mật khẩu mới</b>
             </p>
             <Form.Item>
-              {getFieldDecorator("passConfirm", {
+              {getFieldDecorator("confirm", {
                 initialValue: '',
                 rules: [
                   {
                     required: true,
-                    message: "Hãy nhập mật khẩu mới!"
+                    message: "Hãy nhập lại mật khẩu!"
+                  },
+                  {
+                    validator: this.compareToFirstPassword,
                   }
                 ]
-              })(<Input />)}
+              })(<Input type="password"  />)}
             </Form.Item>
             <Form.Item>
               <Button
@@ -92,6 +138,6 @@ export default connect(
     // state redux
   }),
   {
-    // action
+    updatePassword
   }
-)(Form.create()(ChangePassword));
+)(Form.create()(withFirebase(ChangePassword)));

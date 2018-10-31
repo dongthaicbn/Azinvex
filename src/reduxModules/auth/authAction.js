@@ -1,7 +1,6 @@
 /* eslint-disable*/
-import cookie from 'js-cookie';
+import { toastr } from 'react-redux-toastr'
 import api from '../../utils/api';
-import store from '../../utils/redux/configureStore';
 
 export const register = user => async dispatch => {
   try {
@@ -16,7 +15,7 @@ export const register = user => async dispatch => {
   }
 };
 
-export const login = user => async (dispatch, getState, getFirebase) => {
+export const login = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   firebase.auth().signInWithEmailAndPassword(user.username, user.password)
   .then(firebaseUser => {
@@ -27,3 +26,14 @@ export const login = user => async (dispatch, getState, getFirebase) => {
     console.log('login fail', error)
   })
 };
+export const updatePassword = (creds) =>
+  async (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+    try {
+      await user.updatePassword(creds.password);
+      toastr.success('Success', 'Cập nhật mật khẩu thành công')
+    } catch (error) {
+      toastr.error('Error', error.message)
+    }
+  }
