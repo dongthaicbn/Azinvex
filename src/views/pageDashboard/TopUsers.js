@@ -15,20 +15,11 @@ class TopUsers extends Component {
   render() {
     const { topExpert } = this.props;
     return (
-      <div className="top-users">
-        {/*<div className="gradient-indigo-dark-blue">
-          <div className="header">
-            <h4 className="title">TOP CHUYÊN GIA FOREX</h4>
-          </div>
-          <div className="card-body">
-            <div className="card-block">
-              {topExpert && topExpert.map((expertItem, index) => {
-                  return (<ExpertCard key={index} expert={expertItem} />);
-              })}
-            </div>
-          </div>
-        </div>*/}
-        aaa
+      <div className="content-dashboard-container">
+        <p className="header-text">Top Chuyên Gia FOREX</p>
+        {topExpert && topExpert.map(item => (
+          <ExpertCard expert={item} />
+        ))}
       </div>
     );
   }
@@ -36,6 +27,7 @@ class TopUsers extends Component {
 
 export default connect(
   state => ({
+    topExpert: state.firestore.ordered.topExpert
   }),
   {
     // action

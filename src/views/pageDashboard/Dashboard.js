@@ -1,133 +1,97 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import * as Push from 'push.js'
 import { connect } from 'react-redux';
-import { Card, Button, Table, List, Avatar  } from 'antd';
 import { withFirestore } from 'react-redux-firebase';
 import DashboardCard from './DashboardCard';
-
+import TopUsers from './TopUsers';
+import Timeline from './Timeline';
+import { getTopUser, getStatistics } from './../../reduxModules/pageDashboard/dashboardActions';
+import { getEventsForDashboard } from './../../reduxModules/pageDashboard/notificationActions';
+import firebase from './../../utils/redux/configureFirebase';
 import './Dashboard.scss';
 
 class Dashboard extends Component {
+  state = {
+    moreEvents: false,
+    loadingInitial: true,
+    loadedEvents: [],
+    contextRef: {}
+  }
   constructor(props) {
     super(props);
-    this.state = {
-      data: [{
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        tel: '0571-22098909',
-        phone: 18889898989,
-        address: 'New York No. 1 Lake Park'
-      }, {
-        key: '2',
-        name: 'Jim Green',
-        tel: '0571-22098333',
-        phone: 18889898888,
-        age: 42,
-        address: 'London No. 1 Lake Park'
-      }, {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        tel: '0575-22098909',
-        phone: 18900010002,
-        address: 'Sidney No. 1 Lake Park'
-      }, {
-        key: '4',
-        name: 'Jim Red',
-        age: 18,
-        tel: '0575-22098909',
-        phone: 18900010002,
-        address: 'London No. 2 Lake Park'
-      }, {
-        key: '5',
-        name: 'Jake White',
-        age: 18,
-        tel: '0575-22098909',
-        phone: 18900010002,
-        address: 'Dublin No. 2 Lake Park'
-      }],
-      listExpert: [
-        {
-          name: 'Đặng Hải Long',
-          type: 'Follow'
-        },
-        {
-          name: 'Nguyễn Nhật Trung',
-          type: 'Unfollow'
-        },
-        {
-          name: 'Brian Nguyen',
-          type: 'Follow'
-        },
-        {
-          name: 'JackieHup',
-          type: 'Unfollow'
-        }
-      ]
-    };
   }
-
-
+  componentWillReceiveProps(nextProps) {
+    if (this.props.timelineContent !== nextProps.timelineContent) {
+      this.setState({
+        loadedEvents: [...this.state.loadedEvents, ...nextProps.timelineContent]
+      });
+    }
+  }
+  async componentDidMount() {
+    const db = firebase.firestore();
+    this.props.getTopUser();
+    this.props.getStatistics();
+    Push.Permission.request(function () {
+      console.log("GRANTED")
+    }, function () {
+      console.log("DENIED")
+    });
+    let next = await this.props.getEventsForDashboard();
+    db.collection("notifications")
+      .where('uid', '==', this.props.currentUser.uid)
+      .orderBy('createdAt', 'desc')
+      .limit(1)
+      .onSnapshot((snapshot) => {
+        if (snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
+          const signal = snapshot.docs[0].data();
+          const type = signal.type === 1 ? `Tín hiệu mới` : (signal.type === 2 ? `Thay đổi lệnh ${signal.ticket}` : `Đóng lệnh ${signal.ticket}`)
+          let body = '';
+          if (signal.type === 1) body = `${signal.typeSignal ? "BUY" : "SELL"} ${signal.symbol} NOW`
+          if (signal.type === 2) body = `Cắt lỗ tại: ${signal.stoploss},  Chốt lời tại: ${signal.takeprofit} `
+          if (signal.type === 3) body = `Đóng lệnh tại: ${signal.closePrice}, Lợi nhuận: ${signal.profit}`
+          Push.create(type, {
+            body: body,
+            icon: '/icon.png',
+            timeout: 4000,
+            onClick: function () {
+              window.focus();
+              this.close();
+            }
+          });
+          let newArr = this.state.loadedEvents;
+          newArr.unshift(snapshot.docs[0].data())
+          this.setState({ loadedEvents: newArr })
+        }
+      })
+    if (next && next.docs && next.docs.length > 1) {
+      this.setState({
+        moreEvents: true,
+        loadingInitial: false
+      });
+    }
+  }
+  getNextEvents = async () => {
+    const { timelineContent } = this.props;
+    let lastEvent = timelineContent && timelineContent[timelineContent.length - 1];
+    let next = await this.props.getEventsForDashboard(lastEvent);
+    if (next && next.docs && next.docs.length <= 1) {
+      this.setState({
+        moreEvents: false
+      });
+    }
+  };
   render() {
-    const { topExpert } = this.props;
-    const { data, listExpert } = this.state;
-    const columns = [
-      {
-        title: 'Ticket',
-        dataIndex: 'age'
-      }, {
-        title: 'Name',
-        dataIndex: 'name'
-      }, {
-        title: 'TP/SL',
-        dataIndex: 'phone'
-      }, {
-        title: 'Close Price',
-        dataIndex: 'address'
-      }, {
-        title: 'Date',
-        dataIndex: 'tel'
-      }, {
-        title: 'Profit',
-        dataIndex: 'key'
-      },  {
-        title: 'Stoploss',
-        dataIndex: 'key'
-      },  {
-        title: 'Take Profit',
-        dataIndex: 'key'
-      }
-    ];
+    const { loading } = this.props
+    const { moreEvents, loadedEvents } = this.state;
     return (
       <div className="dashboard-container">
         <DashboardCard />
-        <div className="content-dashboard-container">
-          <p className="header-text">Top Chuyên Gia FOREX</p>
-          {listExpert.map((item, index) => (
-            <Card
-              hoverable
-              key={index}
-              style={{ width: 'calc(25% - 20px)', padding: 20, display: 'inline-block', margin: '0 10px' }}
-              cover={<img alt="avatar" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-            >
-              <Card.Meta
-                title={
-                  <p>
-                    <span>{item.name}</span>
-                    <Button type="primary" className="follow-btn">{item.type}</Button>
-                  </p>
-                }
-              />
-            </Card>)
-          )}
-        </div>
-        <div className="content-dashboard-container">
-          <p className="header-text">Thông Báo</p>
-          <div className="table-container">
-            <Table columns={columns} dataSource={data} bordered />
-          </div>
-        </div>
+        <TopUsers />
+        <Timeline loading={loading}
+          moreEvents={moreEvents}
+          timelineContent={loadedEvents}
+          getNextEvents={this.getNextEvents} />
       </div>
     );
   }
@@ -135,9 +99,14 @@ class Dashboard extends Component {
 
 export default connect(
   state => ({
-    topExpert: state.firestore.ordered.topExpert
+    topExpert: state.firestore.ordered.topExpert,
+    currentUser: state.firebase.auth,
+    loading: state.async.loading,
+    timelineContent: state.events,
   }),
   {
-    // action
+    getTopUser,
+    getStatistics,
+    getEventsForDashboard
   }
 )(withFirestore(Dashboard));

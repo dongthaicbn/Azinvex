@@ -2,9 +2,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Card, Button } from 'antd';
+import { follow, unfollow, isFollowed } from './../../reduxModules/follow/followActions'
 import './Dashboard.scss';
-
+import { Link } from 'react-router-dom'
 class ExpertCard extends Component {
   constructor(props) {
     super(props);
@@ -12,30 +13,36 @@ class ExpertCard extends Component {
       isFollowed: null
     };
   }
-  // follow(expert) {
-  //   const { firestore, currentUser } = this.props
-  //   firestore.set({ collection: 'relationships', doc: `${currentUser.uid}_${expert.id}` }, { followedId: expert.id, followerId: currentUser.uid, createdAt: firestore.FieldValue.serverTimestamp(), displayName: expert.displayName, photoURL: expert.photoURL, })
-  //   this.setState({ isFollowed: true })
-  // }
-  // unfollow(followedId) {
-  //   const { firestore, currentUser } = this.props
-  //   firestore.delete({ collection: 'relationships', doc: `${currentUser.uid}_${followedId}` })
-  //   this.setState({ isFollowed: false })
-  // }
+  follow = expert => {
+    this.props.follow(expert)
+    this.setState({ isFollowed: true })
+  }
+  unfollow = followedId => {
+    this.props.unfollow(followedId)
+    this.setState({ isFollowed: false })
+  }
+  async componentDidMount(){
+    this.setState({ isFollowed: await this.props.isFollowed(this.props.expert.id) })
+  }
   render() {
     const { expert } = this.props;
     return (
-      <div className="expert-card">
-        <a href={'/#/expert/' + expert.id} >
-          <img alt="96x96" src={expert.photoURL} />
-        </a>
-        <div className="body-expert-card">
-          <h4 className="name">{expert.displayName}</h4>
-        </div>
-        {/*{this.state.isFollowed !== null ? 
-        (this.state.isFollowed ? <button onClick={() => this.unfollow(expert.id)} type="button" className="d-flex ml-3 btn btn-raised btn-round gradient-man-of-steel btn-outline-grey py-2 width-150 justify-content-center">Unfollow</button> 
-        : <button onClick={() => this.follow(expert)} type="button" className="d-flex ml-3 btn btn-raised btn-round gradient-man-of-steel btn-outline-grey py-2 width-150 justify-content-center">Follow</button>) : null}*/}
-      </div>
+     
+      <Card
+        hoverable
+        key={expert.id}
+        style={{ width: 'calc(25% - 20px)', padding: 20, display: 'inline-block', margin: '0 10px' }}
+        cover={<img alt="avatar" src={expert.photoURL} />}
+      >
+        <Card.Meta
+          title={
+            <p>
+              <span> <a href={"/#/expert/" + expert.id}>{expert.displayName}</a> </span>
+              {this.state.isFollowed !== null ? (!this.state.isFollowed ? <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">Follow</Button> : <Button onClick={() => this.unfollow(expert.id)} type="default" className="follow-btn">Unfollow</Button>):null}
+            </p>
+          }
+        />
+        </Card>
     );
   }
 }
@@ -45,6 +52,8 @@ export default connect(
     // state redux
   }),
   {
-    // action
+    follow,
+    unfollow,
+    isFollowed
   }
 )(ExpertCard);

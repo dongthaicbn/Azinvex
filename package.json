@@ -47,6 +47,7 @@
     "postcss-loader": "2.0.6",
     "promise": "8.0.1",
     "prop-types": "^15.6.0",
+    "push.js": "^1.0.9",
     "raf": "^3.4.0",
     "react": "^16.0.0",
     "react-async-script-loader": "^0.3.0",
