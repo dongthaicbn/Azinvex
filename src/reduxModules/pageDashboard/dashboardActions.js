@@ -9,6 +9,16 @@ export const getTopUser = () =>
       limit: 5
     });
   };
+export const unsetTopUser = () =>
+  async (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    firestore.unsetListener({
+      collection: 'users',
+      where: ['role', '==', 'expert'],
+      orderBy: ['totalpips', 'desc'],
+      limit: 5
+    });
+  };
 export const getStatistics = () =>
   async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();

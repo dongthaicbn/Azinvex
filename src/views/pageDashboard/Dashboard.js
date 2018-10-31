@@ -6,7 +6,7 @@ import { withFirestore } from 'react-redux-firebase';
 import DashboardCard from './DashboardCard';
 import TopUsers from './TopUsers';
 import Timeline from './Timeline';
-import { getTopUser, getStatistics } from './../../reduxModules/pageDashboard/dashboardActions';
+import { getTopUser, getStatistics, unsetTopUser } from './../../reduxModules/pageDashboard/dashboardActions';
 import { getEventsForDashboard } from './../../reduxModules/pageDashboard/notificationActions';
 import firebase from './../../utils/redux/configureFirebase';
 import './Dashboard.scss';
@@ -81,6 +81,9 @@ class Dashboard extends Component {
       });
     }
   };
+  componentWillUnmount(){
+    this.props.unsetTopUser();
+  }
   render() {
     const { loading } = this.props
     const { moreEvents, loadedEvents } = this.state;
@@ -107,6 +110,7 @@ export default connect(
   {
     getTopUser,
     getStatistics,
-    getEventsForDashboard
+    getEventsForDashboard,
+    unsetTopUser
   }
 )(withFirestore(Dashboard));
