@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
+import { updatePassword } from '../../reduxModules/auth/authAction';
 import './ChangePassword.scss';
 
 /* eslint-disable */
@@ -15,7 +16,6 @@ class ChangePassword extends Component {
   };
   handleCancelEdit = () => {
     this.props.form.setFieldsValue({
-      passOld: '',
       passNew: '',
       passConfirm: ''
     });
@@ -28,20 +28,6 @@ class ChangePassword extends Component {
         <div className="change-password-container">
           <Form onSubmit={this.handleSubmit}>
             <p className="title-input-profile">
-              <b>Mật khẩu cũ</b>
-            </p>
-            <Form.Item>
-              {getFieldDecorator("passOld", {
-                initialValue: '',
-                rules: [
-                  {
-                    required: true,
-                    message: "Hãy nhập mật khẩu cũ!"
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
-            <p className="title-input-profile">
               <b>Mật khẩu mới</b>
             </p>
             <Form.Item>
@@ -53,7 +39,7 @@ class ChangePassword extends Component {
                     message: "Hãy nhập mật khẩu mới!"
                   }
                 ]
-              })(<Input />)}
+              })(<Input type="password" />)}
             </Form.Item>
             <p className="title-input-profile">
               <b>Nhập lại mật khẩu mới</b>
@@ -67,7 +53,7 @@ class ChangePassword extends Component {
                     message: "Hãy nhập mật khẩu mới!"
                   }
                 ]
-              })(<Input />)}
+              })(<Input type="password" />)}
             </Form.Item>
             <Form.Item>
               <Button
@@ -92,6 +78,6 @@ export default connect(
     // state redux
   }),
   {
-    // action
+    updatePassword
   }
 )(Form.create()(ChangePassword));

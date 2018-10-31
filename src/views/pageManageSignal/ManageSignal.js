@@ -52,7 +52,7 @@ class ManageSignal extends Component {
     return (
       <div>
         <div className="manage-left-container">
-          <p className="header-manage-box">Quan ly tin hieu</p>
+          <p className="header-manage-box">Quản lý tín hiệu</p>
           <Form onSubmit={this.handleSubmit}>
             <p className="title-input">Cặp tiền</p>
             <Form.Item>
@@ -67,6 +67,7 @@ class ManageSignal extends Component {
                 ]
               })(<Input disabled={selectedSignal} />)}
             </Form.Item>
+
             <Form.Item>
               {getFieldDecorator('type', {
                 initialValue: 0,
@@ -81,7 +82,7 @@ class ManageSignal extends Component {
             </Form.Item>
           </Form>
           <Form onSubmit={this.handleSubmit}>
-            <p className="title-input">STOP LOSS</p>
+            <p className="title-input">Cắt lỗ</p>
             <Form.Item>
               {getFieldDecorator('stoploss', {
                 initialValue: selectedSignal ? selectedSignal.stoploss : 0,
@@ -94,7 +95,7 @@ class ManageSignal extends Component {
                 ]
               })(<InputNumber />)}
             </Form.Item>
-            <p className="title-input">TAKE PROFIT</p>
+            <p className="title-input">Chốt lời</p>
             <Form.Item>
               {getFieldDecorator('takeprofit', {
                 initialValue: selectedSignal ? selectedSignal.takeprofit : 0,
