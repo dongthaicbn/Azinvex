@@ -35,9 +35,6 @@ class Experts extends Component {
   componentWillUnmount(){
     this.props.unlistenExperts();
   }
-  handleDetail = id => {
-    window.location.href = `#/expert/${id}`;
-  };
   render() {
     const { experts } = this.props;
     return (

@@ -112,17 +112,18 @@ class App extends React.Component {
         case routes.ROUTE_ADMIN_USER:
         case routes.ROUTE_HELP:
         case routes.ROUTE_SUPPORT:
-        {
-          if (isAuthenticated) {
-            if(!this.checkRole(role, location)) {
-              return this.commonComponents();
-            }
-            this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
-          } else {
-            this.props.actionNavigateTo(routes.ROUTE_HOME);
-            return null;
-          }
-        }
+          return this.commonComponents();
+        // {
+        //   if (isAuthenticated) {
+        //     if(!this.checkRole(role, location)) {
+        //       return this.commonComponents();
+        //     }
+        //     this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
+        //   } else {
+        //     this.props.actionNavigateTo(routes.ROUTE_HOME);
+        //     return null;
+        //   }
+        // }
         default:
           return <div>ErrorPage</div>;
       }

@@ -21,6 +21,9 @@ class ExpertCard extends Component {
     this.props.unfollow(followedId);
     this.setState({ isFollowed: false })
   };
+  handleDetail = id => {
+    window.location.href = `#/expert/${id}`;
+  };
   async componentDidMount() {
     this.setState({ isFollowed: await this.props.isFollowed(this.props.expert.id) })
   }
