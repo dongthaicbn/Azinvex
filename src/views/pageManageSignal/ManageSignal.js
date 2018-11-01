@@ -8,7 +8,7 @@ import { withFirestore } from 'react-redux-firebase';
 import { createSignal, updateSignal, selectSignal, closeSignal } from './../../reduxModules/pageManageSignal/signalActions';
 import './ManageSignal.scss';
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 class ManageSignal extends Component {
   constructor(props) {
     super(props);

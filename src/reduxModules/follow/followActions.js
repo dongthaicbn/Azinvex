@@ -29,3 +29,26 @@ export const isFollowed = followedId =>
     const doc = await firestore.get({ collection: 'relationships', doc: `${currentUser.uid}_${followedId}` });
     return doc.exists;
   };
+export const listenFollowedExpert = () =>
+  async (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const currentUser = getState().firebase.auth;
+    firestore.setListener(
+      {
+        collection: 'relationships',
+        where: ['followerId', '==', currentUser.uid],
+        storeAs: 'followedExperts'
+      }
+    );
+  };
+export const unlistenFollowedExpert = () =>
+  async (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const currentUser = getState().firebase.auth;
+    firestore.unsetListener(
+      {
+        collection: 'relationships',
+        where: ['followerId', '==', currentUser.uid]
+      }
+    );
+  };
