@@ -71,18 +71,22 @@
       padding: 5px 0;
       .chat-left-content {
         padding: 8px 15px;
-        border-radius: 4px;
         color: #252525;
-        background-color: #f5f7fa;
+        background-color: #ebedf0;
         margin-left: 10px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
       }
       .chat-right-content {
         float: right;
         padding: 8px 15px;
         color: #fff;
-        border-radius: 4px;
         background-color: #009da0;
         margin-right: 10px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
       }
     }
     &::-webkit-scrollbar {
