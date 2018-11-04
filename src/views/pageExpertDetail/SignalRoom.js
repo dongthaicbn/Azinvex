@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { Table, Button } from 'antd';
+import { Table, Button, Card, Icon, Input, Avatar } from 'antd';
 import './ExpertDetail.scss';
+import avatarUser from '../../assets/user.png';
 
 /* eslint-disable */
 class SignalRoom extends Component {
@@ -46,6 +47,25 @@ class SignalRoom extends Component {
         key: 'stoploss'
       }
     ];
+    const suffix = <Icon type="picture" theme="outlined" />;
+    const fakeListChat = [
+      { type: 'left', text: 'Hello' },
+      { type: 'right', text: 'Ok' },
+      { type: 'left', text: 'Hello' },
+      { type: 'right', text: 'Ok' },
+      { type: 'left', text: 'Hello' },
+      { type: 'right', text: 'Ok' },
+      { type: 'left', text: 'Hello' },
+      { type: 'left', text: 'Hello' },
+      { type: 'left', text: 'Hello' },
+      { type: 'right', text: 'Ok' },
+      { type: 'left', text: 'Hello' },
+      { type: 'left', text: 'Hello' },
+      { type: 'left', text: 'Hello' },
+      { type: 'right', text: 'Ok' },
+      { type: 'right', text: 'Ok' },
+      { type: 'right', text: 'Ok' }
+    ];
     return (
       <div>
         <p className="header-card">Tín hiệu</p>
@@ -57,6 +77,37 @@ class SignalRoom extends Component {
           pagination={false}
           columns={columns}
         />
+        <br />
+        <p className="header-card">Chat</p>
+        <div className="chat-container">
+          <Card className="card-container chat-content-container">
+            {fakeListChat.map((item, index) => (
+              item.type === 'left' ?
+                <div className="chat-text-item" key={index}>
+                  <Avatar
+                    style={{ verticalAlign: 'middle' }}
+                    size="large"
+                    src={avatarUser}
+                  />
+                  <span className="chat-left-content">{item.text}</span>
+                </div> :
+                <div className="chat-text-item" key={index}>
+                  <Avatar
+                    style={{ verticalAlign: 'middle', float: 'right' }}
+                    size="large"
+                    src={avatarUser}
+                  />
+                  <span className="chat-right-content">{item.text}</span>
+                </div>
+            ))}
+          </Card>
+          <Button type="primary" style={{ float: 'right' }}>Gửi</Button>
+          <Input
+            style={{ float: 'left', width: 'calc(100% - 80px)' }}
+            prefix={<Icon type="smile" theme="outlined" />}
+            suffix={suffix}
+          />
+        </div>
       </div>
     );
   }
