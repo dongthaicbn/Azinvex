@@ -64,15 +64,15 @@ class Help extends Component {
                   <h3 style={{ color: 'blue' }} className="title">Dashboard</h3>
                   <img className="img-raised rounded img-fluid" alt="Raised Image" src="https://azinvex.com/files/folder_web/images/1-xVY200.png" />
                   <ol>
-                    <li style={{ fontWeight: 'bold' }}>Tổng quan về tất cả các tín hiệu đang hoạt động trên hệ thống của AZINVEX</li>
+                    <li style={{ fontWeight: 700 }}>Tổng quan về tất cả các tín hiệu đang hoạt động trên hệ thống của AZINVEX</li>
                     <ul>
                       <li><b>Lệnh đang hoạt đông:</b> <i>Tất cả các Tín Hiệu đang hoạt động trên hệ thống của AZINVEX</i></li>
                       <li><b>Tổng số Pips:</b> <i>Tổng kết toàn bộ Số Pips thắng / thua trên hệ thống của AZINVEX</i></li>
                       <li><b>Người dùng hoạt động:</b> <i>Toàn bộ người dùng đang hoạt động tính vào thời điểm hiện tại</i></li>
                       <li><b>Chuyên gia:</b> <i>Số người đăng ký làm Chuyên Gia Bắn Tín Hiệu tại AZINVEX</i></li>
                     </ul>
-                    <li style={{ fontWeight: 'bold' }}>Top các chuyên gia Forex: <i style={{ fontWeight: 100 }}>Danh sách các Chuyên Gia Bắn Tín Hiệu tốt nhất</i></li>
-                    <li style={{ fontWeight: 'bold' }}>Timeline: <i style={{ fontWeight: 100 }}>Dòng thời gian của tất cả các lệnh được bắn từ các Chuyên Gia bạn Theo Dõi</i></li>
+                    <li style={{ fontWeight: 700 }}>Top các chuyên gia Forex: <i style={{ fontWeight: 100 }}>Danh sách các Chuyên Gia Bắn Tín Hiệu tốt nhất</i></li>
+                    <li style={{ fontWeight: 700 }}>Timeline: <i style={{ fontWeight: 100 }}>Dòng thời gian của tất cả các lệnh được bắn từ các Chuyên Gia bạn Theo Dõi</i></li>
                     <ul>
                       <li><b>Ticket:</b> <i>Mã của lệnh được Chuyên Gia bắn</i></li>
                       <li><b>Tên Của Chuyên Gia Bắn Tín Hiệu</b></li>
@@ -88,9 +88,9 @@ class Help extends Component {
                   <h3 style={{ color: 'blue' }} className="title">Room Tín Hiệu</h3>
                   <img className="img-raised rounded img-fluid" alt="Raised Image" src="https://azinvex.com/files/folder_web/images/2-VZE700.png" />
                   <ol>
-                    <li style={{ fontWeight: 'bold' }}>Danh Sách Chuyên Gia: <i style={{ fontWeight: 100 }}>Danh sách các Chuyên Gia Tín Hiệu mà bạn Theo Dõi</i></li>
-                    <li style={{ fontWeight: 'bold' }}>View: <i style={{ fontWeight: 100 }}>Chọn Chuyên Gia bạn muốn xem tín hiệu</i></li>
-                    <li style={{ fontWeight: 'bold' }}>Danh Sách Tín Hiệu: <i style={{ fontWeight: 100 }}>Danh sách các Tín Hiệu của Chuyên Gia bạn chọn</i></li>
+                    <li style={{ fontWeight: 700 }}>Danh Sách Chuyên Gia: <i style={{ fontWeight: 100 }}>Danh sách các Chuyên Gia Tín Hiệu mà bạn Theo Dõi</i></li>
+                    <li style={{ fontWeight: 700 }}>View: <i style={{ fontWeight: 100 }}>Chọn Chuyên Gia bạn muốn xem tín hiệu</i></li>
+                    <li style={{ fontWeight: 700 }}>Danh Sách Tín Hiệu: <i style={{ fontWeight: 100 }}>Danh sách các Tín Hiệu của Chuyên Gia bạn chọn</i></li>
                   </ol>
                   <hr />
                   <h2 style={{ color: 'red' }} className="title">ĐỐI VỚI THÀNH VIÊN <u>BẮN</u> TÍN HIỆU</h2>
