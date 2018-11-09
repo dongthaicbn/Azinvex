@@ -5,12 +5,12 @@ import 'firebase/database';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCJpuJPsf1J8LZhH8YIvWwZYQl_z61ecF0",
-  authDomain: "test-firebase-dc05a.firebaseapp.com",
-  databaseURL: "https://test-firebase-dc05a.firebaseio.com",
-  projectId: "test-firebase-dc05a",
-  storageBucket: "test-firebase-dc05a.appspot.com",
-  messagingSenderId: "106646469332"
+  apiKey: "AIzaSyD2_w2xCYLkNVV-s6fhEfac2OTBRmsqOgo",
+  authDomain: "azinvex-221903.firebaseapp.com",
+  databaseURL: "https://azinvex-221903.firebaseio.com",
+  projectId: "azinvex-221903",
+  storageBucket: "azinvex-221903.appspot.com",
+  messagingSenderId: "1057037050140"
 }
 
 firebase.initializeApp(firebaseConfig);

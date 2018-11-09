@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import { Form, Input, Tooltip, Icon, Select, Checkbox, Button } from 'antd';
+import { register } from '../../reduxModules/auth/authAction';
 import './Register.scss';
 
 /* eslint-disable */
@@ -12,6 +15,7 @@ class Register extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        this.props.register( values );
         console.log('Received values of form: ', values);
       }
     });
@@ -41,13 +45,13 @@ class Register extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '84'
-    })(
-      <Select style={{ width: 70 }}>
-        <Select.Option value="84">+84</Select.Option>
-      </Select>
-    );
+    // const prefixSelector = getFieldDecorator('prefix', {
+    //   initialValue: '84'
+    // })(
+    //   <Select style={{ width: 70 }}>
+    //     <Select.Option value="84">+84</Select.Option>
+    //   </Select>
+    // );
     return (
       <div className="register-wrapper">
         <div className="register-form-container">
@@ -91,7 +95,7 @@ class Register extends Component {
             </Form.Item>
             <p>
               <b>
-                <span>Nickname<span style={{ color: 'red' }}>*</span>&nbsp;
+                <span>Họ tên<span style={{ color: 'red' }}>*</span>&nbsp;
                   <Tooltip title="What do you want others to call you?">
                     <Icon type="question-circle-o" />
                   </Tooltip>
@@ -99,7 +103,7 @@ class Register extends Component {
               </b>
             </p>
             <Form.Item>
-              {getFieldDecorator('nickname', {
+              {getFieldDecorator('displayName', {
                 rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }]
               })(
                 <Input />
@@ -110,7 +114,8 @@ class Register extends Component {
               {getFieldDecorator('phone', {
                 rules: [{ required: true, message: 'Please input your phone number!' }]
               })(
-                <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                // addonBefore={prefixSelector}
+                <Input style={{ width: '100%' }} />
               )}
             </Form.Item>
             <Form.Item>
@@ -130,9 +135,11 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  languages: state.system.languages,
-  location: state.location
-});
-
-export default Form.create()(Register);
+export default compose(
+  connect(
+    null,
+    {
+      register
+    }
+  )
+)(Form.create()(Register))

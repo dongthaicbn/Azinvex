@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withFirestore } from 'react-redux-firebase';
 import { Tabs } from 'antd';
 import './ExpertDetail.scss';
 import avatarUser from '../../assets/user.png';
@@ -8,6 +9,11 @@ import Information from './Information';
 import History from './History';
 import Posts from './Posts';
 
+const currentTime = new Date(Date.now());
+const day = currentTime.getDate();
+const month = currentTime.getMonth();
+const year = currentTime.getFullYear();
+const date = new Date(year, month, day);
 /* eslint-disable */
 class ExpertDetail extends Component {
   constructor(props) {
@@ -16,21 +22,75 @@ class ExpertDetail extends Component {
       // active: 'SIGNAL_ROOM'
     };
   }
+  componentDidMount() {
+
+    const { firestore, expertId } = this.props
+    firestore.get(
+      {
+        collection: 'users',
+        doc: expertId,
+        storeAs: 'expertDetail'
+      },
+    );
+    firestore.setListener(
+      {
+        collection: 'signals',
+        where: [['expert.id', '==', expertId], ['closeAt', '>=', date.getTime()]],
+        storeAs: 'todayList'
+      },
+    )
+    firestore.setListener(
+      {
+        collection: 'signals',
+        where: [['expert.id', '==', expertId], ['status', '==', "pending"]],
+        storeAs: 'pendingList'
+      },
+    )
+    firestore.setListener(
+      {
+        collection: 'signals',
+        where: [['expert.id', '==', expertId], ['status', '==', "active"]],
+        storeAs: 'activeList'
+      },
+    )
+  }
+  componentWillUnmount(){
+    const { firestore, expertId} = this.props
+    firestore.unsetListener(
+      {
+        collection: 'signals',
+        where: [['expert.username', '==', expertId], ['status', '==', "active"]]
+      },
+    )
+    firestore.unsetListener(
+      {
+        collection: 'signals',
+        where: [['expert.username', '==', expertId], ['closeAt', '>=', date.getTime()]]
+      },
+    )
+    firestore.unsetListener(
+      {
+        collection: 'signals',
+        where: [['expert.id', '==', expertId], ['status', '==', "pending"]]
+      },
+    )
+  }
   render() {
+    const {activeList, pendingList, todayList, expertDetail} = this.props;
     return (
       <div>
         <div className="profile-container">
           <div className="card-img-profile" />
           <div className="profile-info">
-            <img alt="avatar" src={avatarUser} className="avatar-image" />
-            <p className="title-profile">Nguyễn Nhật Trung</p>
+            <img alt="avatar" src={expertDetail.photoURL} className="avatar-image" />
+            <p className="title-profile">{expertDetail.displayName} </p>
             <p className="sub-profile">Chuyên gia Forex</p>
           </div>
         </div>
         <div className="expert-container">
           <Tabs>
-            <Tabs.TabPane tab="Phòng tín hiệu" key="1"><SignalRoom /></Tabs.TabPane>
-            <Tabs.TabPane tab="Thông tin" key="2"><Information /></Tabs.TabPane>
+            <Tabs.TabPane tab="Phòng tín hiệu" key="1"><SignalRoom activeList={activeList} pendingList={pendingList} todayList={todayList}/></Tabs.TabPane>
+            <Tabs.TabPane tab="Thông tin" key="2"><Information expertDetail={expertDetail} /></Tabs.TabPane>
             <Tabs.TabPane tab="Lịch sử" key="3"><History /></Tabs.TabPane>
             <Tabs.TabPane tab="Bài viết" key="4"><Posts /></Tabs.TabPane>
           </Tabs>
@@ -40,11 +100,20 @@ class ExpertDetail extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    // action
+const mapStateToProps = state => {
+  let currentExpert = {};
+  if (state.firestore.ordered.expertDetail && state.firestore.ordered.expertDetail[0]) {
+    currentExpert = state.firestore.ordered.expertDetail[0];
   }
-)(ExpertDetail);
+  return {
+    expertId: state.location.payload.id,
+    expertDetail: currentExpert,
+    currentUser: state.firebase.auth,
+    profile: state.firebase.profile,
+    pendingList: state.firestore.ordered.pendingList ? state.firestore.ordered.pendingList : [],
+    activeList: state.firestore.ordered.activeList ? state.firestore.ordered.activeList : [],
+    todayList: state.firestore.ordered.todayList ? state.firestore.ordered.todayList : [],
+  }
+}
+
+export default connect(mapStateToProps, null)(withFirestore(ExpertDetail))

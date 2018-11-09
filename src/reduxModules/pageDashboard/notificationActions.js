@@ -18,13 +18,13 @@ export const getEventsForDashboard = lastEvent => async (dispatch, getState) => 
     if (lastEvent) {
       query = eventsRef
         .where('uid', '==', currentUser.uid)
-        .orderBy('createdAt', 'desc')
+        .orderBy('createAt', 'desc')
         .startAfter(startAfter)
         .limit(5);
     } else {
       query = eventsRef
         .where('uid', '==', currentUser.uid)
-        .orderBy('createdAt', 'desc')
+        .orderBy('createAt', 'desc')
         .limit(5);
     }
 

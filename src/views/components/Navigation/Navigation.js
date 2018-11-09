@@ -27,9 +27,9 @@ class Navigation extends React.Component {
             inlineCollapsed={collapsed}
           >
             <Menu.Item key="home"><Icon type="home" /><span>LadingPage</span></Menu.Item>
-            {
+            {/* {
               role === 'expert' && <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>
-            }
+            } */}
             {
               role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>
             }

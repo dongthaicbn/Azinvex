@@ -19,13 +19,13 @@ const MenuLanding = props => {
 
   const menu = (
     <Menu>
-      {props.profileUser.role === 'expert' &&
+      {/* {props.profileUser.role === 'expert' &&
         <Menu.Item>
           <a href="#/managesignal" className="dropdown-item">
             <i className="material-icons">account_balance</i> Bắn Tín Hiệu
           </a>
         </Menu.Item>
-      }
+      } */}
       {props.profileUser.role === 'expert' &&
         <Menu.Item>
           <a href={'#/expert/' + props.uid} className="dropdown-item">

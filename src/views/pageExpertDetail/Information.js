@@ -5,7 +5,9 @@ import './ExpertDetail.scss';
 
 /* eslint-disable */
 class Information extends Component {
+
   render() {
+    const { expertDetail } = this.props;
     return (
       <Card className="card-container">
         <p className="header-card">Personal Information</p>
@@ -13,15 +15,15 @@ class Information extends Component {
           <div className="column-container">
             <p className="item-container">
               <p className="text-item"><a>Birthday</a></p>
-              <p className="sub-text-item">Invalid Date</p>
+              <p className="sub-text-item">{expertDetail.information && new Date(expertDetail.birthday).toLocaleDateString('en-GB')}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Birthplace</a></p>
-              <p className="sub-text-item">Ninh Bình</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.birthplace}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Lives in</a></p>
-              <p className="sub-text-item">256/6 Độc Lập p.Tân Thành q.Tân Phú, TP.HCM</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.address}</p>
             </p>
           </div>
         </div>
@@ -29,15 +31,15 @@ class Information extends Component {
           <div className="column-container">
             <p className="item-container">
               <p className="text-item"><a>Gender</a></p>
-              <p className="sub-text-item">Nam</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.sex ? "Nữ":"Nam"}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Email</a></p>
-              <p className="sub-text-item">nhattrung.nguyen1990@gmail.com</p>
+              <p className="sub-text-item">{expertDetail.email}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Website</a></p>
-              <p className="sub-text-item">https://www.myfxbook.com/members/azinvex</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.website}</p>
             </p>
           </div>
         </div>
@@ -45,15 +47,15 @@ class Information extends Component {
           <div className="column-container">
             <p className="item-container">
               <p className="text-item"><a>Phone</a></p>
-              <p className="sub-text-item">0908745745</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.phone}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Occupation</a></p>
-              <p className="sub-text-item">PHP Developer</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.occupation}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Joined</a></p>
-              <p className="sub-text-item">abc</p>
+              <p className="sub-text-item">{new Date(expertDetail.createdAt.seconds * 1000).toLocaleDateString('en-GB')}</p>
             </p>
           </div>
         </div>

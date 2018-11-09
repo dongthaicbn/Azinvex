@@ -7,33 +7,45 @@ import avatarUser from '../../assets/user.png';
 
 /* eslint-disable */
 class SignalRoom extends Component {
+
+  capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   render() {
+    const {activeList, pendingList, todayList} = this.props;
+    const list = activeList.concat(pendingList);
     const columns = [
       {
-        title: 'Cặp tiền',
-        dataIndex: 'ticket',
-        key: 'ticket'
+        title: 'Ticket',
+        dataIndex: 'id',
+        key: 'id'
+      },
+      {
+        title: 'Symbol',
+        dataIndex: 'symbol',
+        key: 'symbol'
       },
       {
         title: 'Stoploss',
-        dataIndex: 'expert',
-        render: expert => <a href={`/#/expert/${expert.id}`}>{expert.displayName}</a>,
-        key: 'expert'
+        dataIndex: 'stoploss',
+        key: 'stoploss'
       },
       {
-        title: 'Take Profit',
+        title: 'Takeprofit',
+        dataIndex: 'takeprofit',
+        key: 'takeprofit'
+      },
+      {
+        title: 'Trạng thái',
         dataIndex: 'signal',
         render: (text, signal) =>
-          signal.type === 1 ?
-            `Mở lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.openPrice}` :
-            signal.type === 2 ? 'Sửa lệnh' :
-              `Đóng lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`,
+        this.capitalizeFirstLetter(signal.status),
         key: 'signal'
       },
       {
         title: 'Thời gian mở',
-        dataIndex: 'createdAt',
-        render: createdAt => moment(createdAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
+        dataIndex: 'createAt',
+        render: createAt => moment(createAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
         key: 'createdAt'
       },
       {
@@ -70,10 +82,10 @@ class SignalRoom extends Component {
       <div>
         <p className="header-card">Tín hiệu</p>
         <Table
-          dataSource={[]}
+          dataSource={list}
           bordered
           // loading={loading}
-          footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
+          // footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
           pagination={false}
           columns={columns}
         />

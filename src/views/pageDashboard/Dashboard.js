@@ -13,6 +13,7 @@ import './Dashboard.scss';
 /*eslint-disable*/
 
 class Dashboard extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +22,66 @@ class Dashboard extends Component {
       // loadingInitial: true,
       // contextRef: {}
     };
+  }
+  getCommand(signal) {
+    const { command } = signal;
+    switch (command) {
+      case 0:
+        return `Mở lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} stoploss ${signal.stoploss} takeprofit ${signal.takeprofit}`;
+      case 1:
+        return `Đóng lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
+      case 2:
+        return `Hủy lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol}`;
+      case 3:
+        return `Đã khớp lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice}`;
+      case 4:
+        return `Lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} dời stoploss ${signal.oldSL} -> ${signal.newSL}`;
+      case 5:
+        return `Lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} dời takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+      case 6:
+        return `Lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} thay đổi giá mở cửa ${signal.oldOP} -> ${signal.newOP}`;
+      default:
+        break;
+    }
+  }
+  getTitle(command){
+    switch (command) {
+      case 0:
+        return `Mở lệnh`;
+      case 1:
+        return `Đóng lệnh`;
+      case 2:
+        return `Hủy lệnh`;
+      case 3:
+        return `Đã khớp lệnh`;
+      case 4:
+        return `Thay đổi stoploss`;
+      case 5:
+        return `Thay đổi takeprofit`;
+      case 6:
+        return `Thay đổi giá mở cửa`;
+      default:
+        break;
+    }
+  }
+  getTypeSignal(type) {
+    switch (type) {
+      case "0":
+        return "Buy";
+      case "1":
+        return "Sell";
+      case "2":
+        return "Buy Limit";
+      case "3":
+        return "Sell Limit";
+      case "4":
+        return "Buy Stop";
+      case "5":
+        return "Sell Stop";
+      default:
+        break;
+    }
+    return;
   }
   async componentDidMount() {
     const db = firebase.firestore();
@@ -32,20 +93,16 @@ class Dashboard extends Component {
       console.log('DENIED');
     });
     let next = await this.props.getEventsForDashboard();
+    console.log(this.props.currentUser.uid);
     db.collection("notifications")
       .where('uid', '==', this.props.currentUser.uid)
-      .orderBy('createdAt', 'desc')
+      .orderBy('createAt', 'desc')
       .limit(1)
       .onSnapshot((snapshot) => {
-        if (snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
+        if (this.state.loadedEvents && snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
           const signal = snapshot.docs[0].data();
-          const type = signal.type === 1 ? `Tín hiệu mới` : (signal.type === 2 ? `Thay đổi lệnh ${signal.ticket}` : `Đóng lệnh ${signal.ticket}`);
-          let body = '';
-          if (signal.type === 1) body = `${signal.typeSignal ? "BUY" : "SELL"} ${signal.symbol} NOW`;
-          if (signal.type === 2) body = `Cắt lỗ tại: ${signal.stoploss},  Chốt lời tại: ${signal.takeprofit} `;
-          if (signal.type === 3) body = `Đóng lệnh tại: ${signal.closePrice}, Lợi nhuận: ${signal.profit}`;
-          Push.create(type, {
-            body: body,
+          Push.create(this.getTitle(signal.command), {
+            body: this.getCommand(signal),
             icon: '/icon.png',
             timeout: 4000,
             onClick: function () {
@@ -91,7 +148,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard-container">
         <DashboardCard />
-        <TopUsers />
+        <TopUsers topExpert={this.props.topExpert} />
         <Timeline
           loading={loading}
           moreEvents={moreEvents}

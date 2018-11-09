@@ -59,7 +59,7 @@ class ExpertCard extends Component {
                   } %
                 </span>
               </p>
-              <p><span className="description-text-left">Số Pips đạt</span><span className="description-text-right">{expert.totalpips.toFixed(1)}</span></p>
+              <p><span className="description-text-left">Số Pips đạt</span><span className="description-text-right">{expert.totalpips.toFixed(2)}</span></p>
             </div>
           }
         />

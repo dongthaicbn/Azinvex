@@ -22,11 +22,11 @@ class HeaderLanding extends Component {
     const { profileUser, isAuthenticated, uid } = this.props;
     const menu = (
       <Menu>
-        {profileUser.role === 'expert' &&
+        {/* {profileUser.role === 'expert' &&
           <Menu.Item>
             <a href="#/managesignal" className="dropdown-item">Bắn Tín Hiệu</a>
           </Menu.Item>
-        }
+        } */}
         {profileUser.role === 'expert' &&
           <Menu.Item>
             <a href={'#/expert/' + uid} className="dropdown-item">Trang Cá Nhân</a>
