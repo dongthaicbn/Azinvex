@@ -27,21 +27,11 @@ class Navigation extends React.Component {
             inlineCollapsed={collapsed}
           >
             <Menu.Item key="home"><Icon type="home" /><span>LadingPage</span></Menu.Item>
-            {
-              role === 'expert' && <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>
-            }
-            {
-              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>
-            }
-            {
-              role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Dashboard</span></Menu.Item>
-            }
-            {
-              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
-            }
-            {
-              role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
-            }
+            {role === 'expert' && <Menu.Item key="managesignal"><Icon type="bar-chart" /><span>Bắn Tín Hiệu</span></Menu.Item>}
+            {role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>}
+            {role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Dashboard</span></Menu.Item>}
+            {role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>}
+            {role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>}
             
             <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span><i>Quản Lý</i></span></span>}>
               <Menu.Item key="information">Thông Tin Cá Nhân</Menu.Item>
@@ -50,7 +40,7 @@ class Navigation extends React.Component {
             </Menu.SubMenu>
 
             <Menu.Item key="help"><Icon type="info-circle" /><span>Hướng Dẫn Sử Dụng</span></Menu.Item>
-            <Menu.Item key="support"><Icon type="question-circle" /><span>Hỗ Trợ</span></Menu.Item>
+            {/*<Menu.Item key="support"><Icon type="question-circle" /><span>Hỗ Trợ</span></Menu.Item>*/}
           </Menu>
         </div>
       </ScrollBar>

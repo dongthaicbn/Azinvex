@@ -33,7 +33,7 @@ class App extends React.Component {
     this.setState({
       collapsed: !this.state.collapsed
     });
-  }
+  };
 
   commonComponents = () => (
     <div className="app-container">
@@ -44,7 +44,7 @@ class App extends React.Component {
           collapsed={this.state.collapsed}
           style={{ height: 'calc(100vh - 64px)' }}
         >
-          <div className="logo-img">
+          <div className="logo-img" onClick={() => window.location.href = '#/'}>
             <img src={Logo} alt="" />
             {!this.state.collapsed && <span className="app-title">AZINVEX</span>}
           </div>

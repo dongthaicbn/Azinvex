@@ -14,7 +14,6 @@ const MenuLanding = props => {
 
   const handleSignOut = () => {
     props.firebase.logout();
-
   };
 
   const menu = (
@@ -90,7 +89,7 @@ const MenuLanding = props => {
     <nav className="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
       <div className="container">
         <div className="navbar-translate">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="#/">
             <img alt="" style={{ marginTop: '-20px'}} src="https://azinvex.com/images/Logo-Az-invex.png" height="61px" width="243px" />
           </a>
           <button type="button" className="ml-auto navbar-toggler" data-toggle="collapse"
@@ -104,20 +103,14 @@ const MenuLanding = props => {
         <div className="collapse navbar-collapse" id="navigation-example4">
           <ul className="navbar-nav navbar-center ml-auto">
             <li className="nav-item">
-              <a href="#/home" className="nav-link">
-                Trang Chủ
-              </a>
+              <a href="#/" className="nav-link">Trang Chủ</a>
             </li>
             <li className="nav-item">
-              <a href="#/home" className="nav-link">
-                Về Chúng Tôi
-              </a>
+              <a href="#/" className="nav-link">Về Chúng Tôi</a>
             </li>
           
             <li className="nav-item">
-              <a href="#/contact" className="nav-link">
-                Liên Hệ
-              </a>
+              <a href="#/support" className="nav-link">Liên Hệ</a>
             </li>
             <li className="dropdown nav-item">
               <Dropdown overlay={menu}>
