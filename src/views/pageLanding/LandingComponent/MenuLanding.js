@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { Menu, Dropdown } from 'antd';
 
 import { actionNavigateTo } from '../../../reduxModules/common/routes';
-import * as routes from '../../../utils/constants/routes';
+// import * as routes from '../../../utils/constants/routes';
 import '../Landing.scss';
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 const MenuLanding = props => {
 

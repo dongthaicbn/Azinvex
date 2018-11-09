@@ -1,114 +1,114 @@
 .information-container {
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
-  padding: 20px;
-  .info-header {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .title-input-profile {
-    margin-bottom: 5px;
-  }
-  .card-info-contain {
-    width: 33%;
-    float: left;
-    padding: 20px;
-  }
-  .end-card-info {
-    width: 33%;
-    display: inline-block;
-    padding: 20px;
-  }
-  .header-profile {
-    font-size: 20px;
-    padding: 0 20px;
-  }
-  .grid-container {
-    width: 33%;
-    display: inline-block;
-    padding: 20px;
-  }
-  .grid-container > p {
-    margin-bottom: 5px;
-  }
-  .title-input {
-    font-weight: 600;
-    margin-top: 15px;
-  }
-  .first-title {
-    font-weight: 600;
-  }
-  .avatar-container {
-    width: 33%;
-    padding: 20px;
-    float: left;
-  }
-  .info-icon {
-    cursor: pointer;
-    color: #1890ff;
-  }
-  .submit-btn {
-    float: right;
-    margin-right: 40px;
-  }
-  .ant-upload-list-picture-card .ant-upload-list-item {
-    width: 200px;
-    height: 200px;
-    border-radius: 300px;
-    margin-left: calc(50% - 100px);
-    border: solid 1px #52c41a;
-  }
-  .ant-upload-list-picture-card .ant-upload-list-item-info {
-    border-radius: 300px;
-  }
-  .text-info-name {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  .text-info {
-    text-align: center;
-    font-size: 14px;
-  }
-  .avatar-img {
-    position: relative;
-  }
-  .edit-icon {
-    position: absolute;
-    bottom: 26px;
-    /*margin-left: -70px;*/
-    border: solid 1px #52c41a;
-    border-radius: 30px;
-    text-align: center;
-    background: white;
-    font-size: 18px;
+   background: white;
+   border-radius: 4px;
+   box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+   padding: 20px;
+   .info-header {
+     font-size: 20px;
+     font-weight: 600;
+   }
+   .title-input-profile {
+     margin-bottom: 5px;
+   }
+   .card-info-contain {
+     width: 33%;
+     float: left;
+     padding: 20px;
+   }
+   .end-card-info {
+     width: 33%;
+     display: inline-block;
+     padding: 20px;
+   }
+   .header-profile {
+     font-size: 20px;
+     padding: 0 20px;
+   }
+   .grid-container {
+     width: 33%;
+     display: inline-block;
+     padding: 20px;
+   }
+   .grid-container > p {
+     margin-bottom: 5px;
+   }
+   .title-input {
+     font-weight: 600;
+     margin-top: 15px;
+   }
+   .first-title {
+     font-weight: 600;
+   }
+   .avatar-container {
+     width: 33%;
+     padding: 20px;
+     float: left;
+   }
+   .info-icon {
+     cursor: pointer;
+     color: #1890ff;
+   }
+   .submit-btn {
+     float: right;
+     margin-right: 40px;
+   }
+   .ant-upload-list-picture-card .ant-upload-list-item {
+     width: 200px;
+     height: 200px;
+     border-radius: 300px;
+     margin-left: calc(50% - 100px);
+     border: solid 1px #52c41a;
+   }
+   .ant-upload-list-picture-card .ant-upload-list-item-info {
+     border-radius: 300px;
+   }
+   .text-info-name {
+     text-align: center;
+     margin-top: 10px;
+     font-size: 16px;
+     font-weight: 600;
+     margin-bottom: 5px;
+   }
+   .text-info {
+     text-align: center;
+     font-size: 14px;
+   }
+   .avatar-img {
+     position: relative;
+   }
+   .edit-icon {
+     position: absolute;
+     bottom: 26px;
+     /*margin-left: -70px;*/
+     border: solid 1px #52c41a;
+     border-radius: 30px;
+     text-align: center;
+     background: white;
+     font-size: 18px;
 
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    z-index: 1;
-  }
-  .input-image {
-    opacity: 0;
-    position: absolute;
-    z-index: 0;
-    width: 30px;
-  }
-  .ant-upload.ant-upload-select-picture-card {
-    border: none;
-    height: 0;
-    width: 0;
-    background: white;
-    margin-left: calc(50% + 16px);
-  }
-  .ant-upload-list-picture-card {
-    width: 100%;
-    margin-top: 60px;
-  }
-  .ant-input-disabled {
-    color: #111;
-  }
-}
+     width: 30px;
+     height: 30px;
+     cursor: pointer;
+     z-index: 1;
+   }
+   .input-image {
+     opacity: 0;
+     position: absolute;
+     z-index: 0;
+     width: 30px;
+   }
+   .ant-upload.ant-upload-select-picture-card {
+     border: none;
+     height: 0;
+     width: 0;
+     background: white;
+     margin-left: calc(50% + 16px);
+   }
+   .ant-upload-list-picture-card {
+     width: 100%;
+     margin-top: 60px;
+   }
+   .ant-input-disabled {
+     color: #111;
+   }
+ }
