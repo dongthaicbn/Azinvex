@@ -121,7 +121,7 @@ const MenuLanding = props => {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto" style={{ float: 'right' }}>
-            {props.isAuthenticated && <li>Xin chào {props.profileUser.displayName}&nbsp;</li>}
+            {props.isAuthenticated && <li>Xin chào {props.profileUser.displayName.toUpperCase()}&nbsp;</li>}
             <li className="button-container nav-item iframe-extern">
               {props.isAuthenticated ?
                 <a href="#/" style={{ padding: '.375rem .75rem'}} className="btn btn-rose btn-round btn-block" onClick={handleSignOut}>Logout</a> :
