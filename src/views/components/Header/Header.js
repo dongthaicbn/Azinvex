@@ -12,16 +12,18 @@ class Header extends React.Component {
   handleSelectItem = (item, key, keyPath) => {
     if(item.key === "logout") {
       this.props.firebase.logout();
+    } else {
+      window.location.href = `#/${item.key}`;
     }
-  }
+  };
   render() {
     const { collapsed } = this.props;
     const menu = (
       <Menu style={{ padding: 10 }} onClick={this.handleSelectItem}>
-        <Menu.Item key="user">
+        <Menu.Item key="account">
           <a className="user-info-text"><Icon type="user" style={{ fontSize: 14 }} />&nbsp;&nbsp;Nguyen Nhat Trung</a>
         </Menu.Item>
-        <Menu.Item key="form">
+        <Menu.Item key="information">
           <a className="user-info-text"><Icon type="form" style={{ fontSize: 14 }} />&nbsp;&nbsp;Edit Profile</a>
         </Menu.Item>
         <Menu.Item key="mail">
