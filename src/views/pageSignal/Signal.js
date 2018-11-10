@@ -5,8 +5,6 @@ import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
-
-const { Column } = Table;
 /*eslint-disable*/
 class Signal extends Component {
   state={
@@ -49,13 +47,15 @@ class Signal extends Component {
     )
     this.setState({ selectedExpert: expertId})
   }
-
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
   render() {
     const columns = [
       {
         title: 'Ticket',
-        dataIndex: 'ticket',
-        key: 'ticket'
+        dataIndex: 'id',
+        key: 'id'
       },
       {
         title: 'Lệnh',
@@ -82,8 +82,9 @@ class Signal extends Component {
       },
       {
         title: 'Trạng thái',
+        dataIndex: 'status',
         key: 'status',
-        render: () => <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+        render: (status) => this.capitalizeFirstLetter(status)
       }
     ];
     return (

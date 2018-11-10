@@ -13,7 +13,7 @@ class SignalRoom extends Component {
   }
   render() {
     const {activeList, pendingList, todayList} = this.props;
-    const list = activeList.concat(pendingList);
+    const list = activeList.concat(pendingList).concat(todayList);
     const columns = [
       {
         title: 'Ticket',
@@ -43,20 +43,20 @@ class SignalRoom extends Component {
         key: 'signal'
       },
       {
-        title: 'Thời gian mở',
+        title: 'Thời gian tạo',
         dataIndex: 'createAt',
         render: createAt => moment(createAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
         key: 'createdAt'
       },
       {
         title: 'Giá mở cửa',
-        dataIndex: 'takeprofit',
-        key: 'takeprofit'
+        dataIndex: 'openPrice',
+        key: 'openPrice'
       },
       {
         title: 'Kết quả',
-        dataIndex: 'stoploss',
-        key: 'stoploss'
+        dataIndex: 'profit',
+        render: profit =>profit ? profit + " pips" : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />,
       }
     ];
     const suffix = <Icon type="picture" theme="outlined" />;

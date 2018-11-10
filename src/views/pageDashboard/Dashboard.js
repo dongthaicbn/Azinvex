@@ -99,7 +99,21 @@ class Dashboard extends Component {
       .orderBy('createAt', 'desc')
       .limit(1)
       .onSnapshot((snapshot) => {
-        if (this.state.loadedEvents && snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
+        if (!this.state.loadedEvents[0] && snapshot.docs[0]) {
+          const signal = snapshot.docs[0].data();
+          Push.create(this.getTitle(signal.command), {
+            body: this.getCommand(signal),
+            icon: '/icon.png',
+            timeout: 4000,
+            onClick: function () {
+              window.focus();
+              this.close();
+            }
+          });
+          const newArr = this.state.loadedEvents;
+          newArr.unshift(snapshot.docs[0].data());
+          this.setState({ loadedEvents: newArr });
+        } else if (this.state.loadedEvents[0] && snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
           const signal = snapshot.docs[0].data();
           Push.create(this.getTitle(signal.command), {
             body: this.getCommand(signal),

@@ -7,6 +7,15 @@ import './ExpertDetail.scss';
 /* eslint-disable */
 class History extends Component {
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+
   render() {
     const columns = [
       {
@@ -69,6 +78,7 @@ class History extends Component {
           <Button type="primary" className="detail-command-btn">
             Chi tiết lệnh
           </Button>
+          <Form onSubmit={this.handleSubmit}>
           <p className="header-card">Filter Lệnh</p>
           <div className="col-12 col-md-6 col-lg-4">
             <div className="column-container">
@@ -77,7 +87,12 @@ class History extends Component {
               </p>
               <p className="item-container">
                 <p className="text-item"><a>FROM</a></p>
+                <Form.Item>
+              {getFieldDecorator('dateopened', null)(
                 <DatePicker />
+              )}
+            </Form.Item>
+              
               </p>
             </div>
           </div>
@@ -88,7 +103,11 @@ class History extends Component {
               </p>
               <p className="item-container">
                 <p className="text-item"><a>TO</a></p>
+                <Form.Item>
+                   {getFieldDecorator('datefixed', null)(
                 <DatePicker />
+              )}
+            </Form.Item>
               </p>
             </div>
           </div>
@@ -99,18 +118,23 @@ class History extends Component {
               </p>
               <p className="item-container">
                 <p className="text-item"><a>Cặp tiền</a></p>
+                <Form.Item>
+                   {getFieldDecorator('symbol', null)(
                 <Input />
+              )}
+             </Form.Item>
               </p>
             </div>
           </div>
           <p className="group-btn">
             <span>
-              <Button>Tìm kiếm</Button>
+              <Button type="submit">Tìm kiếm</Button>
             </span>
               <span>
               <Button type="primary" className="reset-btn">Reset</Button>
             </span>
           </p>
+          </Form>
         </Card>
         <Card className="card-container">
           <Button type="primary" className="detail-command-btn">
