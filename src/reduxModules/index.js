@@ -4,12 +4,14 @@ import home from './pageHome/home';
 import signal from './pageManageSignal/signalReducers';
 import async from './async/asyncReducer';
 import events from './pageDashboard/notificationReducers';
+import expert from './expert/expertReducers';
 
 const reducers = {
   system,
   home,
   signal,
   async,
-  events
+  events,
+  expert
 };
 export default reducers;

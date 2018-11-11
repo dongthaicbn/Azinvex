@@ -1,18 +1,90 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { withFirestore } from 'react-redux-firebase';
 import moment from 'moment';
-import { Card, Button, Input, DatePicker, Table } from 'antd';
+import { Form, Card, Button, Input, DatePicker, Table } from 'antd';
 import './ExpertDetail.scss';
+import { getSignalHistoryForDashboard } from './../../reduxModules/expert/expertActions';
 
 /* eslint-disable */
 class History extends Component {
 
+  state = {
+    isFilter:false,
+    filterSignals: [],
+    moreEvents: false,
+    loadingInitial: true,
+    loadedEvents: [],
+    contextRef: {}
+}
+  async componentDidMount(){
+    const { expertId } = this.props
+    console.log(expertId)
+    let next = await this.props.getSignalHistoryForDashboard(null, expertId);
+    console.log(next);
+    if (next && next.docs && next.docs.length > 1) {
+        this.setState({
+            moreEvents: true,
+            loadingInitial: false
+        });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.closedSignals !== nextProps.closedSignals) {
+        this.setState({
+            loadedEvents: [...this.state.loadedEvents, ...nextProps.closedSignals]
+        });
+    }
+}
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    const { firestore, expertId } = this.props
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
+        let {dateopened, datefixed, symbol} = values;
+        let start, end;
+        start = moment(dateopened).toDate();
+        end = moment(datefixed).toDate();
+        symbol = symbol.toUpperCase();
+        if (!dateopened) start = new Date('1980-01-01');
+        if (!datefixed) end = new Date(Date.now());
+        start = start.getTime();
+        end = end.getTime();
+        console.log(start, end);
+        if (symbol){
+          const signalHistoryRef = firestore.collection('signals');
+          const query = signalHistoryRef
+          .where('expert.id', '==', expertId)
+          .where('status', '==', 'closed')
+          .where('symbol', '==', symbol)
+          .where('startAt', '>', start)
+          .where('startAt', '<', end)
+      let querySnap = await query.get();
+      let signalHistory = [];
+      for (let i = 0; i < querySnap.docs.length; i++) {
+          let evt = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
+          signalHistory.push(evt);
+      }
+      this.setState({ isFilter: true, filterSignals: signalHistory })
+        }
         console.log('Received values of form: ', values);
       }
+      else{
+        const signalHistoryRef = firestore.collection('signals');
+        const query = signalHistoryRef
+            .where('expert.id', '==', expertId)
+            .where('status', '==', 'closed')
+            .where('startAt', '>', start)
+            .where('startAt', '<', end)
+        let querySnap = await query.get();
+        let signalHistory = [];
+        for (let i = 0; i < querySnap.docs.length; i++) {
+            let evt = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
+            signalHistory.push(evt);
+        }
+        this.setState({ isFilter: true, filterSignals: signalHistory })
+    }
     });
   }
 
@@ -20,65 +92,61 @@ class History extends Component {
     const columns = [
       {
         title: 'Ticket',
-        dataIndex: 'ticket',
+        dataIndex: 'id',
         key: 'ticket'
       },
       {
         title: 'Cặp tiền',
-        dataIndex: 'ticket',
-        key: 'ticket'
+        dataIndex: 'symbol',
+        key: 'symbol'
       },
       {
         title: 'Giá mở cửa',
-        dataIndex: 'takeprofit',
-        key: 'takeprofit'
+        dataIndex: 'openPrice',
+        key: 'openPrice'
       },
       {
-        title: 'Stoploss',
-        dataIndex: 'expert',
-        render: expert => <a href={`/#/expert/${expert.id}`}>{expert.displayName}</a>,
-        key: 'expert'
+        title: 'Stop Loss',
+        dataIndex: 'stoploss',
+        key: 'stoploss'
       },
       {
         title: 'Take Profit',
-        dataIndex: 'signal',
-        render: (text, signal) =>
-          signal.type === 1 ?
-            `Mở lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.openPrice}` :
-            signal.type === 2 ? 'Sửa lệnh' :
-              `Đóng lệnh ${signal.typeSignal ? 'SELL' : 'BUY'} ${signal.symbol} tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`,
-        key: 'signal'
-      },
-      {
-        title: 'Thời gian mở',
-        dataIndex: 'createdAt',
-        render: createdAt => moment(createdAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
-        key: 'createdAt'
-      },
-      {
-        title: 'Giá đóng cửa',
         dataIndex: 'takeprofit',
         key: 'takeprofit'
       },
       {
+        title: 'Thời gian mở',
+        dataIndex: 'startAt',
+        render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
+        key: 'startAt'
+      },
+      {
+        title: 'Giá đóng cửa',
+        dataIndex: 'closePrice',
+        key: 'closePrice'
+      },
+      {
         title: 'Thời gian đóng',
-        dataIndex: 'createdAt',
-        render: createdAt => moment(createdAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
-        key: 'createdAt'
+        dataIndex: 'closeAt',
+        render: closeAt => moment(closeAt).format('HH:mm DD/MM/YYYY'),
+        key: 'closeAt'
       },
       {
         title: 'Kết quả',
-        dataIndex: 'stoploss',
-        key: 'stoploss'
+        dataIndex: 'profit',
+        key: 'profit'
       }
     ];
+    const { getFieldDecorator } = this.props.form;
     return (
       <div>
+          <Form onSubmit={this.handleSubmit}>
         <Card className="card-container">
           <Button type="primary" className="detail-command-btn">
             Chi tiết lệnh
           </Button>
-          <Form onSubmit={this.handleSubmit}>
+        
           <p className="header-card">Filter Lệnh</p>
           <div className="col-12 col-md-6 col-lg-4">
             <div className="column-container">
@@ -88,7 +156,7 @@ class History extends Component {
               <p className="item-container">
                 <p className="text-item"><a>FROM</a></p>
                 <Form.Item>
-              {getFieldDecorator('dateopened', null)(
+              {getFieldDecorator('dateopened', {})(
                 <DatePicker />
               )}
             </Form.Item>
@@ -104,7 +172,7 @@ class History extends Component {
               <p className="item-container">
                 <p className="text-item"><a>TO</a></p>
                 <Form.Item>
-                   {getFieldDecorator('datefixed', null)(
+                   {getFieldDecorator('datefixed', {})(
                 <DatePicker />
               )}
             </Form.Item>
@@ -119,7 +187,7 @@ class History extends Component {
               <p className="item-container">
                 <p className="text-item"><a>Cặp tiền</a></p>
                 <Form.Item>
-                   {getFieldDecorator('symbol', null)(
+                   {getFieldDecorator('symbol', {})(
                 <Input />
               )}
              </Form.Item>
@@ -128,14 +196,14 @@ class History extends Component {
           </div>
           <p className="group-btn">
             <span>
-              <Button type="submit">Tìm kiếm</Button>
+              <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
             </span>
               <span>
-              <Button type="primary" className="reset-btn">Reset</Button>
+              <Button type="danger" className="reset-btn">Reset</Button>
             </span>
           </p>
-          </Form>
-        </Card>
+      
+        </Card>    </Form>
         <Card className="card-container">
           <Button type="primary" className="detail-command-btn">
             Form Actions On Top And Bottom Right
@@ -146,7 +214,7 @@ class History extends Component {
           </p>
           <br />
           <Table
-            dataSource={[]}
+            dataSource={!this.state.isFilter ? this.state.loadedEvents : this.state.filterSignals}
             bordered
             // loading={loading}
             footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
@@ -158,12 +226,17 @@ class History extends Component {
     );
   }
 }
-
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    // action
+const mapStateToProps = state => {
+  return {
+    expertId: state.location.payload.id,
+    closedSignals: state.expert,
+    loading: state.async.loading,
   }
-)(History);
+}
+
+export default compose(
+  connect(
+    mapStateToProps,
+    {getSignalHistoryForDashboard}
+  )
+)(Form.create()(withFirestore(History)))
