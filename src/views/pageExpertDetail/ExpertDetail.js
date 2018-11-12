@@ -91,7 +91,7 @@ class ExpertDetail extends Component {
           <Tabs>
             <Tabs.TabPane tab="Phòng tín hiệu" key="1"><SignalRoom activeList={activeList} pendingList={pendingList} todayList={todayList}/></Tabs.TabPane>
             <Tabs.TabPane tab="Thông tin" key="2"><Information expertDetail={expertDetail} /></Tabs.TabPane>
-            <Tabs.TabPane tab="Lịch sử" key="3"><History /></Tabs.TabPane>
+            <Tabs.TabPane tab="Lịch sử" key="3"><History expertDetail={expertDetail}  /></Tabs.TabPane>
             <Tabs.TabPane tab="Bài viết" key="4"><Posts /></Tabs.TabPane>
           </Tabs>
         </div>

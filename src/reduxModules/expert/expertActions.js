@@ -23,7 +23,7 @@ export const unlistenExperts = () =>
       });
   };
 /* eslint-disable */
-export const getSignalHistoryForDashboard = (lastSignalHistory, eid) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const getSignalHistory = (lastSignalHistory, eid) => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = firebase.firestore();
   const signalHistoryRef = firestore.collection('signals');
   try {
@@ -41,12 +41,12 @@ export const getSignalHistoryForDashboard = (lastSignalHistory, eid) => async (d
         .where('status', '==', 'closed')
         .orderBy('startAt', 'asc')
         .startAfter(startAfter)
-        .limit(2))
+        .limit(5))
       : (query = signalHistoryRef
         .where('expert.id', '==', eid)
         .where('status', '==', 'closed')
         .orderBy('startAt', 'asc')
-        .limit(2));
+        .limit(5));
     let querySnap = await query.get();
     if (querySnap.docs.length === 0) {
       dispatch(asyncActionFinish());

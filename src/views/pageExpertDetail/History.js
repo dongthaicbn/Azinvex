@@ -5,7 +5,7 @@ import { withFirestore } from 'react-redux-firebase';
 import moment from 'moment';
 import { Form, Card, Button, Input, DatePicker, Table } from 'antd';
 import './ExpertDetail.scss';
-import { getSignalHistoryForDashboard } from './../../reduxModules/expert/expertActions';
+import { getSignalHistory } from './../../reduxModules/expert/expertActions';
 
 /* eslint-disable */
 class History extends Component {
@@ -20,9 +20,7 @@ class History extends Component {
 }
   async componentDidMount(){
     const { expertId } = this.props
-    console.log(expertId)
-    let next = await this.props.getSignalHistoryForDashboard(null, expertId);
-    console.log(next);
+    let next = await this.props.getSignalHistory(null, expertId);
     if (next && next.docs && next.docs.length > 1) {
         this.setState({
             moreEvents: true,
@@ -46,13 +44,12 @@ class History extends Component {
         let start, end;
         start = moment(dateopened).toDate();
         end = moment(datefixed).toDate();
-        symbol = symbol.toUpperCase();
         if (!dateopened) start = new Date('1980-01-01');
         if (!datefixed) end = new Date(Date.now());
         start = start.getTime();
         end = end.getTime();
-        console.log(start, end);
         if (symbol){
+          symbol = symbol.toUpperCase();
           const signalHistoryRef = firestore.collection('signals');
           const query = signalHistoryRef
           .where('expert.id', '==', expertId)
@@ -87,7 +84,19 @@ class History extends Component {
     }
     });
   }
-
+  reset = () => {
+    this.setState({ isFilter: false, filterSignals: [] })
+  }
+  getNextEvents = async () => {
+    const { closedSignals, expertId } = this.props;
+    let lastEvent = closedSignals && closedSignals[closedSignals.length - 1];
+    let next = await this.props.getSignalHistory(lastEvent, expertId);
+    if (next && next.docs && next.docs.length <= 1) {
+        this.setState({
+            moreEvents: false
+        });
+    }
+};
   render() {
     const columns = [
       {
@@ -143,15 +152,11 @@ class History extends Component {
       <div>
           <Form onSubmit={this.handleSubmit}>
         <Card className="card-container">
-          <Button type="primary" className="detail-command-btn">
-            Chi tiết lệnh
-          </Button>
-        
-          <p className="header-card">Filter Lệnh</p>
+          <p className="header-card">Filter tín hiệu</p>
           <div className="col-12 col-md-6 col-lg-4">
             <div className="column-container">
               <p className="item-container">
-                <p className="text-item"><a>Tổng số Pips: </a>9.30</p>
+                <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips}</p>
               </p>
               <p className="item-container">
                 <p className="text-item"><a>FROM</a></p>
@@ -167,7 +172,7 @@ class History extends Component {
           <div className="col-12 col-md-6 col-lg-4">
             <div className="column-container">
               <p className="item-container">
-                <p className="text-item"><a>Số lệnh thắng: </a>1</p>
+                <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
               </p>
               <p className="item-container">
                 <p className="text-item"><a>TO</a></p>
@@ -182,7 +187,7 @@ class History extends Component {
           <div className="col-12 col-md-6 col-lg-4">
             <div className="column-container">
               <p className="item-container">
-                <p className="text-item"><a>Số lệnh thua: </a> 0</p>
+                <p className="text-item"><a>Số lệnh thua: </a> {this.props.expertDetail.signalLoss}</p>
               </p>
               <p className="item-container">
                 <p className="text-item"><a>Cặp tiền</a></p>
@@ -199,25 +204,25 @@ class History extends Component {
               <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
             </span>
               <span>
-              <Button type="danger" className="reset-btn">Reset</Button>
+              <Button onClick={()=>this.reset()} type="danger" className="reset-btn">Reset</Button>
             </span>
           </p>
       
         </Card>    </Form>
         <Card className="card-container">
-          <Button type="primary" className="detail-command-btn">
+          {/* <Button type="primary" className="detail-command-btn">
             Form Actions On Top And Bottom Right
-          </Button>
-          <p className="header-card">Timesheet</p>
-          <p>
+          </Button> */}
+          <p className="header-card">Danh sách tín hiệu</p>
+          {/* <p>
             To add form actions on top and bottom of the form add a div with.form-actions class to start and end the form. Add.right class to align the form action buttons to right.
-          </p>
+          </p> */}
           <br />
           <Table
             dataSource={!this.state.isFilter ? this.state.loadedEvents : this.state.filterSignals}
             bordered
-            // loading={loading}
-            footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
+            loading={this.props.loading}
+            footer={() => <Button disabled={!this.state.moreEvents} onClick={()=>this.getNextEvents()} type="primary" className="detail-btn">Tải thêm</Button>}
             pagination={false}
             columns={columns}
           />
@@ -237,6 +242,6 @@ const mapStateToProps = state => {
 export default compose(
   connect(
     mapStateToProps,
-    {getSignalHistoryForDashboard}
+    {getSignalHistory}
   )
 )(Form.create()(withFirestore(History)))
