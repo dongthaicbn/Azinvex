@@ -16,6 +16,7 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
       role: "member",
       followerCount: 0,
       followedCount: 0,
+      account: 0,
       information:{phone},
       photoURL: "/assets/user.png",
       createdAt: firestore.FieldValue.serverTimestamp()
