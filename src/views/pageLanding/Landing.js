@@ -4,26 +4,34 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import $ from 'jquery';
 import { Layout } from 'antd';
-import ScrollBar from '../components/ScrollBar/ScrollBar';
-
-import HeaderLanDing from './HeaderLading'
+import MenuLanding from './LandingComponent/MenuLanding';
+import HeaderContent from './LandingComponent/HeaderContent';
+import MainContent from './LandingComponent/MainContent';
+import Footer from './LandingComponent/Footer';
 import './Landing.scss';
 
 const { Header, Content } = Layout;
 class Landing extends Component {
-
+  componentDidMount() {
+    if ($('.navbar-color-on-scroll').length !== 0) {
+      $(window).on('scroll', this.checkScrollForTransparentNavbar);
+    }
+  }
+  checkScrollForTransparentNavbar = () => {
+    if ($(document).scrollTop() > 300) {
+      $('.navbar-color-on-scroll').removeClass('navbar-transparent');
+    } else {
+      $('.navbar-color-on-scroll').addClass('navbar-transparent');
+    }
+  };
   render() {
     const { profileUser, isAuthenticated } = this.props;
     return (
       <Layout>
-        <Header className="header-landing">
-          <HeaderLanDing/>
-        </Header>
-        <Content>
-          <ScrollBar>
-            content
-          </ScrollBar>
-        </Content>
+        <MenuLanding profileUser={profileUser} isAuthenticated={isAuthenticated} />
+        <HeaderContent />
+        <MainContent />
+        <Footer />
       </Layout>
     )
   }
