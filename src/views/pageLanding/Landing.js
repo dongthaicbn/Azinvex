@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import $ from 'jquery';
 import { Layout } from 'antd';
+import './Landing.scss';
 import MenuLanding from './LandingComponent/MenuLanding';
 import HeaderContent from './LandingComponent/HeaderContent';
 import MainContent from './LandingComponent/MainContent';
 import Footer from './LandingComponent/Footer';
-import './Landing.scss';
 
-const { Header, Content } = Layout;
 class Landing extends Component {
+
   componentDidMount() {
     if ($('.navbar-color-on-scroll').length !== 0) {
       $(window).on('scroll', this.checkScrollForTransparentNavbar);
     }
   }
+
   checkScrollForTransparentNavbar = () => {
     if ($(document).scrollTop() > 300) {
       $('.navbar-color-on-scroll').removeClass('navbar-transparent');
@@ -24,6 +25,7 @@ class Landing extends Component {
       $('.navbar-color-on-scroll').addClass('navbar-transparent');
     }
   };
+
   render() {
     const { profileUser, isAuthenticated } = this.props;
     return (

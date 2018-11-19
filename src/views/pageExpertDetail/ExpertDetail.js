@@ -77,12 +77,13 @@ class ExpertDetail extends Component {
   }
   render() {
     const {activeList, pendingList, todayList, expertDetail} = this.props;
+    const avatarUrl = (expertDetail.photoURL && expertDetail.photoURL.includes('assets/user.png')) ? avatarUser : expertDetail.photoURL;
     return (
       <div>
         <div className="profile-container">
           <div className="card-img-profile" />
           <div className="profile-info">
-            <img alt="avatar" src={expertDetail.photoURL} className="avatar-image" />
+            <img alt="avatar" src={avatarUrl || avatarUser} className="avatar-image" />
             <p className="title-profile">{expertDetail.displayName} </p>
             <p className="sub-profile">Chuyên gia Forex</p>
           </div>

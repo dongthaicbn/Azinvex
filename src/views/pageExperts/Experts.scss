@@ -10,12 +10,27 @@
     .detail-btn {
       border-radius: 30px;
       margin-right: 10px;
-      background-color: #90EE02;
-      border: none;
-      color: #000;
+      background: #00adb5;
+      border:1px solid #00adb5;
+      padding: 0 15px;
+      height: 30px;
+      color: #fafafa;
+      font-family:"Oswald",sans-serif;
+      font-size: 14px;
+      transition: all 0.1s ease;
+      &:hover{
+        background: #fafafa;
+        border:1px solid #00adb5;
+        color: #00adb5;
+      }
     }
     .follow-btn {
       border-radius: 30px;
+      padding: 0 15px;
+      height: 30px;
+      font-family:"Oswald",sans-serif;
+      font-size: 14px;
+      transition: all 0.1s ease;
     }
     .description-text-right {
       float: right;

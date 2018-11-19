@@ -150,65 +150,66 @@ class History extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-          <Form onSubmit={this.handleSubmit}>
-        <Card className="card-container">
-          <p className="header-card">Filter tín hiệu</p>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="column-container">
-              <p className="item-container">
-                <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips}</p>
-              </p>
-              <p className="item-container">
-                <p className="text-item"><a>FROM</a></p>
-                <Form.Item>
-              {getFieldDecorator('dateopened', {})(
-                <DatePicker />
-              )}
-            </Form.Item>
-              
-              </p>
+        <Form onSubmit={this.handleSubmit}>
+          <Card className="card-container">
+            <p className="header-card">Filter tín hiệu</p>
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="column-container">
+                <p className="item-container">
+                  <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips}</p>
+                </p>
+                <p className="item-container">
+                  <p className="text-item"><a>FROM</a></p>
+                  <Form.Item>
+                {getFieldDecorator('dateopened', {})(
+                  <DatePicker />
+                )}
+              </Form.Item>
+
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="column-container">
-              <p className="item-container">
-                <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
-              </p>
-              <p className="item-container">
-                <p className="text-item"><a>TO</a></p>
-                <Form.Item>
-                   {getFieldDecorator('datefixed', {})(
-                <DatePicker />
-              )}
-            </Form.Item>
-              </p>
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="column-container">
+                <p className="item-container">
+                  <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
+                </p>
+                <p className="item-container">
+                  <p className="text-item"><a>TO</a></p>
+                  <Form.Item>
+                     {getFieldDecorator('datefixed', {})(
+                  <DatePicker />
+                )}
+              </Form.Item>
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="column-container">
-              <p className="item-container">
-                <p className="text-item"><a>Số lệnh thua: </a> {this.props.expertDetail.signalLoss}</p>
-              </p>
-              <p className="item-container">
-                <p className="text-item"><a>Cặp tiền</a></p>
-                <Form.Item>
-                   {getFieldDecorator('symbol', {})(
-                <Input />
-              )}
-             </Form.Item>
-              </p>
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="column-container">
+                <p className="item-container">
+                  <p className="text-item"><a>Số lệnh thua: </a> {this.props.expertDetail.signalLoss}</p>
+                </p>
+                <p className="item-container">
+                  <p className="text-item"><a>Cặp tiền</a></p>
+                  <Form.Item>
+                     {getFieldDecorator('symbol', {})(
+                  <Input />
+                )}
+               </Form.Item>
+                </p>
+              </div>
             </div>
-          </div>
-          <p className="group-btn">
-            <span>
-              <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
-            </span>
+            <p className="group-btn">
               <span>
-              <Button onClick={()=>this.reset()} type="danger" className="reset-btn">Reset</Button>
-            </span>
-          </p>
-      
-        </Card>    </Form>
+                <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
+              </span>
+                <span>
+                <Button onClick={()=>this.reset()} type="danger" className="reset-btn">Reset</Button>
+              </span>
+            </p>
+
+          </Card>
+        </Form>
         <Card className="card-container">
           {/* <Button type="primary" className="detail-command-btn">
             Form Actions On Top And Bottom Right
