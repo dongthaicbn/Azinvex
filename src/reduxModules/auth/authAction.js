@@ -23,7 +23,7 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
     }
     await firestore.set(`users/${createdUser.uid}`, {...newUser})
   } catch (error) {
-    console.log(error)
+    toastr.error('Error', error.message)
   }
 };
 
@@ -35,7 +35,7 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
     window.location.href = '#/';
    })
   .catch(error => {
-    console.log('login fail', error)
+    toastr.error('Error', error.message)
   })
 };
 
