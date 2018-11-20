@@ -187,7 +187,7 @@ const MainContent = () => {
                   Chúng ta cùng nhau tạo một sân chơi trong sạch và minh bạch cho mọi người. Nói không với lừa đảo
                   và các kết quả giao dịch không minh bạch, rõ ràng
                 </p>
-                <a href="#/home" className="btn btn-warning btn-round">
+                <a href="#/register" className="btn btn-warning btn-round">
                   Tham Gia Ngay
                 </a>
               </div>
