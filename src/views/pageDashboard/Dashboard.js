@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import * as Push from 'push.js';
+import { Layout, List, Button } from 'antd';
 import { connect } from 'react-redux';
 import { withFirestore } from 'react-redux-firebase';
-import DashboardCard from './DashboardCard';
-import TopUsers from './TopUsers';
-import Timeline from './Timeline';
+import DashboardCard from './DashboardComponent/DashboardCard';
+import Timeline from './DashboardComponent/Timeline';
+import Post from './DashboardComponent/Post';
 import { getTopUser, getStatistics, unsetTopUser } from './../../reduxModules/pageDashboard/dashboardActions';
 import { getEventsForDashboard } from './../../reduxModules/pageDashboard/notificationActions';
 import firebase from './../../utils/redux/configureFirebase';
 import './Dashboard.scss';
-
+import isEmpty from '../../utils/helpers/isEmpty';
+import ExpertItem from './DashboardComponent/ExpertItem';
 /*eslint-disable*/
 
 class Dashboard extends Component {
@@ -23,7 +25,7 @@ class Dashboard extends Component {
       // contextRef: {}
     };
   }
-  getCommand(signal) {
+  getCommand = signal => {
     const { command } = signal;
     switch (command) {
       case 0:
@@ -44,7 +46,7 @@ class Dashboard extends Component {
         break;
     }
   }
-  getTitle(command){
+  getTitle = command => {
     switch (command) {
       case 0:
         return `Mở lệnh`;
@@ -64,7 +66,7 @@ class Dashboard extends Component {
         break;
     }
   }
-  getTypeSignal(type) {
+  getTypeSignal = type => {
     switch (type) {
       case "0":
         return "Buy";
@@ -157,18 +159,35 @@ class Dashboard extends Component {
     }
   };
   render() {
-    const { loading } = this.props;
+    const { loading, topExpert } = this.props;
     const { moreEvents, loadedEvents } = this.state;
     return (
       <div className="dashboard-container">
-        <DashboardCard />
-        <TopUsers topExpert={this.props.topExpert} />
-        <Timeline
-          loading={loading}
-          moreEvents={moreEvents}
-          timelineContent={loadedEvents}
-          getNextEvents={this.getNextEvents}
-        />
+        <Layout>
+          <Layout.Content>
+            <DashboardCard />
+            <Post header="Bitcoin Panic Selling">
+              Content Post
+            </Post>
+            <Timeline
+              loading={loading}
+              moreEvents={moreEvents}
+              timelineContent={loadedEvents}
+              getNextEvents={this.getNextEvents}
+            />
+          </Layout.Content>
+          <Layout.Sider className="side-bar-right-container">
+            <div className="top-expert-header">Top Chuyên Gia</div>
+            {!isEmpty(topExpert) &&
+              <List
+                className="demo-loadmore-list"
+                itemLayout="horizontal"
+                dataSource={topExpert}
+                renderItem={item => <ExpertItem expert={item} />}
+              />
+            }
+          </Layout.Sider>
+        </Layout>
       </div>
     );
   }

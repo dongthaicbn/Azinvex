@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Dashboard.scss';
+import '../Dashboard.scss';
 
 class DashboardCard extends Component {
   constructor(props) {

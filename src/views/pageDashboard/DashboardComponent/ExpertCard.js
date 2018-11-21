@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Button } from 'antd';
-import { follow, unfollow, isFollowed } from './../../reduxModules/follow/followActions';
-import './Dashboard.scss';
-import avatarUser from '../../assets/user.png';
+import { follow, unfollow, isFollowed } from './../../../reduxModules/follow/followActions';
+import '../Dashboard.scss';
+import avatarUser from '../../../assets/user.png';
 
 /*eslint-disable*/
 

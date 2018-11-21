@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ExpertCard from './ExpertCard';
-import './Dashboard.scss';
+import '../Dashboard.scss';
 
 class TopUsers extends Component {
   constructor(props) {

@@ -201,4 +201,56 @@
   .table-container {
     padding: 10px;
   }
+  .side-bar-right-container {
+    margin: 15px 0 30px 20px;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: white;
+    min-width: 400px !important;
+    max-width: 400px !important;
+    width: 400px;
+    .top-expert-header {
+      font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .account-name-text {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .ant-avatar-image {
+      width: 48px;
+      height: 48px;
+    }
+    .ant-list-item-meta-description {
+      color: rgb(122, 122, 122);
+    }
+    .follow-btn {
+      border: solid 1px #00BFA5;
+      background-color: #00BFA5;
+    }
+    .unfollow-btn {
+      border: solid 1px #00BFA5;
+      color: #00BFA5;
+    }
+  }
+  .card-dashboard-container {
+    font-family: inherit;
+    .header-post {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .content-post {
+      color: #252525;
+    }
+    .footer-post {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #252525;
+      .right-footer {
+        float: right;
+      }
+    }
+  }
 }
