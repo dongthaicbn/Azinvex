@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List, Avatar, Button } from 'antd';
+import { List, Avatar, Button, Icon } from 'antd';
 import { follow, unfollow, isFollowed } from './../../../reduxModules/follow/followActions';
 import '../Dashboard.scss';
 import avatarUser from '../../../assets/user.png';
@@ -35,9 +35,20 @@ class ExpertItem extends Component {
     return (
       <List.Item actions={[action]}>
         <List.Item.Meta
-          avatar={<Avatar src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL}/>}
-          title={<p className="account-name-text">{expert.displayName}</p>}
-          description={expert.email}
+          avatar={<Avatar shape="square" size={48} src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL}/>}
+          title={
+            <p className="account-name-text">
+              {expert.displayName}&nbsp;&nbsp;
+              <span className="pro-expert">PRO</span>
+              </p>
+          }
+          description={
+            <p>
+              <Icon type="user" />&nbsp;1234&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Icon type="bar-chart" />&nbsp;3456&nbsp;
+              <span style={{ color: '#00BFA5' }}>+6789</span>
+            </p>
+          }
         />
       </List.Item>
     );
