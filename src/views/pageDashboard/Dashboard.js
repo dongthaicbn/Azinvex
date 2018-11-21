@@ -12,6 +12,8 @@ import firebase from './../../utils/redux/configureFirebase';
 import './Dashboard.scss';
 import isEmpty from '../../utils/helpers/isEmpty';
 import ExpertItem from './DashboardComponent/ExpertItem';
+import example from '../../assets/example.jpg';
+import avatarUser from '../../assets/user.png';
 /*eslint-disable*/
 
 class Dashboard extends Component {
@@ -45,7 +47,7 @@ class Dashboard extends Component {
       default:
         break;
     }
-  }
+  };
   getTitle = command => {
     switch (command) {
       case 0:
@@ -65,7 +67,7 @@ class Dashboard extends Component {
       default:
         break;
     }
-  }
+  };
   getTypeSignal = type => {
     switch (type) {
       case "0":
@@ -81,10 +83,9 @@ class Dashboard extends Component {
       case "5":
         return "Sell Stop";
       default:
-        break;
+        return;
     }
-    return;
-  }
+  };
   async componentDidMount() {
     const db = firebase.firestore();
     this.props.getTopUser();
@@ -167,7 +168,17 @@ class Dashboard extends Component {
           <Layout.Content>
             <DashboardCard />
             <Post header="Bitcoin Panic Selling">
-              Content Post
+              <p>BTC/USD, 3D</p>
+              <img src={example} className="image-container" />
+              <div className="pull-right right-text-container">
+                <span className="right-text-post">12345 views</span>
+                <span className="right-text-post">20 giờ trước</span>
+              </div>
+              <div className="post-user-information">
+                <img src={avatarUser} className="avatar-user-post" />
+                <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
+              </div>
+              Description content for this post.
             </Post>
             <Timeline
               loading={loading}

@@ -38,7 +38,7 @@ class ExpertItem extends Component {
           avatar={<Avatar shape="square" size={48} src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL}/>}
           title={
             <p className="account-name-text">
-              {expert.displayName}&nbsp;&nbsp;
+              {expert.displayName}
               <span className="pro-expert">PRO</span>
               </p>
           }

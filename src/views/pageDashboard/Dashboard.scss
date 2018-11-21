@@ -203,6 +203,15 @@
   .table-container {
     padding: 10px;
   }
+  .pro-expert {
+    border-radius: 30px;
+    margin-left: 5px;
+    padding: 2px 6px;
+    background-color: #ffac33;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+  }
   .side-bar-right-container {
     margin: 15px 0 30px 20px;
     padding: 15px;
@@ -231,14 +240,6 @@
       border: solid 1px #00BFA5;
       color: #00BFA5;
     }
-    .pro-expert {
-      border-radius: 30px;
-      padding: 2px 6px;
-      background-color: #ffac33;
-      color: white;
-      font-size: 13px;
-      font-weight: 500;
-    }
   }
   .card-dashboard-container {
     font-family: inherit;
@@ -249,6 +250,28 @@
     }
     .content-post {
       color: #252525;
+      .image-container {
+        width: 100%;
+        margin: 20px 0 10px 0;
+        border-radius: 4px;
+      }
+      .post-user-information {
+        height: 64px;
+        display: flex;
+        padding: 12px 12px 12px 0;
+        .avatar-user-post {
+          width: 40px;
+          height: 40px;
+          border-radius: 4px;
+          margin-right: 10px;
+        }
+        .user-name-text {
+          font-size: 16px;
+          font-weight: 600;
+          padding: 10px 0;
+          width: 100%;
+        }
+      }
     }
     .footer-post {
       margin-top: 10px;
@@ -257,6 +280,13 @@
       .right-footer {
         float: right;
       }
+    }
+  }
+  .right-text-container {
+    height: 64px;
+    padding: 22px 0;
+    .right-text-post {
+      margin-left: 10px;
     }
   }
 }
