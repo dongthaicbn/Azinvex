@@ -167,19 +167,34 @@ class Dashboard extends Component {
         <Layout>
           <Layout.Content>
             <DashboardCard />
-            <Post header="Bitcoin Panic Selling">
-              <p>BTC/USD, 3D</p>
-              <img src={example} className="image-container" />
-              <div className="pull-right right-text-container">
-                <span className="right-text-post">12345 views</span>
-                <span className="right-text-post">20 giờ trước</span>
-              </div>
-              <div className="post-user-information">
-                <img src={avatarUser} className="avatar-user-post" />
-                <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
-              </div>
-              Description content for this post.
-            </Post>
+            <div className="post-container">
+              <Post header="Bitcoin Panic Selling">
+                <p>BTC/USD, 3D</p>
+                <img src={example} className="image-container" />
+                <div className="pull-right right-text-container">
+                  <span className="right-text-post">12345 views</span>
+                  <span className="right-text-post">20 giờ trước</span>
+                </div>
+                <div className="post-user-information">
+                  <img src={avatarUser} className="avatar-user-post" />
+                  <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
+                </div>
+                Description content for this post.
+              </Post>
+              <Post header="Bitcoin Panic Selling">
+                <p>BTC/USD, 3D</p>
+                <img src={example} className="image-container" />
+                <div className="pull-right right-text-container">
+                  <span className="right-text-post">12345 views</span>
+                  <span className="right-text-post">20 giờ trước</span>
+                </div>
+                <div className="post-user-information">
+                  <img src={avatarUser} className="avatar-user-post" />
+                  <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
+                </div>
+                Description content for this post.
+              </Post>
+            </div>
             <Timeline
               loading={loading}
               moreEvents={moreEvents}
