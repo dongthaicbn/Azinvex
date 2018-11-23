@@ -44,9 +44,8 @@ class ExpertItem extends Component {
           }
           description={
             <p>
-              <Icon type="user" />&nbsp;1234&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Icon type="bar-chart" />&nbsp;3456&nbsp;
-              <span style={{ color: '#00BFA5' }}>+6789</span>
+              <Icon type="user" />&nbsp;{expert.followedCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Icon type="bar-chart" />&nbsp;{expert.totalpips.toFixed(1)} pips&nbsp;
             </p>
           }
         />

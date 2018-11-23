@@ -229,6 +229,12 @@ class Information extends Component {
                 initialValue: profile.information ? profile.information.website : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
+              <p className="title-input-profile"><b>Avatar</b></p>
+              <Form.Item>
+              {getFieldDecorator('photoURL', {
+                initialValue: profile.photoURL ? profile.photoURL : ''
+                })(<Input disabled={!isEdit} />)}
+              </Form.Item>
               {isEdit && (
                 <Form.Item>
                   <Button
