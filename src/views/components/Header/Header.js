@@ -19,10 +19,10 @@ class Header extends React.Component {
     const menu = (
       <Menu style={{ padding: 10 }} onClick={this.handleSelectItem}>
         <Menu.Item key="user">
-          <a className="user-info-text"><Icon type="user" style={{ fontSize: 14 }} />&nbsp;&nbsp;Nguyen Nhat Trung</a>
+          <a className="user-info-text"><Icon type="user" style={{ fontSize: 14 }} />&nbsp;&nbsp;{this.props.profileUser.displayName}</a>
         </Menu.Item>
         <Menu.Item key="form">
-          <a className="user-info-text"><Icon type="form" style={{ fontSize: 14 }} />&nbsp;&nbsp;Edit Profile</a>
+          <a href="/#/information" className="user-info-text"><Icon type="form" style={{ fontSize: 14 }} />&nbsp;&nbsp;Edit Profile</a>
         </Menu.Item>
         <Menu.Item key="mail">
           <a className="user-info-text"><Icon type="mail" style={{ fontSize: 14 }} />&nbsp;&nbsp;My Inbox</a>

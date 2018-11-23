@@ -51,7 +51,7 @@ class App extends React.Component {
           <Navigation collapsed={this.state.collapsed} />
         </Sider>
         <Layout>
-          <Header collapsed={this.state.collapsed} toggle={this.toggle} />
+          <Header profileUser={this.props.profileUser} collapsed={this.state.collapsed} toggle={this.toggle} />
           <Content className="content-container">
             <ScrollBar>
               <Routes />
@@ -136,7 +136,8 @@ export default compose(
     location: state.location,
     isLoaded: state.firebase.profile.isLoaded,
     isAuthenticated: !state.firebase.auth.isEmpty,
-    role: state.firebase.profile.role
+    role: state.firebase.profile.role,
+    profileUser: state.firebase.profile,
   }),
   {
     actionNavigateTo
