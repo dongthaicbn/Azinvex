@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
@@ -7,6 +8,7 @@ import { Form, Input, Tooltip, Icon, Button, Upload, Modal, DatePicker, Radio } 
 import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
 import avatarUser from '../../assets/user.png';
+import ReactLoading from 'react-loading';
 
 const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
@@ -15,6 +17,7 @@ class Information extends Component {
     this.state = {
       previewVisible: false,
       previewImage: '',
+      uploading: false,
       fileList: [
         {
           uid: '-1',
@@ -40,19 +43,32 @@ class Information extends Component {
   handleChange = async ({ fileList }) => {
     const { firestore, currentUser } = this.props;
     this.setState({ fileList: [fileList[fileList.length - 1]] });
-    // const image = fileList[fileList.length - 1];
-    // const formData = new FormData();
-    // formData.append('photo', image);
-    // const axiosConfig = {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //     'Access-Control-Allow-Origin': '*'
-    //   }
-    // };
-    // const url = 'http://api.congtruyendich.com/upload';
-    // console.log(formData);
-    // const data = await axios.post(url, formData, axiosConfig);
-    // firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
+    const image = fileList[fileList.length - 1].originFileObj;
+    const formData = new FormData();
+    formData.append('photo', image);
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*'
+      }
+    };
+    const url = 'http://api.congtruyendich.com/upload';
+    this.setState({
+      uploading: true,
+    });
+    try {
+      const data = await axios.post(url, formData, axiosConfig);
+      firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
+      this.setState({
+        uploading: false,
+      });
+    } catch (error) {
+      this.setState({
+        uploading: false,
+      });
+      console.log(error);
+    }
+
   };
   handleCancelEdit = () => {
     const { profile } = this.props;
@@ -77,6 +93,7 @@ class Information extends Component {
     });
   };
   render() {
+    const { uploading } = this.state;
     const { getFieldDecorator } = this.props.form;
     const { profile } = this.props;
     const {
@@ -137,10 +154,12 @@ class Information extends Component {
                     style={{ width: '100%' }}
                     src={previewImage}
                   />
-                </Modal>
+                </Modal> 
               </div>
+             
               <p className="text-info-name" style={{ marginTop: 0 }}>{profile.displayName}</p>
               <p className="text-info">{profile.role}</p>
+               {uploading && <ReactLoading className="loading" type={'spin'} color={'#2397EE'} height={50} width={50} /> }
             </div>
             <div className="card-info-contain">
               <p className="title-input-profile">
