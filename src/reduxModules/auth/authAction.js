@@ -1,11 +1,12 @@
 /* eslint-disable*/
 import { toastr } from 'react-redux-toastr'
-import api from '../../utils/api';
+import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
 
 export const register = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const {email, displayName, password, phone, prefix} = user
   const firebase = getFirebase();
   const firestore = getFirestore();
+  dispatch(asyncActionStart());
   try {
     await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
     let createdUser = firebase.auth().currentUser;
@@ -22,31 +23,41 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
       createdAt: firestore.FieldValue.serverTimestamp()
     }
     await firestore.set(`users/${createdUser.uid}`, {...newUser})
+    toastr.success('Success', 'Đăng ký thành công')
+    dispatch(asyncActionFinish());
   } catch (error) {
     toastr.error('Error', error.message)
+    dispatch(asyncActionError());
   }
 };
 
 export const login = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
+  dispatch(asyncActionStart());
   firebase.auth().signInWithEmailAndPassword(user.username, user.password)
   .then(firebaseUser => {
-    console.log('login susscess', firebaseUser)
+    toastr.success('Success', 'Đăng nhập thành công')
     window.location.href = '#/';
+    dispatch(asyncActionFinish());
    })
   .catch(error => {
     toastr.error('Error', error.message)
+    dispatch(asyncActionError());
   })
+  
 };
 
 export const updatePassword = (creds) =>
   async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
+    dispatch(asyncActionStart());
     try {
       await user.updatePassword(creds.password);
       toastr.success('Success', 'Cập nhật mật khẩu thành công')
+      dispatch(asyncActionFinish());
     } catch (error) {
       toastr.error('Error', error.message)
+      dispatch(asyncActionError());
     }
   }

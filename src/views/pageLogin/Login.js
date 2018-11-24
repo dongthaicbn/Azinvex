@@ -48,7 +48,7 @@ class Login extends Component {
                 <Checkbox>Remember me</Checkbox>
               )}
               <a className="login-form-forgot" href="#/register">Forgot password</a>
-              <Button type="primary" htmlType="submit" className="login-form-button">
+              <Button loading={this.props.loading} type="primary" htmlType="submit" className="login-form-button">
                 Log in
               </Button>
               <a href='#/register'>Register now!</a>
@@ -62,7 +62,9 @@ class Login extends Component {
 
 export default compose(
   connect(
-    null,
+    state => ({
+      loading: state.async.loading,
+    }),
     {
       login
     }

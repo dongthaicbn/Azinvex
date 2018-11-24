@@ -7,7 +7,6 @@ import ExpertDetail from './views/pageExpertDetail/ExpertDetail';
 import Information from './views/pageInformation/Information';
 import Account from './views/pageAccount/Account';
 import Signal from './views/pageSignal/Signal';
-import ManageSignal from './views/pageManageSignal/ManageSignal';
 import Help from './views/pageHelp/Help';
 import Support from './views/pageSupport/Support';
 import User from './views/pageUser/User';
@@ -29,8 +28,6 @@ const Routes = ({ location }) => {
       return <Account />;
     case routes.ROUTE_CHANGEPASSWORD:
       return <ChangePassword />;
-    case routes.ROUTE_MANAGESIGNAL:
-      return <ManageSignal />;
     case routes.ROUTE_SIGNAL:
       return <Signal />;
     case routes.ROUTE_ADMIN_USER:

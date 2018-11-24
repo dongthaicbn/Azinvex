@@ -67,14 +67,12 @@ class App extends React.Component {
       role === 'expert' &&
       (
         location.type === routes.ROUTE_DASHBOARD ||
-        location.type === routes.ROUTE_EXPERTS ||
-        location.type === routes.ROUTE_EXPERT_DETAIL
+        location.type === routes.ROUTE_EXPERTS
         || location.type === routes.ROUTE_SIGNAL
       )) || (
         role === 'member' &&
       (
-        location.type === routes.ROUTE_MANAGESIGNAL ||
-        location.type === routes.ROUTE_EXPERT_DETAIL
+        location.type === routes.ROUTE_ADMIN_USER
       ))
     ) {
       return true;
@@ -87,7 +85,7 @@ class App extends React.Component {
     if (!isLoaded) {
       return <Loading />
     } else {
-      if(isAuthenticated && location.type === routes.ROUTE_LOGIN) {
+      if(isAuthenticated && (location.type === routes.ROUTE_LOGIN || location.type === routes.ROUTE_REGISTER)) {
         this.props.actionNavigateTo(routes.ROUTE_HOME);
         return null;
       }
@@ -98,9 +96,12 @@ class App extends React.Component {
           return <Register />;
         case routes.ROUTE_ERROR_403:
           // return <ErrorPage />;
-          return <div>Not asscess role</div>;
+          return <div>403 Error. You do not have Sufficient Permissions to Access This Page</div>;
         case routes.ROUTE_HOME:
           return <LandingPage />;
+        case routes.ROUTE_HELP:
+        case routes.ROUTE_SUPPORT:
+          return this.commonComponents();
         case routes.ROUTE_DASHBOARD:
         case routes.ROUTE_EXPERTS:
         case routes.ROUTE_EXPERT_DETAIL:
@@ -110,20 +111,18 @@ class App extends React.Component {
         case routes.ROUTE_MANAGESIGNAL:
         case routes.ROUTE_SIGNAL:
         case routes.ROUTE_ADMIN_USER:
-        case routes.ROUTE_HELP:
-        case routes.ROUTE_SUPPORT:
-          return this.commonComponents();
-        // {
-        //   if (isAuthenticated) {
-        //     if(!this.checkRole(role, location)) {
-        //       return this.commonComponents();
-        //     }
-        //     this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
-        //   } else {
-        //     this.props.actionNavigateTo(routes.ROUTE_HOME);
-        //     return null;
-        //   }
-        // }
+          // return this.commonComponents();
+        {
+          if (isAuthenticated) {
+            if(!this.checkRole(role, location)) {
+              return this.commonComponents();
+            }
+            this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
+          } else {
+            this.props.actionNavigateTo(routes.ROUTE_LOGIN);
+            return null;
+          }
+        }
         default:
           return <div>ErrorPage</div>;
       }

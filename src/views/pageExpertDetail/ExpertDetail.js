@@ -24,7 +24,7 @@ class ExpertDetail extends Component {
   }
   componentDidMount() {
 
-    const { firestore, expertId } = this.props
+    const { firestore, expertId, currentUser, profile} = this.props;
     firestore.get(
       {
         collection: 'users',
@@ -78,6 +78,8 @@ class ExpertDetail extends Component {
   render() {
     const {activeList, pendingList, todayList, expertDetail} = this.props;
     const avatarUrl = (expertDetail.photoURL && expertDetail.photoURL.includes('assets/user.png')) ? avatarUser : expertDetail.photoURL;
+    const { expertId, currentUser, profile} = this.props;
+    if(profile.role == "expert" && expertId !== currentUser.uid)  return(<div>401 Error. You do not have Sufficient Permissions to Access This Page</div>);
     return (
       <div>
         <div className="profile-container">

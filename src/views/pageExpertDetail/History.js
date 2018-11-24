@@ -156,7 +156,7 @@ class History extends Component {
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
                 <p className="item-container">
-                  <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips}</p>
+                  <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips.toFixed(1)}</p>
                 </p>
                 <p className="item-container">
                   <p className="text-item"><a>FROM</a></p>

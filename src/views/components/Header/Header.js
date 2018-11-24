@@ -40,11 +40,11 @@ class Header extends React.Component {
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={this.props.toggle}
         />
-        <Dropdown overlay={menu}>
+        {this.props.isAuthenticated && <Dropdown overlay={menu}>
           <a className="ant-dropdown-link user-info">
             <Icon type="user" style={{ fontSize: 30 }}/>&nbsp;<Icon type="caret-down" style={{ fontSize: 16 }} />
           </a>
-        </Dropdown>
+        </Dropdown>}
       </Layout.Header>
     );
   }
@@ -52,7 +52,7 @@ class Header extends React.Component {
 
 export default withFirebase(connect(
   state => ({
-    // state redux
+    isAuthenticated: !state.firebase.auth.isEmpty,
   }),
   {
     // action

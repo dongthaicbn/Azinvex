@@ -126,7 +126,7 @@ class Register extends Component {
               )}
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">Register</Button>
+              <Button loading={this.props.loading} type="primary" htmlType="submit">Register</Button>
             </Form.Item>
           </Form>
         </div>
@@ -137,7 +137,9 @@ class Register extends Component {
 
 export default compose(
   connect(
-    null,
+    state => ({
+      loading: state.async.loading,
+    }),
     {
       register
     }

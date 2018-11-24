@@ -117,12 +117,13 @@ class ChangePassword extends Component {
             </Form.Item>
             <Form.Item>
               <Button
+                loading={this.props.loading}
                 onClick={this.handleCancelEdit}
                 style={{ marginRight: 20, background: "#ebedf0" }}
               >
                 Hủy bỏ
               </Button>
-              <Button type="primary" htmlType="submit">
+              <Button loading={this.props.loading} type="primary" htmlType="submit">
                 Lưu
               </Button>
             </Form.Item>
@@ -135,7 +136,7 @@ class ChangePassword extends Component {
 
 export default connect(
   state => ({
-    // state redux
+    loading: state.async.loading,
   }),
   {
     updatePassword
