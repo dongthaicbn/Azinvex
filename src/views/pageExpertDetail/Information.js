@@ -31,7 +31,7 @@ class Information extends Component {
           <div className="column-container">
             <p className="item-container">
               <p className="text-item"><a>Gender</a></p>
-              <p className="sub-text-item">{expertDetail.information && expertDetail.information.sex ? "Nữ":"Nam"}</p>
+              <p className="sub-text-item">{expertDetail.information && expertDetail.information.sex == 0 ? "Nữ":"Nam"}</p>
             </p>
             <p className="item-container">
               <p className="text-item"><a>Email</a></p>
