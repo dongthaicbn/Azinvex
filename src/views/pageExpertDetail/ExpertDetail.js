@@ -80,6 +80,7 @@ class ExpertDetail extends Component {
     const avatarUrl = (expertDetail.photoURL && expertDetail.photoURL.includes('assets/user.png')) ? avatarUser : expertDetail.photoURL;
     const { expertId, currentUser, profile} = this.props;
     if(profile.role == "expert" && expertId !== currentUser.uid)  return(<div>401 Error. You do not have Sufficient Permissions to Access This Page</div>);
+    if(expertDetail.role == "member")  return(<div>Lỗi 404. Thành viên này không phải là chuyên gia</div>);
     return (
       <div>
         <div className="profile-container">
