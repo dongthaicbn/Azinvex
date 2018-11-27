@@ -96,7 +96,6 @@ class Dashboard extends Component {
       console.log('DENIED');
     });
     let next = await this.props.getEventsForDashboard();
-    console.log(this.props.currentUser.uid);
     db.collection("notifications")
       .where('uid', '==', this.props.currentUser.uid)
       .orderBy('createAt', 'desc')

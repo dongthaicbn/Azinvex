@@ -13,6 +13,7 @@ export const ROUTE_ACCOUNT = '@route/ACCOUNT';
 export const ROUTE_CHANGEPASSWORD = '@route/CHANGEPASSWORD';
 export const ROUTE_MANAGESIGNAL = '@route/MANAGESIGNAL';
 export const ROUTE_SIGNAL = '@route/SIGNAL';
+export const ROUTE_SIGNAL_EXPERT = '@route/SIGNAL/EXPERT';
 export const ROUTE_ADMIN_USER = '@route/ADMIN/USER';
 export const ROUTE_HELP = '@route/HELP';
 export const ROUTE_SUPPORT = '@route/SUPPORT';

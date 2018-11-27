@@ -4,19 +4,19 @@ import { Table, List, Avatar, Button, Modal } from 'antd';
 import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
-import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
+import { listenExperts, unlistenExperts } from './../../reduxModules/expert/expertActions';
 
-class Signal extends Component {
+class SignalExpert extends Component {
   state={
     selectedExpert: undefined,
     itemSignalActive: {},
     visibleModal: false
   }
   componentDidMount() {
-    this.props.listenFollowedExpert();
+    this.props.listenExperts();
   }
   componentWillUnmount() {
-    this.props.unlistenFollowedExpert();
+    this.props.unlistenExperts();
     const { firestore } = this.props;
     firestore.unsetListener({
       collection: 'signals',
@@ -101,22 +101,22 @@ class Signal extends Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
-            dataSource={this.props.followedExperts}
+            dataSource={this.props.experts}
             renderItem={item => (
               <List.Item
                 key={item.id}
                 actions={[
                   <Button
-                    disabled={this.isSelected(item.followedId)}
-                    onClick={() => this.selectExpert(item.followedId)}
+                    disabled={this.isSelected(item.id)}
+                    onClick={() => this.selectExpert(item.id)}
                   >
-                    {this.isSelected(item.followedId) ? 'Đang xem' : 'Xem'}
+                    {this.isSelected(item.id) ? 'Đang xem' : 'Xem'}
                   </Button>
                 ]}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={item.photoURL} />}
-                  title={<a href={`/#/expert/${item.followedId}`}>{item.displayName}</a>}
+                  title={<a href={`/#/expert/${item.id}`}>{item.displayName}</a>}
                 />
               </List.Item>
             )}
@@ -155,11 +155,11 @@ class Signal extends Component {
 
 export default connect(
   state => ({
-    followedExperts: state.firestore.ordered.followedExperts,
+    experts: state.firestore.ordered.experts,
     activeSignals: state.firestore.ordered.selectedExpertSignals
   }),
   {
-    listenFollowedExpert,
-    unlistenFollowedExpert
+    listenExperts,
+    unlistenExperts
   }
-)(withFirestore(Signal));
+)(withFirestore(SignalExpert));

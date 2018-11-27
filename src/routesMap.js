@@ -44,6 +44,10 @@ const routesMap = {
     path: '/signals',
     thunk: combineThunks()
   },
+  '@route/SIGNAL/EXPERT': {
+    path: '/signal/expert',
+    thunk: combineThunks()
+  },
   '@route/ADMIN/USER': {
     path: '/admin/user',
     thunk: combineThunks()

@@ -72,7 +72,7 @@ class App extends React.Component {
       )) || (
         role === 'member' &&
       (
-        location.type === routes.ROUTE_ADMIN_USER
+        location.type === routes.ROUTE_ADMIN_USER || location.type === routes.ROUTE_SIGNAL_EXPERT
       ))
     ) {
       return true;
@@ -110,6 +110,7 @@ class App extends React.Component {
         case routes.ROUTE_CHANGEPASSWORD:
         case routes.ROUTE_MANAGESIGNAL:
         case routes.ROUTE_SIGNAL:
+        case routes.ROUTE_SIGNAL_EXPERT:
         case routes.ROUTE_ADMIN_USER:
           // return this.commonComponents();
         {

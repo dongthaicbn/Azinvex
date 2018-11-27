@@ -1,0 +1,33 @@
+.manage-left-container {
+  background: white;
+  width: 33%;
+  float: left;
+  border-radius: 4px;
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+  padding: 20px;
+  .title-input {
+    font-size: 16px;
+  }
+  .sell-btn {
+    margin-left: 10px;
+    background: #6D4C41;
+    border: #6D4C41;
+  }
+  .ant-form-item-control {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+.manage-right-container {
+  background: white;
+  margin-left: 1%;
+  width: 66%;
+  display: inline-block;
+  border-radius: 4px;
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+  padding: 20px;
+}
+.header-manage-box {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
