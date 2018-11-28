@@ -52,7 +52,7 @@ class Information extends Component {
         'Access-Control-Allow-Origin': '*'
       }
     };
-    const url = 'http://api.congtruyendich.com/upload';
+    const url = 'https://api.congtruyendich.com/upload';
     this.setState({
       uploading: true,
     });
