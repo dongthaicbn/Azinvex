@@ -33,7 +33,7 @@ class Navigation extends React.Component {
               role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Khu Vực Chuyên Gia</span></Menu.Item>
             }
             {
-              role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
+              role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
             }
             {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Trang Tổng Quan</span></Menu.Item>
@@ -42,7 +42,7 @@ class Navigation extends React.Component {
               role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
             }
             {
-              role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
+              role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
             }
            {
               role === 'expert' &&  <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>
