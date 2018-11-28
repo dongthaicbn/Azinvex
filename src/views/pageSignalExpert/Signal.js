@@ -120,16 +120,16 @@ class Signal extends Component {
                 key={item.id}
                 actions={[
                   <Button
-                    disabled={this.isSelected(item.followedId)}
-                    onClick={() => this.selectExpert(item.followedId)}
+                    disabled={this.isSelected(item.id)}
+                    onClick={() => this.selectExpert(item.id)}
                   >
-                    {this.isSelected(item.followedId) ? 'Đang xem' : 'Xem'}
+                    {this.isSelected(item.id) ? 'Đang xem' : 'Xem'}
                   </Button>
                 ]}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={item.photoURL} />}
-                  title={<a href={`/#/expert/${item.followedId}`}>{item.displayName}</a>}
+                  title={<a href={`/#/expert/${item.id}`}>{item.displayName}</a>}
                 />
               </List.Item>
             )}
