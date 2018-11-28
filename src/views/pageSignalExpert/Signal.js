@@ -85,6 +85,24 @@ class Signal extends Component {
         return true;
     }
   };
+  getTypeSignalClass = type => {
+    switch (type) {
+      case '0':
+        return 'button-green';
+      case '1':
+        return 'button-red';
+      case '2':
+        return 'button-blue';
+      case '3':
+        return 'button-orange';
+      case '4':
+        return 'button-purple';
+      case '5':
+        return 'button-yellow';
+      default:
+        return true;
+    }
+  };
   render() {
     const { itemSignalActive, visibleModal } = this.state;
     const { activeSignals, pendingSignals } = this.props;
