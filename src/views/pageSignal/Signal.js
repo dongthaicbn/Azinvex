@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, List, Avatar, Button, Modal } from 'antd';
+import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
 import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
@@ -85,6 +85,24 @@ class Signal extends Component {
         return true;
     }
   };
+  getTypeSignalClass = type => {
+    switch (type) {
+      case '0':
+        return 'button-green';
+      case '1':
+        return 'button-red';
+      case '2':
+        return 'button-blue';
+      case '3':
+        return 'button-orange';
+      case '4':
+        return 'button-purple';
+      case '5':
+        return 'button-yellow';
+      default:
+        return true;
+    }
+  };
   render() {
     const { itemSignalActive, visibleModal } = this.state;
     const { activeSignals, pendingSignals } = this.props;
@@ -99,11 +117,17 @@ class Signal extends Component {
         title: 'Loại lệnh',
         dataIndex: 'type',
         key: 'type',
-        render: type => this.getTypeSignal(type)
+        render: type => (
+          <button className={`button ${this.getTypeSignalClass(type)}`}>
+            <Icon type="rise" className="fa" />
+            <strong>{this.getTypeSignal(type)}</strong>
+          </button>
+        )
       },
       {
         title: 'Cặp tiền',
         dataIndex: 'symbol',
+        render: symbol => <strong>{symbol}</strong>,
         key: 'symbol'
       },
       {
@@ -131,7 +155,9 @@ class Signal extends Component {
         title: 'Trạng thái',
         dataIndex: 'status',
         key: 'status',
-        render: status => status === 'pending' ? 'Lệnh Chờ' : 'Lệnh Đang Chạy'
+        render: status => (
+          status === 'pending' ? 'Lệnh Chờ' : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+        )
       }
     ];
     return (
@@ -155,7 +181,7 @@ class Signal extends Component {
                 ]}
               >
                 <List.Item.Meta
-                  avatar={<Avatar src={item.photoURL} />}
+                  avatar={<Avatar shape="square" size="large" src={item.photoURL} />}
                   title={<a href={`/#/expert/${item.followedId}`}>{item.displayName}</a>}
                 />
               </List.Item>
