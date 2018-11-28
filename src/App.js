@@ -72,7 +72,7 @@ class App extends React.Component {
       )) || (
         role === 'member' &&
       (
-        location.type === routes.ROUTE_ADMIN_USER || location.type === routes.ROUTE_SIGNAL_EXPERT
+        location.type === routes.ROUTE_ADMIN_USER || location.type === routes.ROUTE_SIGNAL_EXPERT || location.type === routes.ROUTE_ACCOUNT 
       ))
     ) {
       return true;

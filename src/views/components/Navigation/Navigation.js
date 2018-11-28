@@ -47,7 +47,10 @@ class Navigation extends React.Component {
             {isAuthenticated && 
               <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span>Quản Lý</span></span>}>
                 <Menu.Item key="information">Thông Tin Cá Nhân</Menu.Item>
-                <Menu.Item key="account">Thông Tin Tài Khoản</Menu.Item>
+                {
+              role === 'expert' &&  <Menu.Item key="account">Thông Tin Tài Khoản</Menu.Item>
+                }
+               
                 <Menu.Item key="changepassword">Đổi Mật Khẩu</Menu.Item>
               </Menu.SubMenu>
             }
