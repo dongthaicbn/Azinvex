@@ -32,25 +32,25 @@ class Navigation extends React.Component {
             {
               role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Khu Vực Chuyên Gia</span></Menu.Item>
             }
-  {
-                  role === 'expert' && <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>
-                }
+            {
+              role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
+            }
             {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Trang Tổng Quan</span></Menu.Item>
             }
+            {
+              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
+            }
+            {
+              role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
+            }
  
-      
             {isAuthenticated &&
               <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span>Quản Lý</span></span>}>
                 <Menu.Item key="information">Thông Tin Cá Nhân</Menu.Item>
-              {
-                role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
-              }
-              {
-                role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
-              }            {
-                role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
-              }
+                {
+                  role === 'expert' && <Menu.Item key="account">Nền tảng giao dịch</Menu.Item>
+                }
                 <Menu.Item key="changepassword">Đổi Mật Khẩu</Menu.Item>
               </Menu.SubMenu>
             }
