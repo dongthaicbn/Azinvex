@@ -114,7 +114,7 @@ class Signal extends Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
-            dataSource={this.props.followedExperts}
+            dataSource={this.props.experts}
             renderItem={item => (
               <List.Item
                 key={item.id}
