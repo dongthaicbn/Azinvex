@@ -6,7 +6,7 @@ export const getTopUser = () =>
       where: ['role', '==', 'expert'],
       orderBy: ['totalpips', 'desc'],
       storeAs: 'topExpert',
-      limit: 5
+      limit: 10
     });
   };
 export const unsetTopUser = () =>
