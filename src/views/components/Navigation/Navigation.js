@@ -34,7 +34,7 @@ class Navigation extends React.Component {
             }
 
             {
-              role === 'expert' && <Menu.Item key="account">Nền tảng giao dịch</Menu.Item>
+              role === 'expert' && <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>
             }
             {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Trang Tổng Quan</span></Menu.Item>
@@ -48,10 +48,10 @@ class Navigation extends React.Component {
               <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span>Quản Lý</span></span>}>
                 <Menu.Item key="information">Thông Tin Cá Nhân</Menu.Item>
                 {
-                  role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
+                  role === 'expert' && <Menu.Item key="signal/expert"><span>Phòng Tín Hiệu</span></Menu.Item>
                 }
                 {
-                  role === 'member' && <Menu.Item key="signals"><Icon type="bar-chart" /><span>Phòng Tín Hiệu</span></Menu.Item>
+                  role === 'member' && <Menu.Item key="signals"><span>Phòng Tín Hiệu</span></Menu.Item>
                 }
                 <Menu.Item key="changepassword">Đổi Mật Khẩu</Menu.Item>
               </Menu.SubMenu>
