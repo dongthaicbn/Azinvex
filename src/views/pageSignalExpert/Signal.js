@@ -97,9 +97,9 @@ class Signal extends Component {
       },
       {
         title: 'Loại lệnh',
-        dataIndex: 'typeSignal',
-        key: 'typeSignal',
-        render: typeSignal => this.getTypeSignal(typeSignal)
+        dataIndex: 'type',
+        key: 'type',
+        render: type => this.getTypeSignal(type)
       },
       {
         title: 'Cặp tiền',
