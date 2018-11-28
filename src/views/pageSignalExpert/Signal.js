@@ -67,6 +67,24 @@ class Signal extends Component {
   handleCancelModal = () => {
     this.setState({ visibleModal: false });
   }
+  getTypeSignal = type => {
+    switch (type) {
+      case '0':
+        return 'Buy';
+      case '1':
+        return 'Sell';
+      case '2':
+        return 'Buy Limit';
+      case '3':
+        return 'Sell Limit';
+      case '4':
+        return 'Buy Stop';
+      case '5':
+        return 'Sell Stop';
+      default:
+        return true;
+    }
+  };
   render() {
     const { itemSignalActive, visibleModal } = this.state;
     const { activeSignals, pendingSignals } = this.props;
@@ -78,11 +96,20 @@ class Signal extends Component {
         key: 'id'
       },
       {
-        title: 'Lệnh',
-        dataIndex: 'signal',
-        render: (text, signal) =>
-          `${signal.typeSignal ? 'Bán' : 'Mua'} ${signal.symbol} tại ${signal.openPrice}`,
-        key: 'signal'
+        title: 'Loại lệnh',
+        dataIndex: 'typeSignal',
+        key: 'typeSignal',
+        render: typeSignal => this.getTypeSignal(typeSignal)
+      },
+      {
+        title: 'Cặp tiền',
+        dataIndex: 'symbol',
+        key: 'symbol'
+      },
+      {
+        title: 'Giá mở cửa ',
+        dataIndex: 'openPrice',
+        key: 'openPrice'
       },
       {
         title: 'Thời gian vào',
