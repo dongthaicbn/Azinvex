@@ -45,8 +45,8 @@ class App extends React.Component {
           style={{ height: 'calc(100vh - 64px)' }}
         >
           <div className="logo-img">
-            <img src={Logo} alt="" />
-            {!this.state.collapsed && <span className="app-title">AZINVEX</span>}
+            <a alt="Home" href="/#/"> <img src={Logo} alt="" /> 
+            {!this.state.collapsed && <span className="app-title">AZINVEX</span>} </a>
           </div>
           <Navigation collapsed={this.state.collapsed} />
         </Sider>
