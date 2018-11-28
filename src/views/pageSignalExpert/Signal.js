@@ -6,7 +6,7 @@ import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
 import { listenExperts, unlistenExperts } from './../../reduxModules/expert/expertActions';
 
-class SignalExpert extends Component {
+class Signal extends Component {
   state={
     selectedExpert: undefined,
     itemSignalActive: {},
@@ -23,6 +23,11 @@ class SignalExpert extends Component {
       where: [['expert.id', '==', this.state.selectedExpert], ['status', '==', 'active']],
       storeAs: 'activeSignals'
     });
+    firestore.unsetListener({
+      collection: 'signals',
+      where: [['expert.id', '==', this.state.selectedExpert], ['status', '==', 'pending']],
+      storeAs: 'pendingSignals'
+    });
   }
   isSelected = expertId => {
     return this.state.selectedExpert === expertId;
@@ -30,21 +35,27 @@ class SignalExpert extends Component {
   selectExpert = async expertId => {
     const { firestore } = this.props;
     if (this.state.selectedExpert) {
-      firestore.unsetListener(
-        {
-          collection: 'signals',
-          where: [['expert.id', '==', this.state.selectedExpert], ['status', '==', 'active']],
-          storeAs: 'selectedExpertSignals'
-        }
-      );
-    }
-    firestore.setListener(
-      {
+      firestore.unsetListener({
         collection: 'signals',
-        where: [['expert.id', '==', expertId], ['status', '==', 'active']],
-        storeAs: 'selectedExpertSignals'
-      }
-    );
+        where: [['expert.id', '==', this.state.selectedExpert], ['status', '==', 'active']],
+        storeAs: 'selectedActiveSignals'
+      });
+      firestore.unsetListener({
+        collection: 'signals',
+        where: [['expert.id', '==', this.state.selectedExpert], ['status', '==', 'pending']],
+        storeAs: 'selectedPendingSignals'
+      });
+    }
+    firestore.setListener({
+      collection: 'signals',
+      where: [['expert.id', '==', expertId], ['status', '==', 'active']],
+      storeAs: 'selectedActiveSignals'
+    });
+    firestore.setListener({
+      collection: 'signals',
+      where: [['expert.id', '==', expertId], ['status', '==', 'pending']],
+      storeAs: 'selectedPendingSignals'
+    });
     this.setState({ selectedExpert: expertId });
   }
   capitalizeFirstLetter = string => {
@@ -58,6 +69,8 @@ class SignalExpert extends Component {
   }
   render() {
     const { itemSignalActive, visibleModal } = this.state;
+    const { activeSignals, pendingSignals } = this.props;
+    const list = activeSignals.concat(pendingSignals);
     const columns = [
       {
         title: 'Ticket',
@@ -91,7 +104,7 @@ class SignalExpert extends Component {
         title: 'Trạng thái',
         dataIndex: 'status',
         key: 'status',
-        render: status => this.capitalizeFirstLetter(status)
+        render: status => status === 'pending' ? 'Lệnh Chờ' : 'Lệnh Đang Chạy'
       }
     ];
     return (
@@ -101,22 +114,22 @@ class SignalExpert extends Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
-            dataSource={this.props.experts}
+            dataSource={this.props.followedExperts}
             renderItem={item => (
               <List.Item
                 key={item.id}
                 actions={[
                   <Button
-                    disabled={this.isSelected(item.id)}
-                    onClick={() => this.selectExpert(item.id)}
+                    disabled={this.isSelected(item.followedId)}
+                    onClick={() => this.selectExpert(item.followedId)}
                   >
-                    {this.isSelected(item.id) ? 'Đang xem' : 'Xem'}
+                    {this.isSelected(item.followedId) ? 'Đang xem' : 'Xem'}
                   </Button>
                 ]}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={item.photoURL} />}
-                  title={<a href={`/#/expert/${item.id}`}>{item.displayName}</a>}
+                  title={<a href={`/#/expert/${item.followedId}`}>{item.displayName}</a>}
                 />
               </List.Item>
             )}
@@ -125,7 +138,7 @@ class SignalExpert extends Component {
         <div className="manage-right-container">
           <p className="header-manage-box">Danh sách tín hiệu</p>
           <Table
-            dataSource={this.props.activeSignals}
+            dataSource={list}
             bordered
             columns={columns}
             onRow={record => {
@@ -155,11 +168,12 @@ class SignalExpert extends Component {
 
 export default connect(
   state => ({
-    experts: state.firestore.ordered.experts,
-    activeSignals: state.firestore.ordered.selectedExpertSignals
+    followedExperts: state.firestore.ordered.followedExperts,
+    activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
+    pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : []
   }),
   {
     listenExperts,
     unlistenExperts
   }
-)(withFirestore(SignalExpert));
+)(withFirestore(Signal));
