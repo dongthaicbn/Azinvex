@@ -18,7 +18,7 @@ class Account extends Component {
     return (
       <div>
         <iframe
-          src="https://trade.mql5.com/trade?lang=en&servers=Exness-Real,Exness-Real2,Exness-Real3,Exness-Real4,Exness-Real5,Exness-Real6,Exness-Real7,Exness-Real8,Exness-Real9,Exness-Real11,Exness-Trial,Exness-Trial2,Exness-MT5Real,Exness-MT5Trial&save_password=off&login=&trade_server=&"
+          src="https://trade.mql5.com/trade?lang=en&servers=Exness-Real,Exness-Real2,Exness-Real3,Exness-Real4,Exness-Real5,Exness-Real6,Exness-Real7,Exness-Real8,Exness-Real9,Exness-Real11,Exness-Trial,Exness-Trial2,Exness-MT5Real,Exness-MT5Trial&save_password=on&login=&trade_server=&"
           allowFullScreen="allowfullscreen"
           style={style}></iframe>
       </div>
