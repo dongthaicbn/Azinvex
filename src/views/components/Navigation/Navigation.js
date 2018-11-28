@@ -33,7 +33,7 @@ class Navigation extends React.Component {
               role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Khu Vực Chuyên Gia</span></Menu.Item>
             }
   {
-                  role === 'expert' && <Menu.Item key="account">Nền tảng giao dịch</Menu.Item>
+                  role === 'expert' && <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>
                 }
             {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Trang Tổng Quan</span></Menu.Item>
