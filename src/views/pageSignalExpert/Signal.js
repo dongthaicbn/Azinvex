@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, List, Avatar, Button, Modal } from 'antd';
+import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
 import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
@@ -99,7 +99,12 @@ class Signal extends Component {
         title: 'Loại lệnh',
         dataIndex: 'type',
         key: 'type',
-        render: type => this.getTypeSignal(type)
+        render: type => (
+          <button className={`button ${this.getTypeSignalClass(type)}`}>
+            <Icon type="rise" className="fa" />
+            <strong>{this.getTypeSignal(type)}</strong>
+          </button>
+        )
       },
       {
         title: 'Cặp tiền',
@@ -131,7 +136,9 @@ class Signal extends Component {
         title: 'Trạng thái',
         dataIndex: 'status',
         key: 'status',
-        render: status => status === 'pending' ? 'Lệnh Chờ' : 'Lệnh Đang Chạy'
+        render: status => (
+          status === 'pending' ? 'Lệnh Chờ' : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+        )
       }
     ];
     return (
