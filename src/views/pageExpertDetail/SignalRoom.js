@@ -11,6 +11,22 @@ class SignalRoom extends Component {
   capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  getSignalType(string){
+    switch (string) {
+      case 'pending':
+        return 'Lệnh Chờ'
+        break;
+      case 'cancelled':
+        return 'Lệnh Đã Hủy'
+        break;
+      case 'closed':
+        return 'Lệnh Đã Đóng'
+        break;
+      default:
+        return 'Lệnh Đang Chạy'
+        break;
+    }
+  }
   render() {
     const {activeList, pendingList, todayList} = this.props;
     const list = activeList.concat(pendingList).concat(todayList);
@@ -39,7 +55,7 @@ class SignalRoom extends Component {
         title: 'Trạng thái',
         dataIndex: 'signal',
         render: (text, signal) =>
-        signal.status === 'cancelled' ? 'Lệnh Đã Hủy':(signal.status === 'closed' ? 'Lệnh Đã Đóng' : 'Lệnh Đang Chạy'),
+          getSignalType(signal.status),
         key: 'signal'
       },
       {
