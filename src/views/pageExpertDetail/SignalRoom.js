@@ -39,7 +39,7 @@ class SignalRoom extends Component {
         title: 'Trạng thái',
         dataIndex: 'signal',
         render: (text, signal) =>
-        this.capitalizeFirstLetter(signal.status),
+        signal.status == "pending" ? (signal.status === 'cancelled' ? 'Đã Hủy' : 'Lệnh Chờ' ) : 'Lệnh Đang Chạy',
         key: 'signal'
       },
       {

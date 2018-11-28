@@ -104,7 +104,7 @@ class Signal extends Component {
         title: 'Trạng thái',
         dataIndex: 'status',
         key: 'status',
-        render: status => this.capitalizeFirstLetter(status)
+        render: status => status === 'pending' ? 'Lệnh Chờ' : 'Lệnh Đang Chạy'
       }
     ];
     return (
