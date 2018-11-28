@@ -30,10 +30,10 @@ class Navigation extends React.Component {
             inlineCollapsed={collapsed}
           >
             {
-              role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
+              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>
             }
             {
-              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Trang Cá Nhân</span></Menu.Item>
+              role === 'expert' && <Menu.Item key="signal/expert"><Icon type="bar-chart" /><span>Room Tín Hiệu</span></Menu.Item>
             }
             {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>Dashboard</span></Menu.Item>
