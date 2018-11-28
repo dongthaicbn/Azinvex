@@ -168,7 +168,7 @@ class Signal extends Component {
 
 export default connect(
   state => ({
-    followedExperts: state.firestore.ordered.followedExperts,
+    experts: state.firestore.ordered.experts,
     activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
     pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : []
   }),
