@@ -86,7 +86,6 @@ class SignalRoom extends Component {
           bordered
           // loading={loading}
           // footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
-          pagination={false}
           columns={columns}
         />
         <br />
