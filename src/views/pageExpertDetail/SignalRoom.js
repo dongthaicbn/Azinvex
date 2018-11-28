@@ -39,7 +39,7 @@ class SignalRoom extends Component {
         title: 'Trạng thái',
         dataIndex: 'signal',
         render: (text, signal) =>
-        signal.status == "pending" ? (signal.status === 'cancelled' ? 'Đã Hủy' : 'Lệnh Chờ' ) : 'Lệnh Đang Chạy',
+        signal.status === 'cancelled' ? 'Lệnh Đã Hủy':(signal.status === 'closed' ? 'Lệnh Đã Đóng' : 'Lệnh Đang Chạy'),
         key: 'signal'
       },
       {
@@ -56,7 +56,7 @@ class SignalRoom extends Component {
       {
         title: 'Kết quả',
         dataIndex: 'profit',
-        render: profit =>profit ? profit + " pips" : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />,
+        render: profit =>profit !== undefined ? profit + " pips" : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />,
       }
     ];
     const suffix = <Icon type="picture" theme="outlined" />;

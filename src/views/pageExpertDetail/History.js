@@ -159,7 +159,7 @@ class History extends Component {
                   <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips.toFixed(1)}</p>
                 </p>
                 <p className="item-container">
-                  <p className="text-item"><a>FROM</a></p>
+                  <p className="text-item"><a>Từ ngày</a></p>
                   <Form.Item>
                 {getFieldDecorator('dateopened', {})(
                   <DatePicker />
@@ -175,7 +175,7 @@ class History extends Component {
                   <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
                 </p>
                 <p className="item-container">
-                  <p className="text-item"><a>TO</a></p>
+                  <p className="text-item"><a>Đến ngày</a></p>
                   <Form.Item>
                      {getFieldDecorator('datefixed', {})(
                   <DatePicker />
