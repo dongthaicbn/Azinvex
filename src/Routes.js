@@ -8,11 +8,8 @@ import Information from './views/pageInformation/Information';
 import Account from './views/pageAccount/Account';
 import Signal from './views/pageSignal/Signal';
 import SignalExpert from './views/pageSignalExpert/Signal';
-import Help from './views/pageHelp/Help';
 import Support from './views/pageSupport/Support';
 import User from './views/pageUser/User';
-import Login from './views/pageLogin/Login';
-import Register from './views/pageRegister/Register';
 import ChangePassword from './views/pageChangePassword/ChangePassword';
 
 const Routes = ({ location }) => {
@@ -35,14 +32,8 @@ const Routes = ({ location }) => {
       return <SignalExpert />;
     case routes.ROUTE_ADMIN_USER:
       return <User />;
-    case routes.ROUTE_HELP:
-      return <Help />;
     case routes.ROUTE_SUPPORT:
       return <Support />;
-    case routes.ROUTE_LOGIN:
-      return <Login />;
-    case routes.ROUTE_REGISTER:
-      return <Register />;
     default:
       return null;
   }

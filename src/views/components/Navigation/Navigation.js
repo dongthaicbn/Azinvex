@@ -14,8 +14,7 @@ class Navigation extends React.Component {
     if(item.key === 'logout') {
       this.props.firebase.logout();
       window.location.href = '#/';
-    }
-    if (item.key === 'home') window.location.href = '#/';
+    } else if (item.key === 'home') window.location.href = '#/';
     else window.location.href = `#/${item.key}`;
   };
 

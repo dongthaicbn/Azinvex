@@ -155,10 +155,10 @@ class History extends Component {
             <p className="header-card">Filter tín hiệu</p>
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
-                <p className="item-container">
+                <div className="item-container">
                   <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips.toFixed(1)}</p>
-                </p>
-                <p className="item-container">
+                </div>
+                <div className="item-container">
                   <p className="text-item"><a>Từ ngày</a></p>
                   <Form.Item>
                 {getFieldDecorator('dateopened', {})(
@@ -166,47 +166,47 @@ class History extends Component {
                 )}
               </Form.Item>
 
-                </p>
+                </div>
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
-                <p className="item-container">
+                <div className="item-container">
                   <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
-                </p>
-                <p className="item-container">
+                </div>
+                <div className="item-container">
                   <p className="text-item"><a>Đến ngày</a></p>
                   <Form.Item>
                      {getFieldDecorator('datefixed', {})(
                   <DatePicker />
                 )}
               </Form.Item>
-                </p>
+                </div>
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
-                <p className="item-container">
+                <div className="item-container">
                   <p className="text-item"><a>Số lệnh thua: </a> {this.props.expertDetail.signalLoss}</p>
-                </p>
-                <p className="item-container">
+                </div>
+                <div className="item-container">
                   <p className="text-item"><a>Cặp tiền</a></p>
                   <Form.Item>
                      {getFieldDecorator('symbol', {})(
                   <Input />
                 )}
                </Form.Item>
-                </p>
+                </div>
               </div>
             </div>
-            <p className="group-btn">
+            <div className="group-btn">
               <span>
                 <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
               </span>
                 <span>
                 <Button onClick={()=>this.reset()} type="danger" className="reset-btn">Reset</Button>
               </span>
-            </p>
+            </div>
 
           </Card>
         </Form>

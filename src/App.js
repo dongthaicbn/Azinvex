@@ -13,6 +13,7 @@ import LoginPage from './views/pageLogin/Login';
 import Header from './views/components/Header/Header';
 import Loading from './views/components/Loading/Loading';
 import Register from './views/pageRegister/Register';
+import Help from './views/pageHelp/Help';
 
 import Logo from './assets/logo.png';
 import * as routes from './utils/constants/routes';
@@ -100,6 +101,7 @@ class App extends React.Component {
         case routes.ROUTE_HOME:
           return <LandingPage />;
         case routes.ROUTE_HELP:
+          return <Help />;
         case routes.ROUTE_SUPPORT:
           return this.commonComponents();
         case routes.ROUTE_DASHBOARD:

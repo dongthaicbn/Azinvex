@@ -5,6 +5,7 @@ import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
+import avatarDefault from '../../assets/user.png';
 
 class Signal extends Component {
   state={
@@ -111,15 +112,12 @@ class Signal extends Component {
       {
         title: 'Ticket',
         dataIndex: 'id',
-        width: 100,
-        fixed: 'left',
         render: id => <strong>{id}</strong>,
         key: 'id'
       },
       {
         title: 'Loại lệnh',
         dataIndex: 'type',
-        width: 180,
         key: 'type',
         align: 'center',
         render: type => (
@@ -132,52 +130,43 @@ class Signal extends Component {
       {
         title: 'Cặp tiền',
         dataIndex: 'symbol',
-        width: 100,
-        className: 'aaa',
-        render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>,
-        key: 'symbol'
+        key: 'symbol',
+        render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>
       },
       {
-        title: 'Giá mở cửa ',
-        width: 120,
+        title: 'Giá mở cửa',
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
         title: 'Thời gian vào',
-        width: 160,
         dataIndex: 'startAt',
         render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
         key: 'startAt'
       },
       {
         title: 'Chốt lời',
-        width: 120,
         dataIndex: 'takeprofit',
         render: takeprofit => <strong style={{ color: 'green' }}>{takeprofit}</strong>,
         key: 'takeprofit'
       },
       {
         title: 'Cắt lỗ',
-        width: 120,
         dataIndex: 'stoploss',
-        render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>,
-        key: 'stoploss'
+        key: 'stoploss',
+        render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>
       },
       {
         title: 'Trạng thái',
         dataIndex: 'status',
-        width: 100,
-        fixed: 'right',
-        key: 'status',
-        align: 'center',
-        render: status => (
-          status === 'pending' ? <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+        render: status => (status === 'pending' ?
+          <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> :
+          <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
         )
       }
     ];
     return (
-      <div>
+      <div className="signal-container">
         <div className="manage-left-container">
           <p className="header-manage-box">Danh sách chuyên gia</p>
           <List
@@ -197,7 +186,7 @@ class Signal extends Component {
                 ]}
               >
                 <List.Item.Meta
-                  avatar={<Avatar shape="square" size="large" src={item.photoURL} />}
+                  avatar={<Avatar shape="square" size="large" src={item.photoURL === '/assets/user.png' ? avatarDefault : item.photoURL} />}
                   title={<a href={`/#/expert/${item.followedId}`}>{item.displayName}</a>}
                 />
               </List.Item>

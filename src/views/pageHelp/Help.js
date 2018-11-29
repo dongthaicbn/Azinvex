@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 import './Help.scss';
 import bg10 from '../../assets/landingImages/bg10.jpg';
+import MenuLanding from '../pageLanding/LandingComponent/MenuLanding';
 
 /*eslint-disable*/
 class Help extends Component {
 
+  componentDidMount() {
+    if ($('.navbar-color-on-scroll').length !== 0) {
+      $(window).on('scroll', this.checkScrollForTransparentNavbar);
+    }
+  }
+
+  checkScrollForTransparentNavbar = () => {
+    if ($(document).scrollTop() > 300) {
+      $('.navbar-color-on-scroll').removeClass('navbar-transparent');
+    } else {
+      $('.navbar-color-on-scroll').addClass('navbar-transparent');
+    }
+  };
   render() {
+    const { profileUser, isAuthenticated, auth } = this.props;
     return (
       <div className="blog-posts sidebar-collapse">
+
+        <MenuLanding
+          profileUser={profileUser}
+          isAuthenticated={isAuthenticated}
+          auth = {auth}
+          firebase={this.props.firebase}
+        />
 
         <div className="page-header header-filter header-small" data-parallax="true" style={{ backgroundImage: `url(${bg10})` }}>
           <div className="container">
@@ -157,7 +180,9 @@ class Help extends Component {
 
 export default connect(
   state => ({
-    // state redux
+    auth: state.firebase.auth,
+    isAuthenticated: !state.firebase.auth.isEmpty,
+    profileUser: state.firebase.profile
   }),
   {
     // action
