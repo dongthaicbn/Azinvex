@@ -9,13 +9,13 @@ import Post from './ExpertDetailComponent/Post';
 class Posts extends Component {
   state = {
     isCreateNoticeModal: false
-  }
+  };
   handleCreateNoticeModal = () => {
     this.setState({ isCreateNoticeModal: true });
-  }
+  };
   handleCancelModal = () => {
     this.setState({ isCreateNoticeModal: false });
-  }
+  };
   handleCreateNotice = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -25,7 +25,7 @@ class Posts extends Component {
         // implement handle create notice
       }
     });
-  }
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
     // const { expertDetail, expertPosts } = this.props;

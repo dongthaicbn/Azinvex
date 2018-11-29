@@ -131,7 +131,7 @@ class SignalRoom extends Component {
         <br />
         <p className="header-card">Chat</p>
         <div className="chat-container">
-          <Card className="card-container chat-content-container">
+          <Card className="card-container chat-content-container common-scroll">
             {fakeListChat.map((item, index) => (
               item.type === 'left' ?
                 <div className="chat-text-item" key={index}>

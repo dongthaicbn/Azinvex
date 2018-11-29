@@ -89,23 +89,6 @@
         border-top-right-radius: 15px;
       }
     }
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(#009da0, 0.65);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #009da0;
-    }
   }
   .column-container {
     padding: 10px 0;
@@ -198,20 +181,6 @@
       .list-comment {
         max-height: 200px;
         overflow: auto;
-        &::-webkit-scrollbar {
-          width: 6px;
-        }
-        &::-webkit-scrollbar-track {
-          box-shadow: inset 0 0 5px grey;
-          border-radius: 10px;
-        }
-        &::-webkit-scrollbar-thumb {
-          background: rgba(#009da0, 0.65);
-          border-radius: 10px;
-        }
-        &::-webkit-scrollbar-thumb:hover {
-          background: #009da0;
-        }
         .post-user-information {
           height: 64px;
           display: flex;

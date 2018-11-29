@@ -21,7 +21,7 @@ class Post extends Component {
         <div className="content-post">
           {children}
           <p className="comment-header">Bình luận</p>
-          <div className="list-comment">
+          <div className="list-comment common-scroll">
             {listComment.map((item, index) => (
               <div className="post-user-information" key={index}>
                 <img src={avatarUser} className="avatar-user-post" />
