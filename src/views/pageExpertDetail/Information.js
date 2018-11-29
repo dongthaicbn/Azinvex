@@ -10,19 +10,19 @@ class Information extends Component {
     const { expertDetail } = this.props;
     return (
       <Card className="card-container">
-        <p className="header-card">Personal Information</p>
+        <p className="header-card">Thông tin cá nhân</p>
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <p className="item-container">
-              <p className="text-item"><a><b>Birthday</b></a></p>
+              <p className="text-item"><a><b>Ngày sinh</b></a></p>
               <p className="sub-text-item">{expertDetail.information && new Date(expertDetail.birthday).toLocaleDateString('en-GB')}</p>
             </p>
             <p className="item-container">
-              <p className="text-item"><a><b>Birthplace</b></a></p>
+              <p className="text-item"><a><b>Quê quán</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.birthplace}</p>
             </p>
             <p className="item-container">
-              <p className="text-item"><a><b>Lives in</b></a></p>
+              <p className="text-item"><a><b>Sống tại</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.address}</p>
             </p>
           </div>
@@ -30,7 +30,7 @@ class Information extends Component {
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <p className="item-container">
-              <p className="text-item"><a><b>Gender</b></a></p>
+              <p className="text-item"><a><b>Giới tính</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.sex == 0 ? "Nam":"Nữ"}</p>
             </p>
             <p className="item-container">
@@ -46,15 +46,15 @@ class Information extends Component {
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <p className="item-container">
-              <p className="text-item"><a><b>Phone</b></a></p>
+              <p className="text-item"><a><b>Số điện thoại</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.phone}</p>
             </p>
             <p className="item-container">
-              <p className="text-item"><a><b>Occupation</b></a></p>
+              <p className="text-item"><a><b>Nghề nghiệp</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.occupation}</p>
             </p>
             <p className="item-container">
-              <p className="text-item"><a><b>Joined</b></a></p>
+              <p className="text-item"><a><b>Tham gia ngày</b></a></p>
               <p className="sub-text-item">{new Date(expertDetail.createdAt.seconds * 1000).toLocaleDateString('en-GB')}</p>
             </p>
           </div>
