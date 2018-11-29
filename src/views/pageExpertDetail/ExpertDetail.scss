@@ -139,6 +139,7 @@
 }
 .post-container {
   display: block;
+  margin: 0 -10px;
   .card-dashboard-container {
     font-family: inherit;
     width: calc(50% - 20px);
@@ -204,6 +205,7 @@
         background: #009da0;
         color: white;
         border: 1px solid #009da0;
+        cursor: pointer;
       }
       .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
         border: 1px solid #009da0;
