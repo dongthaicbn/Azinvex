@@ -27,6 +27,24 @@ class SignalRoom extends Component {
         break;
     }
   }
+  getTypeSignal = type => {
+    switch (type) {
+      case '0':
+        return 'Buy';
+      case '1':
+        return 'Sell';
+      case '2':
+        return 'Buy Limit';
+      case '3':
+        return 'Sell Limit';
+      case '4':
+        return 'Buy Stop';
+      case '5':
+        return 'Sell Stop';
+      default:
+        return true;
+    }
+  };
   render() {
     const {activeList, pendingList, todayList} = this.props;
     const list = activeList.concat(pendingList).concat(todayList);
@@ -35,6 +53,13 @@ class SignalRoom extends Component {
         title: 'Ticket',
         dataIndex: 'id',
         key: 'id'
+      },
+      {
+        title: 'Loại lệnh',
+        dataIndex: 'type',
+        render: type =>
+        this.getTypeSignalClass(type),
+        key: 'type'
       },
       {
         title: 'Symbol',
