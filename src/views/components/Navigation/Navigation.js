@@ -11,8 +11,9 @@ import './Navigation.scss';
 class Navigation extends React.Component {
 
   onChangeMenu = item => {
-    if(item.key === "logout") {
+    if(item.key === 'logout') {
       this.props.firebase.logout();
+      window.location.href = '#/';
     }
     if (item.key === 'home') window.location.href = '#/';
     else window.location.href = `#/${item.key}`;

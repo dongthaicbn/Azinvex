@@ -111,12 +111,17 @@ class Signal extends Component {
       {
         title: 'Ticket',
         dataIndex: 'id',
+        width: 100,
+        fixed: 'left',
+        render: id => <strong>{id}</strong>,
         key: 'id'
       },
       {
         title: 'Loại lệnh',
         dataIndex: 'type',
+        width: 180,
         key: 'type',
+        align: 'center',
         render: type => (
           <button className={`button ${this.getTypeSignalClass(type)}`}>
             <Icon type="rise" className="fa" />
@@ -127,36 +132,47 @@ class Signal extends Component {
       {
         title: 'Cặp tiền',
         dataIndex: 'symbol',
-        render: symbol => <strong>{symbol}</strong>,
+        width: 100,
+        className: 'aaa',
+        render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>,
         key: 'symbol'
       },
       {
         title: 'Giá mở cửa ',
+        width: 120,
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
         title: 'Thời gian vào',
+        width: 160,
         dataIndex: 'startAt',
         render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
         key: 'startAt'
       },
       {
         title: 'Chốt lời',
+        width: 120,
         dataIndex: 'takeprofit',
+        render: takeprofit => <strong style={{ color: 'green' }}>{takeprofit}</strong>,
         key: 'takeprofit'
       },
       {
         title: 'Cắt lỗ',
+        width: 120,
         dataIndex: 'stoploss',
+        render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>,
         key: 'stoploss'
       },
       {
         title: 'Trạng thái',
         dataIndex: 'status',
+        width: 100,
+        fixed: 'right',
         key: 'status',
+        align: 'center',
         render: status => (
-          status === 'pending' ? 'Lệnh Chờ' : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+          status === 'pending' ? <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
         )
       }
     ];
@@ -194,6 +210,7 @@ class Signal extends Component {
             dataSource={list}
             bordered
             columns={columns}
+            scroll={{ x: 1000, y: 800 }}
             onRow={record => {
               return {
                 onClick: () => {

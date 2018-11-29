@@ -11,49 +11,64 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => { 
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.login({ username: values.userName, password: values.password });
         this.props.form.resetFields();
       }
     });
-  }
+  };
 
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="login-wrapper">
-        <div className="login-form-container">
-          <Form onSubmit={this.handleSubmit}>
-            <p><b>Username</b></p>
-            <Form.Item>
-              {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }]
-              })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-              )}
-            </Form.Item>
-            <p><b>Password</b></p>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }]
-              })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(
-                <Checkbox>Remember me</Checkbox>
-              )}
-              <a className="login-form-forgot" href="#/register">Forgot password</a>
-              <Button loading={this.props.loading} type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              <a href='#/register'>Register now!</a>
-            </Form.Item>
-          </Form>
+      <div className="page-login">
+        <div className="login-wrapper">
+          <div className="login-form-container">
+            <div className="row">
+              <div className="col-5">
+                <div className="login-form-header">
+                  <span className="text-tit-small"> welcome to</span>
+                  <span className="text-tit-big">Cộng Đồng Bắn Tín Hiệu FOREX</span>
+                </div>
+                <div className="login-form-content">
+                  <Form onSubmit={this.handleSubmit}>
+                    <span className="lab-text">Username</span>
+                    <Form.Item>
+                      {getFieldDecorator('userName', {
+                        rules: [{ required: true, message: 'Please input your username!' }]
+                      })(
+                        <Input prefix={<Icon type="user"/>} placeholder="Username"/>
+                      )}
+                    </Form.Item>
+                    <span className="lab-text">Password</span>
+                    <Form.Item>
+                      {getFieldDecorator('password', {
+                        rules: [{ required: true, message: 'Please input your Password!' }]
+                      })(
+                        <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password" />
+                      )}
+                    </Form.Item>
+                    <Form.Item>
+                      {getFieldDecorator('remember', {
+                        valuePropName: 'checked',
+                        initialValue: true
+                      })(
+                        <Checkbox>Remember me</Checkbox>
+                      )}
+                      <a className="login-form-forgot" href="#/register"><span>Forgot password</span></a>
+                      <div className="form-group">
+                        <Button htmlType="submit" className="login-form-button">Đăng nhập</Button>
+                      </div>
+                      <div >
+                        <button className="stroke-btn-40">Đăng ký</button>
+                      </div>
+                    </Form.Item>
+                  </Form>
+                </div>
+              </div>
+              <div className="col-7 bg-form-ic-wpman">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

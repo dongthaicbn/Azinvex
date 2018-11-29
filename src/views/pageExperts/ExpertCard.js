@@ -33,7 +33,7 @@ class ExpertCard extends Component {
     return (
       <Card
         hoverable
-        style={{ width: 'calc(25% - 20px)', padding: 20, display: 'inline-block', margin: '0 10px' }}
+        style={{ width: 'calc(25% - 20px)', padding: 20, display: 'inline-block', margin: '0 10px 20px' }}
         cover={<img alt="avatar" src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL} className="avatar-image" />}
       >
         <Card.Meta
