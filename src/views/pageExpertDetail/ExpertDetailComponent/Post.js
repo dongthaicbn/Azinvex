@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from 'antd';
+import { Card, Input, Icon } from 'antd';
 import '../ExpertDetail.scss';
 import avatarUser from '../../../assets/user.png';
 
@@ -32,6 +32,7 @@ class Post extends Component {
               </div>
             ))}
           </div>
+          <Input addonAfter={<Icon type="arrow-right" />} placeholder="Write comment" />
         </div>
       </Card>
     );

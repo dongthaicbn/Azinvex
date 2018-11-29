@@ -181,6 +181,7 @@
       .list-comment {
         max-height: 200px;
         overflow: auto;
+        margin-bottom: 10px;
         .post-user-information {
           height: 64px;
           display: flex;
@@ -198,6 +199,14 @@
             width: 100%;
           }
         }
+      }
+      .ant-input-group > .ant-input:last-child, .ant-input-group-addon:last-child {
+        background: #009da0;
+        color: white;
+        border: 1px solid #009da0;
+      }
+      .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+        border: 1px solid #009da0;
       }
     }
   }
