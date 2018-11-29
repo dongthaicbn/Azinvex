@@ -58,11 +58,11 @@ class Login extends Component {
                       <div className="form-group">
                         <Button htmlType="submit" className="login-form-button">Đăng nhập</Button>
                       </div>
-                      <div >
-                        <button className="stroke-btn-40">Đăng ký</button>
-                      </div>
                     </Form.Item>
                   </Form>
+                  <div className="register-btn">
+                    <button className="stroke-btn-40" onClick={() => window.location.href = '#/register'}>Đăng ký</button>
+                  </div>
                 </div>
               </div>
               <div className="col-7 bg-form-ic-wpman">
