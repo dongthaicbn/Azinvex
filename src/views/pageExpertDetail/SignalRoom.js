@@ -58,7 +58,7 @@ class SignalRoom extends Component {
         title: 'Loại lệnh',
         dataIndex: 'type',
         render: type =>
-        this.getTypeSignalClass(type),
+          this.getTypeSignal(type),
         key: 'type'
       },
       {
