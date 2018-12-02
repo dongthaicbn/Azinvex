@@ -1,14 +1,14 @@
 {
-  "ID_HOME": "Home",
-  "ID_PRODUCT": "Product",
-  "ID_SERVICE": "Service",
-  "ID_INTRODUCTION": "Introduction",
-  "ID_CONTACT": "Contact",
-  "ID_SELECT_LANGUAGE": "Select language",
-  "ID_ADDRESS": "Address",
-  "ID_EMAIL": "Email",
-  "ID_HOT_LINE": "Hotline",
-  "ID_TITLE": "Title",
-  "ID_SEND": "Send",
-  "ID_DETAIL": "Detail"
+  "IDS_LOGIN": "Login",
+  "IDS_LOGOUT": "Logout",
+  "IDS_REGISTER": "Register",
+  "IDS_ENGLISH": "English",
+  "IDS_VIETNAMESE": "Vietnamese",
+  "IDS_MANAGE": "Manage",
+  "IDS_PERSONAL_INFORMATION": "Personal information",
+  "IDS_SIGNAL_ROOM": "Signal room",
+  "IDS_CHANGE_PASSWORD": "Change password",
+  "IDS_SUPPORT": "Support",
+  "IDS_HOME": "Home",
+  "IDS_GUIDE": "Guide"
 }
