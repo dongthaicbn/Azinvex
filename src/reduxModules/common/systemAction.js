@@ -3,13 +3,16 @@ import { SET_LANGUAGE_ON_MOUNT, SET_SHOW_TOAST, HIDE_TOAST } from '../../utils/c
 const TOAST_DURATION = 3000;
 let timeoutToast = null;
 
-export const actionSetLanguageOnMount = (languageCode, languageTrans) => ({
-  type: SET_LANGUAGE_ON_MOUNT,
-  payload: {
-    languageCode,
-    languageTrans
-  }
-});
+export const actionSetLanguageOnMount = (languageCode, languageTrans, isRTL = false) => async dispatch => {
+  dispatch({
+    type: SET_LANGUAGE_ON_MOUNT,
+    payload: {
+      languageCode,
+      languageTrans,
+      isRTL
+    }
+  });
+};
 
 export const actionShowToast = (typeToast, messageToast) => dispatch => {
   dispatch({ type: SET_SHOW_TOAST, payload: { typeToast, messageToast } });

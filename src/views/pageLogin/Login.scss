@@ -16,7 +16,7 @@
   background: url("../../assets/img/login-bg-layer.png")center bottom no-repeat;
   .login-form-container {
     background-color: #ffffff;
-    box-shadow: 0px 10px 20px rgba(1, 1, 1, 0.12);
+    box-shadow: 0 10px 20px rgba(1, 1, 1, 0.12);
     border-radius: 4px;
     padding: 60px;
     .login-form-header{
@@ -47,7 +47,7 @@
       font-family: "Roboto",sans-serif;
       margin-bottom: 30px;
     }
-    .login-form-content{
+    .login-form-content {
       .lab-text{
         display: block;
         color: #a0a0a0;
@@ -55,10 +55,10 @@
         font-family: "Roboto",sans-serif;
         margin-bottom: 10px;
       }
-      .ant-form{
+      .ant-form {
         padding: 0;
         background: #ffffff;
-        .ant-input{
+        .ant-input {
           border:1px solid #d4d4d4!important;
           color: #393e46!important;
           padding: 0 30px;
@@ -68,7 +68,7 @@
 
         }
       }
-      .ant-checkbox{
+      .ant-checkbox {
         .ant-checkbox-inner{
           background-color: #ffffff;
           border-color: #d4d4d4;
@@ -97,8 +97,8 @@
         border:none;
       }
       .ant-checkbox-wrapper + span, .ant-checkbox + span{
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 0;
+        padding-right: 0;
         font-size: 14px;
         font-family: "Roboto",sans-serif;
         color:#393e46;
@@ -154,6 +154,9 @@
         font-weight: 500;
         text-transform: uppercase;
         cursor: pointer;
+      }
+      .register-btn {
+        margin-top: -24px;
       }
     }
     .bg-form-ic-wpman{

@@ -1,14 +1,14 @@
 {
-  "ID_HOME": "Trang chủ",
-  "ID_PRODUCT": "Sản phẩm",
-  "ID_SERVICE": "Dịch vụ",
-  "ID_INTRODUCTION": "Giới thiệu",
-  "ID_CONTACT": "Liên hệ",
-  "ID_SELECT_LANGUAGE": "Lựa chọn ngôn ngữ",
-  "ID_ADDRESS": "Địa chỉ:",
-  "ID_EMAIL": "Email",
-  "ID_HOT_LINE": "Hotline",
-  "ID_TITLE": "Tiêu đề",
-  "ID_SEND": "Gửi",
-  "ID_DETAIL": "Chi tiết"
+  "IDS_LOGIN": "Đăng Nhập",
+  "IDS_LOGOUT": "Đăng Xuất",
+  "IDS_REGISTER": "Đăng ký",
+  "IDS_ENGLISH": "Tiếng anh",
+  "IDS_VIETNAMESE": "Tiếng việt",
+  "IDS_MANAGE": "Quản Lý",
+  "IDS_PERSONAL_INFORMATION": "Thông Tin Cá Nhân",
+  "IDS_SIGNAL_ROOM": "Phòng Tín Hiệu",
+  "IDS_CHANGE_PASSWORD": "Đổi Mật Khẩu",
+  "IDS_SUPPORT": "Hỗ Trợ",
+  "IDS_HOME": "Trang Tổng Quan",
+  "IDS_GUIDE": "Hướng Dẫn Sử Dụng"
 }

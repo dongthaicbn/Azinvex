@@ -58,7 +58,7 @@
   color: #009da0;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .card-container {
   border-radius: 4px;
@@ -88,23 +88,6 @@
         border-bottom-left-radius: 15px;
         border-top-right-radius: 15px;
       }
-    }
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(#009da0, 0.65);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #009da0;
     }
   }
   .column-container {
@@ -153,4 +136,80 @@
 }
 .text-area-content {
   resize: none;
+}
+.post-container {
+  display: block;
+  margin: 0 -10px;
+  .card-dashboard-container {
+    font-family: inherit;
+    width: calc(50% - 20px);
+    margin: 0 10px;
+    //border: solid 1px #00BFA5;
+    float: left;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px 0 rgba(60,64,67,.08), 0 1px 3px 1px rgba(60,64,67,.16);
+    transition: box-shadow 135ms cubic-bezier(.4,0,.2,1);
+    border-radius: 6px;
+    .header-post {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .date-post {
+      color: #6c757d;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+    .content-post {
+      color: #252525;
+      .image-container {
+        width: 100%;
+        margin: 20px 0 10px 0;
+        border-radius: 4px;
+      }
+      .content-post-description {
+        margin-bottom: 10px;
+      }
+      .comment-header {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-top: solid 1px #009da0;
+        padding-top: 10px;
+        color: #009da0;
+      }
+      .list-comment {
+        max-height: 200px;
+        overflow: auto;
+        margin-bottom: 10px;
+        .post-user-information {
+          height: 64px;
+          display: flex;
+          padding: 12px 12px 12px 0;
+          border-bottom: solid 1px #ebedf0;
+          .avatar-user-post {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 10px;
+          }
+          .user-name-text {
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+          }
+        }
+      }
+      .ant-input-group > .ant-input:last-child, .ant-input-group-addon:last-child {
+        background: #009da0;
+        color: white;
+        border: 1px solid #009da0;
+        cursor: pointer;
+      }
+      .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+        border: 1px solid #009da0;
+      }
+    }
+  }
 }
