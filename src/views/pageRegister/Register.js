@@ -83,7 +83,7 @@ class Register extends Component {
                     </Form.Item>
                     <span className="lab-text">Số điện thoại</span>
                     <Form.Item>
-                      {getFieldDecorator('displayName', {
+                      {getFieldDecorator('information.phone', {
                         rules: [{ required: true, message: 'Please input phone number!' }]
                       })(
                         <Input />
