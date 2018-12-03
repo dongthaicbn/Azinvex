@@ -35,7 +35,7 @@ class Dashboard extends Component {
       case 1:
         return `Đóng lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
       case 2:
-        return `Hủy lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} `;
+        return `Hủy lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol}`;
       case 3:
         return `Đã khớp lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice}`;
       case 4:
