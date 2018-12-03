@@ -144,6 +144,7 @@ class History extends Component {
       {
         title: 'Kết quả',
         dataIndex: 'profit',
+        render: profit => profit + ' pips',
         key: 'profit'
       }
     ];
