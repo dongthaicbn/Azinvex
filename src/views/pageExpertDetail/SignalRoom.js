@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
+import { compose } from 'recompose';
 import { Table, Button, Card, Icon, Input, Avatar } from 'antd';
 import './ExpertDetail.scss';
 import avatarUser from '../../assets/user.png';
+import localize from '../../utils/hocs/localize';
 
 /* eslint-disable */
 class SignalRoom extends Component {
 
-  capitalizeFirstLetter(string) {
+  capitalizeFirstLetter = string => {
       return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-  getSignalType(string){
+  };
+  getSignalType = string => {
     switch (string) {
       case 'pending':
-        return 'Lệnh Chờ'
-        break;
+        return 'Lệnh Chờ';
       case 'cancelled':
-        return 'Lệnh Đã Hủy'
-        break;
+        return 'Lệnh Đã Hủy';
       case 'closed':
-        return 'Lệnh Đã Đóng'
-        break;
+        return 'Lệnh Đã Đóng';
       default:
-        return 'Lệnh Đang Chạy'
-        break;
+        return 'Lệnh Đang Chạy';
     }
-  }
+  };
   getTypeSignal = type => {
     switch (type) {
       case '0':
@@ -46,7 +43,7 @@ class SignalRoom extends Component {
     }
   };
   render() {
-    const {activeList, pendingList, todayList} = this.props;
+    const { activeList, pendingList, todayList, t } = this.props;
     const list = activeList.concat(pendingList).concat(todayList);
     const columns = [
       {
@@ -152,7 +149,7 @@ class SignalRoom extends Component {
                 </div>
             ))}
           </Card>
-          <Button type="primary" style={{ float: 'right' }}>Gửi</Button>
+          <Button type="primary" style={{ float: 'right' }}>{t('IDS_SEND')}</Button>
           <Input
             style={{ float: 'left', width: 'calc(100% - 80px)' }}
             prefix={<Icon type="smile" theme="outlined" />}
@@ -164,11 +161,4 @@ class SignalRoom extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    // action
-  }
-)(SignalRoom);
+export default compose(localize)(SignalRoom);

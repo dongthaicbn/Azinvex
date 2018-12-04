@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as Push from 'push.js';
-import { Layout, List, Button } from 'antd';
+import { compose } from 'recompose';
+import { Layout, List } from 'antd';
 import { connect } from 'react-redux';
 import { withFirestore } from 'react-redux-firebase';
 import DashboardCard from './DashboardComponent/DashboardCard';
@@ -14,6 +15,7 @@ import isEmpty from '../../utils/helpers/isEmpty';
 import ExpertItem from './DashboardComponent/ExpertItem';
 import example from '../../assets/example.jpg';
 import avatarUser from '../../assets/user.png';
+import localize from '../../utils/hocs/localize';
 /*eslint-disable*/
 
 class Dashboard extends Component {
@@ -159,7 +161,7 @@ class Dashboard extends Component {
     }
   };
   render() {
-    const { loading, topExpert } = this.props;
+    const { loading, topExpert, t } = this.props;
     const { moreEvents, loadedEvents } = this.state;
     return (
       <div className="dashboard-container">
@@ -171,7 +173,7 @@ class Dashboard extends Component {
                 <p>BTC/USD, 3D</p>
                 <img src={example} className="image-container" />
                 <div className="pull-right right-text-container">
-                  <span className="right-text-post">12345 views</span>
+                  <span className="right-text-post">12345 {t('IDS_VIEWS')}</span>
                   <span className="right-text-post">20 giờ trước</span>
                 </div>
                 <div className="post-user-information">
@@ -184,7 +186,7 @@ class Dashboard extends Component {
                 <p>BTC/USD, 3D</p>
                 <img src={example} className="image-container" />
                 <div className="pull-right right-text-container">
-                  <span className="right-text-post">12345 views</span>
+                  <span className="right-text-post">12345 {t('IDS_VIEWS')}</span>
                   <span className="right-text-post">20 giờ trước</span>
                 </div>
                 <div className="post-user-information">
@@ -202,7 +204,7 @@ class Dashboard extends Component {
             />
           </Layout.Content>
           <Layout.Sider className="side-bar-right-container">
-            <div className="top-expert-header">Top Chuyên Gia</div>
+            <div className="top-expert-header">{t('IDS_TOP_EXPERTS')}</div>
             {!isEmpty(topExpert) &&
               <List
                 className="demo-loadmore-list"
@@ -218,17 +220,20 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    topExpert: state.firestore.ordered.topExpert,
-    currentUser: state.firebase.auth,
-    loading: state.async.loading,
-    timelineContent: state.events
-  }),
-  {
-    getTopUser,
-    getStatistics,
-    getEventsForDashboard,
-    unsetTopUser
-  }
+export default compose(
+  connect(
+    state => ({
+      topExpert: state.firestore.ordered.topExpert,
+      currentUser: state.firebase.auth,
+      loading: state.async.loading,
+      timelineContent: state.events
+    }),
+    {
+      getTopUser,
+      getStatistics,
+      getEventsForDashboard,
+      unsetTopUser
+    }
+  ),
+  localize
 )(withFirestore(Dashboard));

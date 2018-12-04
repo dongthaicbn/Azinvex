@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import ExpertCard from './ExpertCard';
 import { listenExperts, unlistenExperts } from './../../reduxModules/expert/expertActions';
 import './Experts.scss';
+import localize from '../../utils/hocs/localize';
 
 /* eslint-disable */
 class Experts extends Component {
@@ -36,11 +38,11 @@ class Experts extends Component {
     this.props.unlistenExperts();
   }
   render() {
-    const { experts } = this.props;
+    const { experts, t } = this.props;
     return (
       <div className="expert-container">
         <div className="content-expert-container">
-          <p className="header-text">Danh Sách Chuyên Gia</p>
+          <p className="header-text">{t('IDS_LIST_EXPERTS')}</p>
           <p className="sub-header-text">Tổng Hợp Những Chuyên gia forex hàng đầu từ khắp mọi nơi</p>
           {experts && experts.map(expert => (
             <ExpertCard key={expert.id} expert={expert} />
@@ -51,12 +53,15 @@ class Experts extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    experts: state.firestore.ordered.experts
-  }),
-  {
-    listenExperts,
-    unlistenExperts
-  }
+export default compose(
+  connect(
+    state => ({
+      experts: state.firestore.ordered.experts
+    }),
+    {
+      listenExperts,
+      unlistenExperts
+    }
+  ),
+  localize
 )(Experts);
