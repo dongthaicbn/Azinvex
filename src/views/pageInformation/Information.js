@@ -9,6 +9,7 @@ import { withFirestore } from 'react-redux-firebase';
 import './Information.scss';
 import avatarUser from '../../assets/user.png';
 import ReactLoading from 'react-loading';
+import localize from '../../utils/hocs/localize';
 
 const dateFormat = 'DD/MM/YYYY';
 class Information extends Component {
@@ -99,10 +100,10 @@ class Information extends Component {
     });
   };
   render() {
-    const { uploading } = this.state;
     const { getFieldDecorator } = this.props.form;
-    const { profile } = this.props;
+    const { profile, t } = this.props;
     const {
+      uploading,
       previewVisible,
       previewImage,
       fileList,
@@ -122,7 +123,7 @@ class Information extends Component {
     };
     return (
       <div className="information-container">
-        <p className="info-header">Thông tin cá nhân</p>
+        <p className="info-header">{t('IDS_PERSONAL_INFORMATION')}</p>
         {!isEdit && (
           <Button
             type="primary"
@@ -191,38 +192,38 @@ class Information extends Component {
                   ]
                 })(<Input disabled />)}
               </Form.Item>
-              <p className="title-input-profile"><b>E-mail</b></p>
+              <p className="title-input-profile"><b>{t('IDS_EMAIL')}</b></p>
               <Form.Item>
                 {getFieldDecorator('email', {
                   initialValue: profile.email
                 })(<Input disabled />)}
               </Form.Item>
-              <p className="title-input-profile"><b>Ngày sinh</b></p>
+              <p className="title-input-profile"><b>{t('IDS_BIRTHDAY')}</b></p>
               <Form.Item>
                 {getFieldDecorator('birthday', {
                 initialValue: profile.birthday ? moment(profile.birthday) : moment('1/1/1960')
                 })(<DatePicker format={dateFormat} disabled={!isEdit} />)}
               </Form.Item>
-              <p className="title-input-profile"><b>Số điện thoại</b></p>
+              <p className="title-input-profile"><b>{t('IDS_PHONE_NUMBER')}</b></p>
               <Form.Item>
               {getFieldDecorator('information.phone', {
                 initialValue: profile.information ? profile.information.phone : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
-              <p className="title-input-profile"><b>Giới tính</b></p>
+              <p className="title-input-profile"><b>{t('IDS_GENDER')}</b></p>
               <Form.Item>
                 {getFieldDecorator('information.sex', {
                   initialValue: 0
                 })(
                 <Radio.Group disabled={!isEdit}>
-                    <Radio.Button value="0">Nam</Radio.Button>
-                    <Radio.Button value="1">Nữ</Radio.Button>
+                    <Radio.Button value="0">{t('IDS_MALE')}</Radio.Button>
+                    <Radio.Button value="1">{t('IDS_FEMALE')}</Radio.Button>
                 </Radio.Group>
                 )}
               </Form.Item>
             </div>
             <div className="end-card-info">
-              <p className="title-input-profile"><b>Địa chỉ</b></p>
+              <p className="title-input-profile"><b>{t('IDS_ADDRESS')}</b></p>
               <Form.Item>
               {getFieldDecorator('information.address', {
                 initialValue: profile.information ? profile.information.address : ''
@@ -289,5 +290,6 @@ export default compose(
   branch(
     (props => props.isLoaded),
     renderNothing
-  )
+  ),
+  localize
 )(Form.create()(withFirestore(Information)));
