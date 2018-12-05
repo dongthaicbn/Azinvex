@@ -47,12 +47,12 @@ class SignalRoom extends Component {
     const list = activeList.concat(pendingList).concat(todayList);
     const columns = [
       {
-        title: 'Ticket',
+        title: <span>{t('IDS_TICKET')}</span>,
         dataIndex: 'id',
         key: 'id'
       },
       {
-        title: 'Loại lệnh',
+        title: <span>{t('IDS_TYPE_COMMAND')}</span>,
         dataIndex: 'type',
         render: type => this.getTypeSignal(type),
         key: 'type'
@@ -73,25 +73,25 @@ class SignalRoom extends Component {
         key: 'takeprofit'
       },
       {
-        title: 'Trạng thái',
+        title: <span>{t('IDS_STATUS')}</span>,
         dataIndex: 'signal',
         render: (text, signal) =>
           this.getSignalType(signal.status),
         key: 'signal'
       },
       {
-        title: 'Thời gian tạo',
+        title: <span>{t('IDS_CREATE_TIME')}</span>,
         dataIndex: 'createAt',
         render: createAt => moment(createAt.seconds * 1000).format('HH:mm DD/MM/YYYY'),
         key: 'createdAt'
       },
       {
-        title: 'Giá mở cửa',
+        title: <span>{t('IDS_OPEN_PRICE')}</span>,
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
-        title: 'Kết quả',
+        title: <span>{t('IDS_RESULT')}</span>,
         dataIndex: 'profit',
         render: profit =>profit !== undefined ? profit + " pips" : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />,
       }
@@ -117,7 +117,7 @@ class SignalRoom extends Component {
     ];
     return (
       <div>
-        <p className="header-card">Tín hiệu</p>
+        <p className="header-card">{t('IDS_SIGNAL')}</p>
         <Table
           dataSource={list}
           bordered
@@ -126,7 +126,7 @@ class SignalRoom extends Component {
           columns={columns}
         />
         <br />
-        <p className="header-card">Chat</p>
+        <p className="header-card">{t('IDS_CHAT')}</p>
         <div className="chat-container">
           <Card className="card-container chat-content-container common-scroll">
             {fakeListChat.map((item, index) => (

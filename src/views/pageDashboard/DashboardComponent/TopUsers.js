@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { compose } from 'recompose';
 import ExpertCard from './ExpertCard';
 import '../Dashboard.scss';
+import localize from '../../../utils/hocs/localize';
 
 class TopUsers extends Component {
   constructor(props) {
@@ -13,10 +14,10 @@ class TopUsers extends Component {
     };
   }
   render() {
-    const { topExpert } = this.props;
+    const { topExpert, t } = this.props;
     return (
       <div className="content-dashboard-container">
-        <p className="header-text">Top Chuyên Gia FOREX</p>
+        <p className="header-text">{t('IDS_TOP_FOREX_EXPERT')}</p>
         {topExpert && topExpert.map((item, index) => (
           <ExpertCard expert={item} key={index} />
         ))}
@@ -25,11 +26,14 @@ class TopUsers extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    topExpert: state.firestore.ordered.topExpert
-  }),
-  {
-    // action
-  }
+export default compose(
+  connect(
+    state => ({
+      topExpert: state.firestore.ordered.topExpert
+    }),
+    {
+      // action
+    }
+  ),
+  localize
 )(TopUsers);

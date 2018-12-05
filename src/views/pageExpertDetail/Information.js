@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { Card } from 'antd';
 import './ExpertDetail.scss';
+import localize from '../../utils/hocs/localize';
 
 /* eslint-disable */
 class Information extends Component {
 
   render() {
-    const { expertDetail } = this.props;
+    const { expertDetail, t } = this.props;
     return (
       <Card className="card-container">
-        <p className="header-card">Thông tin cá nhân</p>
+        <p className="header-card">{t('IDS_PERSONAL_INFORMATION')}</p>
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <div className="item-container">
-              <p className="text-item"><a><b>Ngày sinh</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_BIRTHDAY')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && new Date(expertDetail.birthday).toLocaleDateString('en-GB')}</p>
             </div>
             <div className="item-container">
@@ -30,11 +32,11 @@ class Information extends Component {
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <div className="item-container">
-              <p className="text-item"><a><b>Giới tính</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_GENDER')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.sex == 0 ? "Nam":"Nữ"}</p>
             </div>
             <div className="item-container">
-              <p className="text-item"><a><b>Email</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_EMAIL')}</b></a></p>
               <p className="sub-text-item">{expertDetail.email}</p>
             </div>
             <div className="item-container">
@@ -46,7 +48,7 @@ class Information extends Component {
         <div className="col-12 col-md-6 col-lg-4">
           <div className="column-container">
             <div className="item-container">
-              <p className="text-item"><a><b>Số điện thoại</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_PHONE_NUMBER')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.phone}</p>
             </div>
             <div className="item-container">
@@ -66,11 +68,14 @@ class Information extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    // action
-  }
+export default compose(
+  connect(
+    state => ({
+      // state redux
+    }),
+    {
+      // action
+    }
+  ),
+  localize
 )(Information);
