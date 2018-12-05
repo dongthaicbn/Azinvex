@@ -67,3 +67,48 @@ export const getSignalHistory = (lastSignalHistory, eid) => async (dispatch, get
     dispatch(asyncActionError());
   }
 }
+
+export const addPost = (creds) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firestore = getFirestore();
+  const currentUser = getState().firebase.auth;
+  try {
+    dispatch(asyncActionStart());
+    let newData = { ...creds, createdAt: firestore.FieldValue.serverTimestamp()};
+    await firestore.add(
+      {
+        collection: 'users',
+        doc: currentUser.uid,
+        subcollections: [{ collection: 'posts' }]
+      },
+      newData
+    );
+    dispatch(asyncActionFinish());
+  } catch (error) {
+   console.log(error) 
+   dispatch(asyncActionError());
+  }
+}
+
+export const listenPost = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firestore = getFirestore();
+  firestore.setListener(
+    {
+      collection: 'users',
+      doc: getState().location.payload.id,
+      subcollections: [{ collection: 'posts' }],
+      storeAs: 'expertPosts',
+    },
+  )
+}
+
+export const unlistenPost = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firestore = getFirestore();
+  firestore.unsetListener(
+    {
+      collection: 'users',
+      doc: getState().location.payload.id,
+      subcollections: [{ collection: 'posts' }]
+    },
+  )
+}
+

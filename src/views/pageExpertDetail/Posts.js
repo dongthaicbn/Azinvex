@@ -1,75 +1,122 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { Card, Button, Icon, Modal, Form, Input, Upload, message } from 'antd';
 import './ExpertDetail.scss';
 import example from '../../assets/example.jpg';
 import Post from './ExpertDetailComponent/Post';
+import { addPost, listenPost, unlistenPost } from './../../reduxModules/expert/expertActions';
+
 
 /*eslint-disable*/
 class Posts extends Component {
   state = {
-    isCreateNoticeModal: false
+    isCreateNoticeModal: false,
+    fileList: [],
+    uploadResult: '',
+    uploading: false
   };
+  handleUpload = async () => {
+    const { fileList } = this.state;
+    const image = fileList[fileList.length - 1];
+    const formData = new FormData();
+    formData.append('photo', image);
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*'
+      }
+    };
+    const url = 'https://api.congtruyendich.com/upload';
+    this.setState({
+      uploading: true,
+    });
+    try {
+      const data = await axios.post(url, formData, axiosConfig);
+      this.setState({
+        uploadResult: data.data.full,
+        uploading: false
+      });
+      this.props.form.setFields( { "photo" : {value : data.data.full} } );
+      message.success('upload successfully.');
+    } catch (error) {
+      console.log(error)
+      this.setState({
+        uploading: false
+      });
+      message.error('upload failed.');
+    }
+
+  }
   handleCreateNoticeModal = () => {
     this.setState({ isCreateNoticeModal: true });
   };
   handleCancelModal = () => {
     this.setState({ isCreateNoticeModal: false });
+    this.props.form.resetFields()
   };
   handleCreateNotice = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.setState({ isCreateNoticeModal: false });
+        this.props.addPost(values);  
+        this.props.form.resetFields()
         // console.log('values', values);
         // implement handle create notice
       }
     });
   };
+  componentDidMount(){
+    this.props.listenPost();
+  }
+  componentWillUnmount(){
+    this.props.unlistenPost();
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     // const { expertDetail, expertPosts } = this.props;
     const { isCreateNoticeModal } = this.state;
+    const { uploading, fileList } = this.state;
     const props = {
-      name: 'file',
-      multiple: true,
-      action: '//jsonplaceholder.typicode.com/posts/',
-      onChange(info) {
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      }
+      multiple:false,
+      onRemove: (file) => {
+        this.setState((state) => {
+          const index = state.fileList.indexOf(file);
+          const newFileList = state.fileList.slice();
+          newFileList.splice(index, 1);
+          return {
+            fileList: newFileList,
+          };
+        });
+      },
+      beforeUpload: (file) => {
+        this.setState(state => ({
+          fileList: [...state.fileList, file],
+        }));
+        return false;
+      },
+      fileList,
     };
-    const listComment = [1, 2, 3, 4, 5];
+    const { expertPosts } = this.props;
     return (
       <Card className="card-container">
-        <Button type="primary" className="create-notice-btn" onClick={this.handleCreateNoticeModal}>
+       {this.props.currentUser.uid == this.props.expertDetail.id ? (        <Button type="primary" className="create-notice-btn" onClick={this.handleCreateNoticeModal}>
           <Icon type="twitter" theme="outlined" />
           Tạo thông báo mới
-        </Button>
+        </Button>) : null}
+
         <p className="header-card">User Timeline </p>
         <div className="post-container">
-          <Post header="Hello World" date="16/10/2018" listComment={listComment}>
-            <img src={example} className="image-container" />
+        {expertPosts.map((e,i) =>  <Post profileUser={this.props.profileUser} expertDetail={this.props.expertDetail} postId={e.id} header={e.title} date={moment(e.createdAt.seconds*1000).format('HH:mm DD/MM/YYYY')}>
+    {e.photo && <img src={e.photo} className="image-container" /> }
             <p className="content-post-description">
-              Description content for this post.
-              Tất vớ là một xu hướng thời trang- Đã bao giờ bạn để ý tới “vũ khí” lợi hại này chưa?
+             {e.content}
             </p>
           </Post>
-          <Post header="Hello World" date="16/10/2018" listComment={listComment}>
-            <p className="content-post-description">
-              Description content for this post.
-              Tất vớ là một xu hướng thời trang- Đã bao giờ bạn để ý tới “vũ khí” lợi hại này chưa?
-            </p>
-          </Post>
-          <Post header="Hello World" date="16/10/2018" listComment={listComment}>
-            <p className="content-post-description">
-              Description content for this post.
-              Tất vớ là một xu hướng thời trang- Đã bao giờ bạn để ý tới “vũ khí” lợi hại này chưa?
-            </p>
-          </Post>
+        )}
+         
         </div>
         <Form onSubmit={this.handleCreateNotice}>
           <Modal
@@ -92,17 +139,30 @@ class Posts extends Component {
             <Form.Item>
               {getFieldDecorator('content', {
                 initialValue: '',
-                rules: [{ required: true, message: 'Hãy nhập mô tả bản thân!' }]
-              })(<Input.TextArea rows={4} placeholder="Mô tả bản thân" className="text-area-content" />)}
+                rules: [{ required: true, message: 'Hãy nhập nội dung!' }]
+              })(<Input.TextArea rows={4} placeholder="Nội dung" className="text-area-content" />)}
             </Form.Item>
             <p className="text-title">Ảnh</p>
             <Form.Item>
-              <Upload.Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <Icon type="cloud-upload" />
-                </p>
-                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-              </Upload.Dragger>
+              {getFieldDecorator('photo', {
+                initialValue: ''
+              })(<Input placeholder="Ảnh" />)}
+            </Form.Item>
+            <Form.Item>
+            <Upload multiple={false} {...props}>
+          <Button>
+            <Icon type="upload" /> Select File
+          </Button>
+        </Upload>
+        <Button
+          type="primary"
+          onClick={this.handleUpload}
+          disabled={fileList.length === 0}
+          loading={uploading}
+          style={{ marginTop: 16 }}
+        >
+          {uploading ? 'Uploading' : 'Start Upload' }
+        </Button>
             </Form.Item>
           </Modal>
         </Form>
@@ -113,9 +173,15 @@ class Posts extends Component {
 
 export default connect(
   state => ({
-    // expertPosts: state.firestore.ordered.expertPosts ? state.firestore.ordered.expertPosts : []
+    expertPosts: state.firestore.ordered.expertPosts ? state.firestore.ordered.expertPosts : [],
+    expertDetail: state.firestore.ordered.expertDetail[0],
+    profileUser: state.firebase.profile,
+    currentUser: state.firebase.auth
   }),
   {
     // action
+    addPost,
+    listenPost,
+    unlistenPost
   }
 )(Form.create()(Posts));
