@@ -34,8 +34,9 @@ class Information extends Component {
     const { currentUser, firestore } = this.props;
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      const { birthday, ...updatedUser } = values;
-      const newData = { ...updatedUser, birthday: moment(values.birthday).toDate().getTime(), updatedAt: firestore.FieldValue.serverTimestamp() };
+      let { birthday,website, ...updatedUser } = values;
+      if(!values.website) website = 'https://signal.azinvex.com'
+      const newData = { ...updatedUser, birthday: moment(values.birthday).toDate().getTime(), updatedAt: firestore.FieldValue.serverTimestamp(), website };
       firestore.update({ collection: 'users', doc: currentUser.uid }, newData);
     });
     this.setState({ isEdit: false });
