@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Card, Button} from 'antd';
+import { compose } from 'recompose';
 import { follow, unfollow, isFollowed } from './../../reduxModules/follow/followActions';
 import './Experts.scss';
 import avatarUser from '../../assets/user.png';
+import localize from '../../utils/hocs/localize';
 
 class ExpertCard extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class ExpertCard extends Component {
     this.setState({ isFollowed: await this.props.isFollowed(this.props.expert.id) })
   }
   render() {
-    const { expert } = this.props;
+    const { expert, t } = this.props;
     const { isFollowed } = this.state;
     return (
       <Card
@@ -41,11 +43,11 @@ class ExpertCard extends Component {
             <p>
               <span>{expert.displayName}</span>
               <span style={{ float: 'right' }}>
-                <Button type="primary" className="detail-btn" onClick={() => this.handleDetail(expert.id)}>Chi tiết</Button>
+                <Button type="primary" className="detail-btn" onClick={() => this.handleDetail(expert.id)}>{t('IDS_DETAIL')}</Button>
                 {isFollowed !== null &&
                   !isFollowed ?
-                  <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">Follow</Button> :
-                  <Button onClick={() => this.unfollow(expert.id)} type="default" className="follow-btn">Unfollow</Button>
+                  <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">{t('IDS_FOLLOW')}</Button> :
+                  <Button onClick={() => this.unfollow(expert.id)} type="default" className="follow-btn">{t('IDS_UN_FOLLOW')}</Button>
                 }
               </span>
             </p>
@@ -53,7 +55,7 @@ class ExpertCard extends Component {
           description={
             <div>
               <p>
-                <span className="description-text-left">Tỉ lệ thắng</span><span className="description-text-right">
+                <span className="description-text-left">{t('IDS_WIN_RATIO')}</span><span className="description-text-right">
                   {(expert.signalLoss + expert.signalWin) !== 0 ?
                     Math.round((expert.signalWin / (expert.signalLoss + expert.signalWin)) * 100) : 0
                   } %
@@ -68,13 +70,16 @@ class ExpertCard extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    follow,
-    unfollow,
-    isFollowed
-  }
+export default compose(
+  connect(
+    state => ({
+      // state redux
+    }),
+    {
+      follow,
+      unfollow,
+      isFollowed
+    }
+  ),
+  localize
 )(ExpertCard);

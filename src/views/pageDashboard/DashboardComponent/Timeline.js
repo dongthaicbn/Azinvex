@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { compose } from 'recompose';
 import { Table, Button } from 'antd';
+import localize from '../../../utils/hocs/localize';
 
 /*eslint-disable*/
 
@@ -46,14 +48,15 @@ class Timeline extends Component {
     return;
   }
   render() {
+    const { timelineContent, getNextEvents, loading, moreEvents, t } = this.props;
     const columns = [
       {
-        title: "Ticket",
+        title: <span>{t('IDS_TICKET')}</span>,
         dataIndex: "ticket",
         key: "ticket"
       },
       {
-        title: "Chuyên gia",
+        title: <span>{t('IDS_EXPERT')}</span>,
         dataIndex: "expert",
         render: expert => (
           <a href={`/#/expert/${expert.id}`}>{expert.displayName}</a>
@@ -61,22 +64,21 @@ class Timeline extends Component {
         key: "expert"
       },
       {
-        title: "Lệnh",
+        title: <span>{t('IDS_COMMANDS')}</span>,
         dataIndex: "signal",
         render: (text, signal) => this.getCommand(signal),
         key: "signal"
       },
       {
-        title: "Thời gian",
+        title: <span>{t('IDS_TIME')}</span>,
         dataIndex: "createAt",
         render: createAt => moment(createAt).format("HH:mm DD/MM/YYYY"),
         key: "createAt"
       }
     ];
-    const { timelineContent, getNextEvents, loading, moreEvents } = this.props;
     return (
       <div className="content-dashboard-container">
-        <p className="header-text">Thông Báo</p>
+        <p className="header-text">{t('IDS_NOTICE')}</p>
         <div className="table-container">
           <Table
             dataSource={timelineContent}
@@ -89,7 +91,7 @@ class Timeline extends Component {
                 className="detail-btn"
                 onClick={() => getNextEvents()}
               >
-                Tải thêm
+                {t('IDS_LOAD_MORE')}
               </Button>
             )}
             pagination={false}
@@ -100,4 +102,4 @@ class Timeline extends Component {
     );
   }
 }
-export default Timeline;
+export default compose(localize)(Timeline);

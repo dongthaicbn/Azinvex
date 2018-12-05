@@ -42,7 +42,7 @@ class Navigation extends React.Component {
             inlineCollapsed={collapsed}
           >
             {
-              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>Khu Vực Chuyên Gia</span></Menu.Item>
+              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>{t('IDS_EXPERTS_AREA')}</span></Menu.Item>
             }
 
             {
@@ -52,7 +52,7 @@ class Navigation extends React.Component {
               role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>{t('IDS_HOME')}</span></Menu.Item>
             }
             {
-              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>Danh Sách Chuyên Gia</span></Menu.Item>
+              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>{t('IDS_LIST_EXPERTS')}</span></Menu.Item>
             }
             
  
