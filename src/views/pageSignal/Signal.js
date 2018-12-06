@@ -62,7 +62,7 @@ class Signal extends Component {
   capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  handleOkModal = () => {
+  handleOkModal = ticket => {
     this.setState({ visibleModal: false });
   }
   handleCancelModal = () => {
@@ -104,9 +104,42 @@ class Signal extends Component {
         return true;
     }
   };
+  getSignalLog = ticket => {
+    const { firestore } = this.props;
+    firestore.get(
+      {
+        collection: 'signals',
+        doc: ticket,
+        orderBy: 'createAt',
+        subcollections: [{ collection: 'logs' }],
+        storeAs: 'signalLog'
+      }
+    );
+  }
+  getCommand(signal) {
+    const { command } = signal;
+    switch (command) {
+      case 0:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Mở lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} với stoploss ${signal.stoploss} và takeprofit ${signal.takeprofit}`;
+      case 1:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đóng lệnh tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
+      case 2:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Hủy lệnh `;
+      case 3:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đã khớp lệnh tại ${signal.openPrice}`;
+      case 4:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời stoploss ${signal.oldSL} -> ${signal.newSL}`;
+      case 5:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+      case 6:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Thay đổi giá mở cửa ${signal.oldOP} -> ${signal.newOP}`;
+      default:
+        break;
+    }
+  }
   render() {
     const { itemSignalActive, visibleModal } = this.state;
-    const { activeSignals, pendingSignals } = this.props;
+    const { activeSignals, pendingSignals, signalLog } = this.props;
     const list = activeSignals.concat(pendingSignals);
     const columns = [
       {
@@ -204,6 +237,7 @@ class Signal extends Component {
               return {
                 onClick: () => {
                   this.setState({ visibleModal: true, itemSignalActive: { ...record } });
+                  this.getSignalLog(record.id);
                 }
               };
             }}
@@ -216,9 +250,9 @@ class Signal extends Component {
           onOk={this.handleOkModal}
           onCancel={this.handleCancelModal}
         >
-          <p>{itemSignalActive.id}</p>
-          <p>{itemSignalActive.signal}</p>
-          <p>{itemSignalActive.signal}</p>
+          <ul>
+            {signalLog.map(e => <li><b>{this.getCommand(e)}</b></li>)}
+          </ul>
         </Modal>
       </div>
     );
@@ -229,7 +263,8 @@ export default connect(
   state => ({
     followedExperts: state.firestore.ordered.followedExperts,
     activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
-    pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : []
+    pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : [],
+    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
   }),
   {
     listenFollowedExpert,

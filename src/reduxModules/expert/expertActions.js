@@ -73,7 +73,7 @@ export const addPost = (creds) => async (dispatch, getState, { getFirebase, getF
   const currentUser = getState().firebase.auth;
   try {
     dispatch(asyncActionStart());
-    let newData = { ...creds, createdAt: firestore.FieldValue.serverTimestamp()};
+    let newData = { ...creds, view: 0, createdAt: firestore.FieldValue.serverTimestamp()};
     await firestore.add(
       {
         collection: 'users',

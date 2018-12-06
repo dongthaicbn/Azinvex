@@ -64,3 +64,9 @@ export const updatePassword = (creds) =>
       dispatch(asyncActionError());
     }
   }
+
+export const deleteComment = (commandId) => {
+  async (dispatch, getState, { getFirebase, getFirestore }) => {
+    
+  }
+}
