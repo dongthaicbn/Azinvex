@@ -173,7 +173,7 @@
     }
   }
   .content-dashboard-container {
-    background: white;
+    background: #333;
     border-radius: 4px;
     box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
     padding: 20px;
@@ -196,11 +196,46 @@
       padding: 5px;
       margin-left: calc(50% - 100px);
     }
+    .ant-table-footer {
+      background: #333;
+      border: solid 1px #9E9E9E;
+      border-top: none;
+    }
+    .ant-table-tbody {
+      color: #eee;
+      tr {
+        a {
+          color: #BE7633;
+        }
+        td {
+          border-right: solid 1px #9E9E9E;
+          border-bottom: solid 1px #9E9E9E;
+        }
+        &:hover {
+          color: #333;
+          a {
+            color: #333;
+          }
+          td {
+            background: #BE7633;
+          }
+        }
+      }
+    }
+    .ant-table-thead > tr > th {
+      background: #333;
+      color: #eee;
+      border: solid 1px #9E9E9E;
+    }
+  }
+  .ant-table-bordered .ant-table-header > table, .ant-table-bordered .ant-table-body > table, .ant-table-bordered .ant-table-fixed-left table, .ant-table-bordered .ant-table-fixed-right table {
+    border: solid 1px #9E9E9E;
   }
   .header-text {
     padding: 10px;
     font-size: 18px;
     font-weight: 600;
+    color: #eee;
   }
   .table-container {
     padding: 10px;
@@ -218,29 +253,46 @@
     margin: 20px 0 30px 20px;
     padding: 15px;
     border-radius: 4px;
-    background-color: white;
+    background-color: #333;
     min-width: 400px !important;
     max-width: 400px !important;
     width: 400px;
+    color: #eee;
+    .ant-list-split .ant-list-item {
+      border-bottom: solid 1px #9E9E9E;
+    }
+    .ant-layout-sider-children {
+      background-color: #333;
+    }
     .top-expert-header {
       font-weight: 600;
       font-size: 24px;
       margin-bottom: 10px;
+      color: #eee;
     }
     .account-name-text {
       font-size: 16px;
       font-weight: 700;
+      color: #eee;
     }
     .ant-list-item-meta-description {
-      color: rgb(122, 122, 122);
+      color: #b5b5b5;
     }
     .follow-btn {
-      border: solid 1px #00BFA5;
-      background-color: #00BFA5;
+      border: solid 1px #BE7633;
+      background-color: rgba(190, 118, 51, 0.8);
+      &:hover {
+        background-color: #BE7633;
+      }
     }
     .unfollow-btn {
-      border: solid 1px #00BFA5;
+      border: solid 1px #9E9E9E;
       color: #00BFA5;
+      &:hover {
+        background-color: #BE7633;
+        color: #333;
+        border: solid 1px #BE7633;
+      }
     }
   }
   .post-container {
@@ -252,6 +304,9 @@
     width: 50%;
     margin: 0 10px;
     //border: solid 1px #00BFA5;
+    background: #333;
+    border: solid 1px #9E9E9E;
+    color: #eee;
     box-shadow: 0 1px 1px 0 rgba(60,64,67,.08), 0 1px 3px 1px rgba(60,64,67,.16);
     transition: box-shadow 135ms cubic-bezier(.4,0,.2,1);
     border-radius: 6px;
@@ -261,7 +316,7 @@
       margin-bottom: 10px;
     }
     .content-post {
-      color: #252525;
+      color: #eee;
       .image-container {
         width: 100%;
         margin: 20px 0 10px 0;
@@ -288,7 +343,7 @@
     .footer-post {
       margin-top: 10px;
       font-size: 16px;
-      color: #252525;
+      color: #eee;
       .right-footer {
         float: right;
       }
