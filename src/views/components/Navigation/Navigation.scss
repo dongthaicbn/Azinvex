@@ -19,6 +19,8 @@
   }
   .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
     color: #333;
+    font-size: 15px;
+    font-family: sans-serif;
   }
 }
 .select-language {
@@ -29,7 +31,9 @@
 }
 
 .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
-  color: white;
+  color: #eee;
+  font-size: 15px;
+  font-family: sans-serif;
   &:hover {
     background-color: #BE7633;
     color: #333;
