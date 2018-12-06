@@ -7,19 +7,36 @@
 }
 .navigation-container {
   height: calc(100vh - 128px);
-  background-color: #001529;
+  background-color: #CCBFB3;
+  .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background-color: #CCBFB3;
+    color: #333;
+    box-shadow: none;
+  }
+  .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: #BE7633;
+    color: #333;
+  }
+  .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
+    color: #333;
+    font-size: 15px;
+    font-family: sans-serif;
+  }
 }
 .select-language {
   height: 64px;
-  background-color: #001529;
-  color: white;
+  background-color: #CCBFB3;
+  color: #333;
   padding: 24px;
 }
 
 .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
-  color: white;
+  color: #eee;
+  font-size: 15px;
+  font-family: sans-serif;
   &:hover {
-    background: #1890ff;
+    background-color: #BE7633;
+    color: #333;
   }
 }
 .logo {

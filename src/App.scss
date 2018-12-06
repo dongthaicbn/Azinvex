@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  .ant-layout {
+    background: #3C3B39;
+  }
 }
 .ant-menu, .ant-form, .ant-table, .ant-form-item, .ant-card {
   font-family: Roboto sans-serif;
@@ -13,15 +16,19 @@ p {
   margin: 24px 16px;
   min-height: 280px;
   height: calc(100vh - 200px);
+  .ant-layout-sider-children {
+    background: #CCB8A6;
+  }
 }
 .logo-img {
-  height: 32px;
-  //background: rgba(255,255,255,.2);
-  margin: 16px;
+  padding: 16px;
+  background: #CCB8A6;
   .app-title {
-    color: white;
-    font-size: 18px;
+    color: #333;
     padding: 6px 10px;
+    font-size: 20px;
+    font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+    font-weight: 600;
   }
 }
 .page-header {

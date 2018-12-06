@@ -41,21 +41,11 @@ class Navigation extends React.Component {
             onClick={this.onChangeMenu}
             inlineCollapsed={collapsed}
           >
-            {
-              role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>{t('IDS_EXPERTS_AREA')}</span></Menu.Item>
-            }
+            {role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="bar-chart" /><span>{t('IDS_EXPERTS_AREA')}</span></Menu.Item>}
+            {role === 'expert' && <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>}
+            {role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>{t('IDS_HOME')}</span></Menu.Item>}
+            {role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>{t('IDS_LIST_EXPERTS')}</span></Menu.Item>}
 
-            {
-              role === 'expert' && <Menu.Item key="account"><Icon type="bar-chart" />Nền tảng giao dịch</Menu.Item>
-            }
-            {
-              role === 'member' && <Menu.Item key="dashboard"><Icon type="home" /><span>{t('IDS_HOME')}</span></Menu.Item>
-            }
-            {
-              role === 'member' && <Menu.Item key="experts"><Icon type="bar-chart" /><span>{t('IDS_LIST_EXPERTS')}</span></Menu.Item>
-            }
-            
- 
             {isAuthenticated &&
               <Menu.SubMenu className="nav-item" title={<span><Icon type="user" /><span>{t('IDS_MANAGE')}</span></span>}>
                 <Menu.Item key="information">{t('IDS_PERSONAL_INFORMATION')}</Menu.Item>
@@ -73,7 +63,6 @@ class Navigation extends React.Component {
             <Menu.Item key="help"><Icon type="info-circle" /><span>{t('IDS_GUIDE')}</span></Menu.Item>
             <Menu.Item key="support"><Icon type="question-circle" /><span>{t('IDS_SUPPORT')}</span></Menu.Item>
             {isAuthenticated && <Menu.Item key="logout"><Icon type="logout" /><span>{t('IDS_LOGOUT')}</span></Menu.Item>}
-   
 
           </Menu>
         </div>
