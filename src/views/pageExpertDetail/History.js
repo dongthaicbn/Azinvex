@@ -153,6 +153,12 @@ getCommand(signal) {
       break;
   }
 }
+handleOkModal = () => {
+  this.setState({ visibleModal: false });
+}
+handleCancelModal = () => {
+  this.setState({ visibleModal: false });
+}
   render() {
     const columns = [
       {

@@ -62,7 +62,7 @@ class Signal extends Component {
   capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  handleOkModal = ticket => {
+  handleOkModal = () => {
     this.setState({ visibleModal: false });
   }
   handleCancelModal = () => {
