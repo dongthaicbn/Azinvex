@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Icon } from 'antd';
 import '../Dashboard.scss';
-import chatIcon from '../../../assets/icon/chat_white.png';
+import chatIcon from '../../../assets/icon/chat.png';
 
 /*eslint-disable*/
 

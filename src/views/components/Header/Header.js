@@ -34,7 +34,7 @@ class Header extends React.Component {
     );
 
     return (
-      <Layout.Header style={{ background: '#333', padding: 0, color: '#eee' }}>
+      <Layout.Header style={{ background: '#fff', padding: 0 }}>
         <Icon
           className="trigger"
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
