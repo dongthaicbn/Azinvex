@@ -262,7 +262,7 @@ class Signal extends Component {
           onCancel={this.handleCancelModal}
         >
           <ul>
-            {signalLog.map(e => <li><b>{this.getCommand(e)}</b></li>)}
+            {signalLog.map(e => <li key={e.id}><b>{this.getCommand(e)}</b></li>)}
           </ul>
         </Modal>
       </div>

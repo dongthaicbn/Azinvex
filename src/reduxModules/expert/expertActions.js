@@ -39,13 +39,13 @@ export const getSignalHistory = (lastSignalHistory, eid) => async (dispatch, get
       ? (query = signalHistoryRef
         .where('expert.id', '==', eid)
         .where('status', '==', 'closed')
-        .orderBy('startAt', 'asc')
+        .orderBy('startAt', 'desc')
         .startAfter(startAfter)
         .limit(5))
       : (query = signalHistoryRef
         .where('expert.id', '==', eid)
         .where('status', '==', 'closed')
-        .orderBy('startAt', 'asc')
+        .orderBy('startAt', 'desc')
         .limit(5));
     let querySnap = await query.get();
     if (querySnap.docs.length === 0) {

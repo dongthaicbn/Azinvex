@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { withFirestore } from 'react-redux-firebase';
 import { compose } from 'recompose';
-import { Table, Button, Card, Icon, Input, Avatar } from 'antd';
+import { Table, Button, Card, Icon, Input, Avatar, Modal } from 'antd';
 import './ExpertDetail.scss';
 import avatarUser from '../../assets/user.png';
 import localize from '../../utils/hocs/localize';
 
 /* eslint-disable */
 class SignalRoom extends Component {
-
+  state={
+    visibleModal: false
+  }
   capitalizeFirstLetter = string => {
       return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -42,8 +46,48 @@ class SignalRoom extends Component {
         return true;
     }
   };
+  handleOkModal = ticket => {
+    this.setState({ visibleModal: false });
+  }
+  handleCancelModal = () => {
+    this.setState({ visibleModal: false });
+  }
+  getSignalLog = ticket => {
+    const { firestore } = this.props;
+    firestore.get(
+      {
+        collection: 'signals',
+        doc: ticket,
+        orderBy: 'createAt',
+        subcollections: [{ collection: 'logs' }],
+        storeAs: 'signalLog'
+      }
+    );
+  }
+  getCommand(signal) {
+    const { command } = signal;
+    switch (command) {
+      case 0:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Mở lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} với stoploss ${signal.stoploss} và takeprofit ${signal.takeprofit}`;
+      case 1:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đóng lệnh tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
+      case 2:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Hủy lệnh `;
+      case 3:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đã khớp lệnh tại ${signal.openPrice}`;
+      case 4:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời stoploss ${signal.oldSL} -> ${signal.newSL}`;
+      case 5:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+      case 6:
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Thay đổi giá mở cửa ${signal.oldOP} -> ${signal.newOP}`;
+      default:
+        break;
+    }
+  }
   render() {
-    const { activeList, pendingList, todayList, t } = this.props;
+    const { visibleModal } = this.state;
+    const { activeList, pendingList, todayList, t, signalLog } = this.props;
     const list = activeList.concat(pendingList).concat(todayList);
     const columns = [
       {
@@ -124,6 +168,14 @@ class SignalRoom extends Component {
           // loading={loading}
           // footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
           columns={columns}
+          onRow={record => {
+            return {
+              onClick: () => {
+                this.setState({ visibleModal: true });
+                this.getSignalLog(record.id);
+              }
+            };
+          }}
         />
         <br />
         <p className="header-card">{t('IDS_CHAT')}</p>
@@ -156,9 +208,25 @@ class SignalRoom extends Component {
             suffix={suffix}
           />
         </div>
+        <Modal
+          title="CHI TIẾT TÍN HIỆU"
+          visible={visibleModal}
+          centered
+          onOk={this.handleOkModal}
+          onCancel={this.handleCancelModal}
+        >
+          <ul>
+            {signalLog.map(e => <li key={e.id}><b>{this.getCommand(e)}</b></li>)}
+          </ul>
+        </Modal>
       </div>
     );
   }
 }
 
-export default compose(localize)(SignalRoom);
+export default compose(connect(
+  state => ({
+    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
+  }),
+null
+),localize)(withFirestore(SignalRoom));
