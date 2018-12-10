@@ -1,3 +1,32 @@
+export const followSignal = ticket =>
+  (dispatch, getState, { getFirestore }) => {
+    const currentUser = getState().firebase.auth;
+    const firestore = getFirestore();
+    firestore.set(
+      {
+        collection: 'follows',
+        doc: `${currentUser.uid}_${ticket}`
+      },
+      {
+        ticket,
+        followerId: currentUser.uid,
+        createdAt: firestore.FieldValue.serverTimestamp()
+      }
+    );
+  };
+export const unfollowSignal = ticket =>
+  (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const currentUser = getState().firebase.auth;
+    firestore.delete({ collection: 'follows', doc: `${currentUser.uid}_${ticket}` });
+  };
+export const isFollowedSignal = ticket =>
+  async (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const currentUser = getState().firebase.auth;
+    const doc = await firestore.get({ collection: 'follows', doc: `${currentUser.uid}_${ticket}` });
+    return doc.exists;
+  };
 export const follow = expert =>
   (dispatch, getState, { getFirestore }) => {
     const currentUser = getState().firebase.auth;

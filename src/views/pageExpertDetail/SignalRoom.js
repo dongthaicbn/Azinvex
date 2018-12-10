@@ -7,6 +7,7 @@ import { Table, Button, Card, Icon, Input, Avatar, Modal } from 'antd';
 import './ExpertDetail.scss';
 import avatarUser from '../../assets/user.png';
 import localize from '../../utils/hocs/localize';
+import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
 
 /* eslint-disable */
 class SignalRoom extends Component {
@@ -85,6 +86,10 @@ class SignalRoom extends Component {
         break;
     }
   }
+  detail(ticket){
+      this.setState({ visibleModal: true });
+      this.getSignalLog(ticket);
+  }
   render() {
     const { visibleModal } = this.state;
     const { activeList, pendingList, todayList, t, signalLog } = this.props;
@@ -138,7 +143,13 @@ class SignalRoom extends Component {
         title: <span>{t('IDS_RESULT')}</span>,
         dataIndex: 'profit',
         render: profit =>profit !== undefined ? profit + " pips" : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />,
-      }
+      },
+      {
+        title: <span>Hành động</span>,
+        dataIndex: 'id',
+        render: ticket => <div><Button onClick={() => this.detail(ticket)} type="primary" className="follow-btn">Chi tiết</Button> <FollowButton t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={ticket} /></div>,
+        key: 'follow'
+      },
     ];
     const suffix = <Icon type="picture" theme="outlined" />;
     const fakeListChat = [
@@ -168,14 +179,6 @@ class SignalRoom extends Component {
           // loading={loading}
           // footer={() => <Button type="primary" className="detail-btn">Tải thêm</Button>}
           columns={columns}
-          onRow={record => {
-            return {
-              onClick: () => {
-                this.setState({ visibleModal: true });
-                this.getSignalLog(record.id);
-              }
-            };
-          }}
         />
         <br />
         <p className="header-card">{t('IDS_CHAT')}</p>
@@ -223,10 +226,47 @@ class SignalRoom extends Component {
     );
   }
 }
+class FollowButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFollowed: false,
+      ticket: null
+    };
+  }
 
+  async componentDidMount() {
+    this.setState({ isFollowed: await this.props.isFollowedSignal(this.props.ticket) });
+  }
+  follow(ticket){
+    const { followSignal } = this.props;
+    followSignal(ticket);
+    this.setState({ isFollowed: true })
+  }
+  unfollow(ticket){
+    const { unfollowSignal } = this.props;
+    unfollowSignal(ticket)
+    this.setState({ isFollowed: false })
+  }
+  render() {
+    const { isFollowed } = this.state;
+    const { ticket, t } = this.props;
+    return (
+      <span>
+        {
+          !isFollowed ?
+          <Button onClick={() => this.follow(ticket)} type="primary" className="follow-btn">{t('IDS_FOLLOW')}</Button> :
+          <Button onClick={() => this.unfollow(ticket)} type="default" className="follow-btn">{t('IDS_UN_FOLLOW')}</Button>
+        }
+      </span>
+    )
+  }
+}
 export default compose(connect(
   state => ({
     signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
   }),
-null
+{
+  followSignal, unfollowSignal, isFollowedSignal
+}
 ),localize)(withFirestore(SignalRoom));

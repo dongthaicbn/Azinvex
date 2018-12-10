@@ -1,10 +1,13 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
 import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
-import './Signal.scss';
+// import './Signal.scss';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
+import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
+
 import avatarDefault from '../../assets/user.png';
 
 class Signal extends Component {
@@ -137,6 +140,10 @@ class Signal extends Component {
         break;
     }
   }
+  detail(ticket) {
+    this.setState({ visibleModal: true });
+    this.getSignalLog(ticket);
+  }
   render() {
     const { itemSignalActive, visibleModal } = this.state;
     const { activeSignals, pendingSignals, signalLog } = this.props;
@@ -196,7 +203,13 @@ class Signal extends Component {
           <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> :
           <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
         )
-      }
+      },
+      {
+        title: <span>Hành động</span>,
+        dataIndex: 'id',
+        render: ticket => <div><Button onClick={() => this.detail(ticket)} type="primary" className="follow-btn">Chi tiết</Button> <FollowButton followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={ticket} /></div>,
+        key: 'follow'
+      },
     ];
     return (
       <div className="signal-container">
@@ -232,15 +245,7 @@ class Signal extends Component {
             dataSource={list}
             bordered
             columns={columns}
-            scroll={{ x: 1000, y: 800 }}
-            onRow={record => {
-              return {
-                onClick: () => {
-                  this.setState({ visibleModal: true, itemSignalActive: { ...record } });
-                  this.getSignalLog(record.id);
-                }
-              };
-            }}
+  
           />
         </div>
         <Modal
@@ -258,7 +263,42 @@ class Signal extends Component {
     );
   }
 }
+class FollowButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFollowed: false,
+      ticket: null
+    };
+  }
 
+  async componentDidMount() {
+    this.setState({ isFollowed: await this.props.isFollowedSignal(this.props.ticket) });
+  }
+  follow(ticket) {
+    const { followSignal } = this.props;
+    followSignal(ticket);
+    this.setState({ isFollowed: true })
+  }
+  unfollow(ticket) {
+    const { unfollowSignal } = this.props;
+    unfollowSignal(ticket)
+    this.setState({ isFollowed: false })
+  }
+  render() {
+    const { isFollowed } = this.state;
+    const { ticket } = this.props;
+    return (
+      <span>
+        {
+          !isFollowed ?
+          <Button onClick={() => this.follow(ticket)} type="primary" className="follow-btn">Theo dõi</Button> :
+          <Button onClick={() => this.unfollow(ticket)} type="default" className="follow-btn">Bỏ theo dõi</Button>
+        }
+      </span>
+    )
+  }
+}
 export default connect(
   state => ({
     followedExperts: state.firestore.ordered.followedExperts,
@@ -268,6 +308,9 @@ export default connect(
   }),
   {
     listenFollowedExpert,
-    unlistenFollowedExpert
+    unlistenFollowedExpert,
+    followSignal,
+    unfollowSignal,
+    isFollowedSignal
   }
 )(withFirestore(Signal));
