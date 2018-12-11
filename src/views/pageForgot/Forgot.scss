@@ -1,0 +1,167 @@
+.page-login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  background: url("../../assets/img/bg-login.jpg")center no-repeat;
+  background-size: cover;
+}
+.login-wrapper {
+  width: 1140px;
+  height: auto;
+  display: block;
+  position: relative;
+  padding-bottom: 55px;
+  background: url("../../assets/img/login-bg-layer.png")center bottom no-repeat;
+  .login-form-container {
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(1, 1, 1, 0.12);
+    border-radius: 4px;
+    padding: 60px;
+    .login-form-header{
+      display: block;
+      margin-bottom: 30px;
+      .text-tit-small{
+        display: block;
+        color: #393e46;
+        opacity: 0.54;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-family: "Oswald",sans-serif;
+        font-weight: bold;
+      }
+      .text-tit-big{
+        display: block;
+        color: #393e46;
+        text-transform: uppercase;
+        font-size: 36px;
+        font-family: "Oswald",sans-serif;
+        font-weight: bold;
+      }
+    }
+    .text-note{
+      display: block;
+      color: #393e46;
+      font-size: 14px;
+      font-family: "Roboto",sans-serif;
+      margin-bottom: 30px;
+    }
+    .login-form-content {
+      .lab-text{
+        display: block;
+        color: #a0a0a0;
+        font-size: 14px;
+        font-family: "Roboto",sans-serif;
+        margin-bottom: 10px;
+      }
+      .ant-form {
+        padding: 0;
+        background: #ffffff;
+        .ant-input {
+          border:1px solid #d4d4d4 !important;
+          color: #393e46 !important;
+          padding: 0 30px;
+          background: #ffffff;
+          width: 310px;
+          border-radius: 2px;
+
+        }
+      }
+      .ant-checkbox {
+        .ant-checkbox-inner{
+          background-color: #ffffff;
+          border-color: #d4d4d4;
+          height: 24px;
+          width: 24px;
+          line-height: 24px;
+          border-radius: 2px;
+          margin-right: 10px;
+        }
+      }
+      .ant-checkbox-checked .ant-checkbox-inner{
+        height: 24px;
+        width: 24px;
+        border-radius: 2px;
+        background: #00adb5;
+        border-color: #00adb5;
+
+      }
+      .ant-checkbox-inner:after{
+        left: 8px;
+        top: 4px;
+        width: 6px;
+        height: 11px;
+      }
+      .ant-checkbox-checked:after{
+        border:none;
+      }
+      .ant-checkbox-wrapper + span, .ant-checkbox + span{
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 14px;
+        font-family: "Roboto",sans-serif;
+        color:#393e46;
+        font-weight: 400;
+      }
+      .login-form-forgot{
+        margin-left: 75px;
+        font-size: 14px;
+        font-family: "Roboto",sans-serif;
+        color:#393e46;
+      }
+      .form-group{
+        width: 310px;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 30px;
+        position: relative;
+        button{
+          border: 1px solid #00adb5;
+          background-color: #00adb5;
+          border-radius: 2px;
+          height: 40px;
+          padding: 0 10px;
+          width: 100%;
+          line-height: 40px;
+          color: #fafafa;
+          font-family: "Roboto",sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: 0.1 all ease;
+        }
+        &:hover{
+          button{
+            background: #fafafa;
+            color: #00adb5;
+            border-color: #00adb5;
+          }
+
+        }
+      }
+      .stroke-btn-40{
+        width: 310px;
+        border: 1px solid #d4d4d4;
+        background-color: #ffffff;
+        border-radius: 2px;
+        height: 40px;
+        padding: 0 10px;
+        line-height: 40px;
+        color: #393e46;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      .register-btn {
+        margin-top: -24px;
+      }
+    }
+    .bg-form-ic-wpman{
+      background: url("../../assets/img/login-ic-woman.png") center no-repeat;
+      background-size: contain;
+    }
+  }
+}

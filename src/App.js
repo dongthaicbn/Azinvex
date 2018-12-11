@@ -10,6 +10,7 @@ import Navigation from './views/components/Navigation/Navigation';
 import ScrollBar from './views/components/ScrollBar/ScrollBar';
 import LandingPage from './views/pageLanding/Landing';
 import LoginPage from './views/pageLogin/Login';
+import Forgot from './views/pageLogin/Forgot';
 import Header from './views/components/Header/Header';
 import Loading from './views/components/Loading/Loading';
 import Register from './views/pageRegister/Register';
@@ -87,13 +88,15 @@ class App extends React.Component {
     if (!isLoaded) {
       return <Loading />
     } else {
-      if(isAuthenticated && (location.type === routes.ROUTE_LOGIN || location.type === routes.ROUTE_REGISTER)) {
+      if(isAuthenticated && (location.type === routes.ROUTE_FORGOT || location.type === routes.ROUTE_LOGIN || location.type === routes.ROUTE_REGISTER)) {
         this.props.actionNavigateTo(routes.ROUTE_HOME);
         return null;
       }
       switch (location.type) {
         case routes.ROUTE_LOGIN:
           return <LoginPage />;
+          case routes.ROUTE_FORGOT:
+          return <Forgot />;       
         case routes.ROUTE_REGISTER:
           return <Register />;
         case routes.ROUTE_ERROR_403:

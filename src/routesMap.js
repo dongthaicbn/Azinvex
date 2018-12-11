@@ -64,6 +64,10 @@ const routesMap = {
     path: '/login',
     thunk: combineThunks()
   },
+  '@route/FORGOT': {
+    path: '/forgot',
+    thunk: combineThunks()
+  },
   '@route/ERROR_403': '/403'
 };
 export default routesMap;

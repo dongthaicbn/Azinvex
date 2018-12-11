@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
 
 export const register = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
-  const {email, displayName, password, phone, prefix} = user
+  const { email, displayName, password, phone, prefix } = user
   const firebase = getFirebase();
   const firestore = getFirestore();
   dispatch(asyncActionStart());
@@ -13,7 +13,7 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
     await createdUser.updateProfile({ displayName })
     // create a new profile in firestore
     let newUser = {
-      displayName, email, 
+      displayName, email,
       role: "member",
       followerCount: 0,
       followedCount: 0,
@@ -21,11 +21,11 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
       totalpips: 0,
       signalWin: 0,
       signalLoss: 0,
-      information:{phone},
+      information: { phone },
       photoURL: "/assets/user.png",
       createdAt: firestore.FieldValue.serverTimestamp()
     }
-    await firestore.set(`users/${createdUser.uid}`, {...newUser})
+    await firestore.set(`users/${createdUser.uid}`, { ...newUser })
     toastr.success('Success', 'Đăng ký thành công')
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -37,19 +37,30 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
 export const login = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   dispatch(asyncActionStart());
-  firebase.auth().signInWithEmailAndPassword(user.username, user.password)
-  .then(firebaseUser => {
-    toastr.success('Success', 'Đăng nhập thành công')
-    window.location.href = '#/';
+  firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+    .then(firebaseUser => {
+      toastr.success('Success', 'Đăng nhập thành công')
+      window.location.href = '#/';
+      dispatch(asyncActionFinish());
+    })
+    .catch(error => {
+      toastr.error('Error', error.message)
+      dispatch(asyncActionError());
+    })
+
+};
+export const forgot = email => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firebase = getFirebase();
+  dispatch(asyncActionStart());
+  firebase.auth.sendPasswordResetEmail(email).then(function () {
+    toastr.success('Success', 'Đã gửi thông tin reset mật khẩu về mail của bạn!')
+    window.location.href = '#/login';
     dispatch(asyncActionFinish());
-   })
-  .catch(error => {
+  }).catch(function (error) {
     toastr.error('Error', error.message)
     dispatch(asyncActionError());
-  })
-  
+  });
 };
-
 export const updatePassword = (creds) =>
   async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
@@ -67,6 +78,6 @@ export const updatePassword = (creds) =>
 
 export const deleteComment = (commandId) => {
   async (dispatch, getState, { getFirebase, getFirestore }) => {
-    
+
   }
 }

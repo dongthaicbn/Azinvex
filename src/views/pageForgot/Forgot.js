@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { login } from '../../reduxModules/auth/authAction';
-import './Login.scss';
+import { forgot } from '../../reduxModules/auth/authAction';
+import './Forgot.scss';
 /* eslint-disable */
-class Login extends Component {
+class Forgot extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => { 
       if (!err) {
-        this.props.login({ username: values.userName, password: values.password });
+        this.props.forgot(values.email);
         this.props.form.resetFields();
       }
     });
@@ -34,34 +34,20 @@ class Login extends Component {
                     <span className="lab-text">Email</span>
                     <Form.Item>
                       {getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your Email!' }]
+                        rules: [{ required: true, message: 'Please input your email!' }]
                       })(
                         <Input prefix={<Icon type="user"/>} placeholder="Email"/>
                       )}
                     </Form.Item>
-                    <span className="lab-text">Password</span>
+                    
                     <Form.Item>
-                      {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }]
-                      })(
-                        <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password" />
-                      )}
-                    </Form.Item>
-                    <Form.Item>
-                      {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true
-                      })(
-                        <Checkbox>Ghi nhớ</Checkbox>
-                      )}
-                      <a className="login-form-forgot" href="#/forgot"><span>Quên mật khẩu ?</span></a>
                       <div className="form-group">
-                        <Button htmlType="submit" className="login-form-button">Đăng nhập</Button>
+                        <Button htmlType="submit" className="login-form-button">Submit</Button>
                       </div>
                     </Form.Item>
                   </Form>
                   <div className="register-btn">
-                    <button className="stroke-btn-40" onClick={() => window.location.href = '#/register'}>Đăng ký</button>
+                    <button className="stroke-btn-40" onClick={() => window.location.href = '#/login'}>Đăng nhập</button>
                   </div>
                 </div>
               </div>
@@ -81,7 +67,7 @@ export default compose(
       loading: state.async.loading,
     }),
     {
-      login
+      forgot
     }
   )
-)(Form.create()(Login))
+)(Form.create()(Forgot))

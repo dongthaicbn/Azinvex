@@ -1,6 +1,7 @@
 export const ROUTE_HOME = '@route/HOME';
 
 export const ROUTE_LOGIN = '@route/LOGIN';
+export const ROUTE_FORGOT = '@route/FORGOT';
 export const ROUTE_REGISTER = '@route/REGISTER';
 export const ROUTE_LOGOUT = '@route/LOGOUT';
 export const ROUTE_TIMEOUT = '@route/TIMEOUT';
