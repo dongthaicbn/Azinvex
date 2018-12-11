@@ -52,7 +52,7 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
 export const forgot = email => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   dispatch(asyncActionStart());
-  firebase.auth.sendPasswordResetEmail(email).then(function () {
+  firebase.auth().sendPasswordResetEmail(email).then(function () {
     toastr.success('Success', 'Đã gửi thông tin reset mật khẩu về mail của bạn!')
     window.location.href = '#/login';
     dispatch(asyncActionFinish());
