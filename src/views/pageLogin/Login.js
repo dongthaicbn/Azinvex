@@ -11,7 +11,7 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => { 
       if (!err) {
-        this.props.login({ username: values.userName, password: values.password });
+        this.props.login({ email: values.email, password: values.password });
         this.props.form.resetFields();
       }
     });
