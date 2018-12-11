@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
 import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
-// import './Signal.scss';
+import './Signal.scss';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
 import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
 
