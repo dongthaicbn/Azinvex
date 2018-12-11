@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
 import moment from 'moment';
+import { compose } from 'recompose';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
+import localize from '../../utils/hocs/localize';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
 import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
 
@@ -119,23 +121,24 @@ class Signal extends Component {
       }
     );
   }
-  getCommand(signal) {
+  getCommand = signal => {
     const { command } = signal;
+    const { t } = this.props;
     switch (command) {
       case 0:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Mở lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} với stoploss ${signal.stoploss} và takeprofit ${signal.takeprofit}`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_OPEN')} ${this.getTypeSignal(signal.type).toLowerCase()} ${signal.symbol} ${t('IDS_AT')} ${signal.openPrice} sl: ${signal.stoploss} tp: ${signal.takeprofit}`;
       case 1:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đóng lệnh tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_CLOSE')} ${t('IDS_AT')} ${signal.closePrice} ${t('IDS_PROFIT')} ${signal.profit} pips`;
       case 2:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Hủy lệnh `;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_CANCELLED')} `;
       case 3:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đã khớp lệnh tại ${signal.openPrice}`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_ACTIVE')} ${t('IDS_AT')} ${signal.openPrice}`;
       case 4:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời stoploss ${signal.oldSL} -> ${signal.newSL}`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} stoploss ${signal.oldSL} -> ${signal.newSL}`;
       case 5:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
       case 6:
-        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Thay đổi giá mở cửa ${signal.oldOP} -> ${signal.newOP}`;
+        return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} ${t('IDS_OPEN_PRICE').toLowerCase()} ${signal.oldOP} -> ${signal.newOP}`;
       default:
         break;
     }
@@ -146,7 +149,7 @@ class Signal extends Component {
   }
   render() {
     const { itemSignalActive, visibleModal } = this.state;
-    const { activeSignals, pendingSignals, signalLog } = this.props;
+    const { activeSignals, pendingSignals, signalLog, t } = this.props;
     const list = activeSignals.concat(pendingSignals);
     const columns = [
       {
@@ -156,7 +159,7 @@ class Signal extends Component {
         key: 'id'
       },
       {
-        title: 'Loại lệnh',
+        title: t("IDS_TYPE_COMMAND"),
         dataIndex: 'type',
         key: 'type',
         align: 'center',
@@ -168,36 +171,36 @@ class Signal extends Component {
         )
       },
       {
-        title: 'Cặp tiền',
+        title: t("IDS_SYMBOL"),
         dataIndex: 'symbol',
         key: 'symbol',
         render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>
       },
       {
-        title: 'Giá mở cửa',
+        title: t("IDS_OPEN_PRICE"),
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
-        title: 'Thời gian vào',
+        title: t("IDS_CREATE_TIME"),
         dataIndex: 'startAt',
         render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
         key: 'startAt'
       },
       {
-        title: 'Chốt lời',
+        title: t("IDS_TAKEPROFIT"),
         dataIndex: 'takeprofit',
         render: takeprofit => <strong style={{ color: 'green' }}>{takeprofit}</strong>,
         key: 'takeprofit'
       },
       {
-        title: 'Cắt lỗ',
+        title: t("IDS_STOPLOSS"),
         dataIndex: 'stoploss',
         key: 'stoploss',
         render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>
       },
       {
-        title: 'Trạng thái',
+        title: t("IDS_STATUS"),
         dataIndex: 'status',
         render: status => (status === 'pending' ?
           <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> :
@@ -205,16 +208,16 @@ class Signal extends Component {
         )
       },
       {
-        title: <span>Hành động</span>,
+        title: t("IDS_ACTION"),
         dataIndex: 'id',
-        render: ticket => <div><Button onClick={() => this.detail(ticket)} type="primary" className="follow-btn">Chi tiết</Button> <FollowButton followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={ticket} /></div>,
+        render: ticket => <div><Button onClick={() => this.detail(ticket)} type="primary" className="follow-btn">{t("IDS_DETAIL")}</Button> <FollowButton t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={ticket} /></div>,
         key: 'follow'
       },
     ];
     return (
       <div className="signal-container">
         <div className="manage-left-container">
-          <p className="header-manage-box">Danh sách chuyên gia</p>
+          <p className="header-manage-box">{t('IDS_LIST_EXPERTS')}</p>
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
@@ -227,7 +230,7 @@ class Signal extends Component {
                     disabled={this.isSelected(item.followedId)}
                     onClick={() => this.selectExpert(item.followedId)}
                   >
-                    {this.isSelected(item.followedId) ? 'Đang xem' : 'Xem'}
+                    {this.isSelected(item.followedId) ? t('IDS_WATCHING') : t('IDS_WATCH')}
                   </Button>
                 ]}
               >
@@ -240,7 +243,7 @@ class Signal extends Component {
           />
         </div>
         <div className="manage-right-container">
-          <p className="header-manage-box">Danh sách tín hiệu</p>
+          <p className="header-manage-box">{t('IDS_ACTIVE_COMMAND')}</p>
           <Table
             dataSource={list}
             bordered
@@ -249,7 +252,7 @@ class Signal extends Component {
           />
         </div>
         <Modal
-          title="CHI TIẾT TÍN HIỆU"
+          title={t('IDS_DETAIL_SIGNAL')}
           visible={visibleModal}
           centered
           onOk={this.handleOkModal}
@@ -267,7 +270,7 @@ class FollowButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFollowed: false,
+      isFollowed: null,
       ticket: null
     };
   }
@@ -287,19 +290,19 @@ class FollowButton extends Component {
   }
   render() {
     const { isFollowed } = this.state;
-    const { ticket } = this.props;
+    const { ticket, t } = this.props;
     return (
       <span>
         {
           !isFollowed ?
-          <Button onClick={() => this.follow(ticket)} type="primary" className="follow-btn">Theo dõi</Button> :
-          <Button onClick={() => this.unfollow(ticket)} type="default" className="follow-btn">Bỏ theo dõi</Button>
+          <Button loading={isFollowed==null} onClick={() => this.follow(ticket)} type="primary" className="follow-btn">{t("IDS_FOLLOW")}</Button> :
+          <Button loading={isFollowed==null} onClick={() => this.unfollow(ticket)} type="default" className="follow-btn">{t("IDS_UN_FOLLOW")}</Button>
         }
       </span>
     )
   }
 }
-export default connect(
+export default compose(connect(
   state => ({
     followedExperts: state.firestore.ordered.followedExperts,
     activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
@@ -313,4 +316,4 @@ export default connect(
     unfollowSignal,
     isFollowedSignal
   }
-)(withFirestore(Signal));
+),localize)(withFirestore(Signal));

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Input, Icon, Form, Button } from 'antd';
+import { Card, Input, Icon, Form } from 'antd';
 import { withFirestore } from 'react-redux-firebase';
 import firebase from './../../../utils/redux/configureFirebase';
-
 import '../ExpertDetail.scss';
-import avatarUser from '../../../assets/user.png';
-
 
 /*eslint-disable*/
-const Search = Input.Search;
 class Post extends Component {
   constructor(props) {
     super(props);

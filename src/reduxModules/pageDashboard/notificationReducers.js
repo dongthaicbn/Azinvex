@@ -2,26 +2,19 @@ import { createReducer } from './../../utils/helpers/reducerUtil';
 import { CREATE_EVENT, DELETE_EVENT, UPDATE_EVENT, FETCH_EVENTS } from './notificationConstants';
 
 const initialState = [];
-export const createEvent = (state, payload) => {
-  return [...state, Object.assign({}, payload.event)];
-};
+export const createEvent = (state, payload) => [...state, Object.assign({}, payload.event)];
 
-export const updateEvent = (state, payload) => {
-  return [
-    ...state.filter(event => event.id !== payload.event.id),
-    Object.assign({}, payload.event)
-  ];
-};
+export const updateEvent = (state, payload) => [
+  ...state.filter(event => event.id !== payload.event.id),
+  Object.assign({}, payload.event)
+];
 
-export const deleteEvent = (state, payload) => {
-  return [
-    ...state.filter(event => event.id !== payload.eventId)
-  ];
-};
+export const deleteEvent = (state, payload) => [
+  ...state.filter(event => event.id !== payload.eventId)
+];
 
-export const fetchEvents = (state, payload) => {
-  return payload.events;
-};
+
+export const fetchEvents = (state, payload) => payload.events;
 
 export default createReducer(initialState, {
   [CREATE_EVENT]: createEvent,

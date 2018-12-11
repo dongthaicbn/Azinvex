@@ -4,9 +4,7 @@ import combineThunks from './utils/redux/combineThunks';
 const routesMap = {
   '@route/HOME': {
     path: '/',
-    thunk: combineThunks(
-      // actionFetchHomeData()
-    )
+    thunk: combineThunks() // actionFetchHomeData()
   },
   '@route/REGISTER': {
     path: '/register',

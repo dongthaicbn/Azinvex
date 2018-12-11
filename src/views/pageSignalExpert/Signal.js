@@ -9,7 +9,6 @@ import { listenExperts, unlistenExperts } from './../../reduxModules/expert/expe
 class Signal extends Component {
   state={
     selectedExpert: undefined,
-    itemSignalActive: {},
     visibleModal: false
   }
   componentDidMount() {
@@ -29,9 +28,8 @@ class Signal extends Component {
       storeAs: 'pendingSignals'
     });
   }
-  isSelected = expertId => {
-    return this.state.selectedExpert === expertId;
-  }
+  isSelected = expertId => this.state.selectedExpert === expertId;
+
   selectExpert = async expertId => {
     const { firestore } = this.props;
     if (this.state.selectedExpert) {
@@ -58,9 +56,7 @@ class Signal extends Component {
     });
     this.setState({ selectedExpert: expertId });
   }
-  capitalizeFirstLetter = string => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
   handleOkModal = () => {
     this.setState({ visibleModal: false });
   }
@@ -105,15 +101,13 @@ class Signal extends Component {
   };
   getSignalLog = ticket => {
     const { firestore } = this.props;
-    firestore.get(
-      {
-        collection: 'signals',
-        doc: ticket,
-        orderBy: 'createAt',
-        subcollections: [{ collection: 'logs' }],
-        storeAs: 'signalLog'
-      }
-    );
+    firestore.get({
+      collection: 'signals',
+      doc: ticket,
+      orderBy: 'createAt',
+      subcollections: [{ collection: 'logs' }],
+      storeAs: 'signalLog'
+    });
   }
   getCommand(signal) {
     const { command } = signal;
@@ -137,7 +131,7 @@ class Signal extends Component {
     }
   }
   render() {
-    const { itemSignalActive, visibleModal } = this.state;
+    const { visibleModal } = this.state;
     const { activeSignals, pendingSignals, signalLog } = this.props;
     const list = activeSignals.concat(pendingSignals);
     const columns = [
@@ -244,14 +238,13 @@ class Signal extends Component {
             bordered
             columns={columns}
             scroll={{ x: 1000, y: 800 }}
-            onRow={record => {
-              return {
+            onRow={record => ({
                 onClick: () => {
-                  this.setState({ visibleModal: true, itemSignalActive: { ...record } });
+                  this.setState({ visibleModal: true });
                   this.getSignalLog(record.id);
                 }
-              };
-            }}
+              })
+            }
           />
         </div>
         <Modal
@@ -273,9 +266,15 @@ class Signal extends Component {
 export default connect(
   state => ({
     experts: state.firestore.ordered.experts,
-    activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
-    pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : [],
-    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
+    activeSignals: state.firestore.ordered.selectedActiveSignals
+      ? state.firestore.ordered.selectedActiveSignals
+      : [],
+    pendingSignals: state.firestore.ordered.selectedPendingSignals
+      ? state.firestore.ordered.selectedPendingSignals
+      : [],
+    signalLog: state.firestore.ordered.signalLog
+      ? state.firestore.ordered.signalLog
+      : []
   }),
   {
     listenExperts,

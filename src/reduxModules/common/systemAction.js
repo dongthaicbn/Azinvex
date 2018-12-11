@@ -1,9 +1,17 @@
-import { SET_LANGUAGE_ON_MOUNT, SET_SHOW_TOAST, HIDE_TOAST } from '../../utils/constants/actionTypes';
+import {
+  SET_LANGUAGE_ON_MOUNT,
+  SET_SHOW_TOAST,
+  HIDE_TOAST
+} from '../../utils/constants/actionTypes';
 
 const TOAST_DURATION = 3000;
 let timeoutToast = null;
 
-export const actionSetLanguageOnMount = (languageCode, languageTrans, isRTL = false) => async dispatch => {
+export const actionSetLanguageOnMount = (
+  languageCode,
+  languageTrans,
+  isRTL = false
+) => async dispatch => {
   dispatch({
     type: SET_LANGUAGE_ON_MOUNT,
     payload: {

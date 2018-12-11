@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './Support.scss';
 
 class Support extends Component {
@@ -18,11 +17,4 @@ class Support extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    // state redux
-  }),
-  {
-    // action
-  }
-)(Support);
+export default Support;

@@ -28,6 +28,28 @@ class Timeline extends Component {
         break;
     }
   }
+  getCommand = signal => {
+    const { command } = signal;
+    const { t } = this.props;
+    switch (command) {
+      case 0:
+        return `${t('IDS_ORDER_OPEN')} ${this.getTypeSignal(signal.type)} ${signal.symbol} ${t('IDS_AT')} ${signal.openPrice} sl: ${signal.stoploss} tp: ${signal.takeprofit}`;
+      case 1:
+        return `${t('IDS_ORDER_CLOSE')} ${this.getTypeSignal(signal.type)} ${signal.symbol}  ${t('IDS_AT')} ${signal.closePrice} ${t('IDS_PROFIT')} ${signal.profit} pips`;
+      case 2:
+        return `${t('IDS_CANCELLED')} ${this.getTypeSignal(signal.type)} ${signal.symbol}`;
+      case 3:
+        return `${t('IDS_ORDER')} ${this.getTypeSignal(signal.type)} ${signal.symbol}  ${t('IDS_ORDER_ACTIVE')} ${t('IDS_AT')} ${signal.openPrice}`;
+      case 4:
+        return `${t('IDS_ORDER')} ${this.getTypeSignal(signal.type)} ${signal.symbol} ${t('IDS_MOVE')} stoploss ${signal.oldSL} -> ${signal.newSL}`;
+      case 5:
+        return `${t('IDS_ORDER')} ${this.getTypeSignal(signal.type)} ${signal.symbol}  ${t('IDS_MOVE')} takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+      case 6:
+        return `${t('IDS_ORDER')} ${this.getTypeSignal(signal.type)} ${signal.symbol}  ${t('IDS_MOVE')} ${t('IDS_OPEN_PRICE').toLowerCase()} ${signal.oldOP} -> ${signal.newOP}`;
+      default:
+        break;
+    }
+  }
   getTypeSignal(type) {
     switch (type) {
       case "0":
@@ -83,6 +105,7 @@ class Timeline extends Component {
           <Table
             dataSource={timelineContent}
             bordered
+            rowKey="ticket"
             loading={loading}
             footer={() => (
               <Button

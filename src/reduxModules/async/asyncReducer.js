@@ -5,17 +5,11 @@ const initialState = {
   loading: false
 };
 
-export const asyncActionStarted = state => {
-  return { ...state, loading: true };
-};
+export const asyncActionStarted = state => ({ ...state, loading: true });
 
-export const asyncActionFinished = state => {
-  return { ...state, loading: false };
-};
+export const asyncActionFinished = state => ({ ...state, loading: false });
 
-export const asyncActionError = state => {
-  return { ...state, loading: false };
-};
+export const asyncActionError = state => ({ ...state, loading: false });
 
 export default createReducer(initialState, {
   [ASYNC_ACTION_START]: asyncActionStarted,

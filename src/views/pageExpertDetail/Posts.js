@@ -4,7 +4,6 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Card, Button, Icon, Modal, Form, Input, Upload, message } from 'antd';
 import './ExpertDetail.scss';
-import example from '../../assets/example.jpg';
 import Post from './ExpertDetailComponent/Post';
 import { addPost, listenPost, unlistenPost } from './../../reduxModules/expert/expertActions';
 

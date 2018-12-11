@@ -170,7 +170,7 @@ class Information extends Component {
             </div>
             <div className="card-info-contain">
               <p className="title-input-profile">
-                <span className="first-title">Họ và tên</span>
+                <span className="first-title">{t('IDS_DISPLAYNAME')}</span>
                 &nbsp;
                 <Tooltip title='Tên hiển thị trên hệ thống.'>
                   <Icon
@@ -229,20 +229,20 @@ class Information extends Component {
                 initialValue: profile.information ? profile.information.address : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
-              <p className="title-input-profile"><b>Nghề nghiệp</b></p>
+              <p className="title-input-profile"><b>{t('IDS_OCCUPATION')}</b></p>
               <Form.Item>
               {getFieldDecorator('information.occupation', {
                 initialValue: profile.information ? profile.information.occupation : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
-              <p className="title-input-profile"><b>Quê quán</b></p>
+              <p className="title-input-profile"><b>{t('IDS_BIRTHPLACE')}</b></p>
               <Form.Item>
               {getFieldDecorator('information.birthplace', {
                 initialValue: profile.information ? profile.information.birthplace : ''
                 })(<Input disabled={!isEdit} />)}
               </Form.Item>
               <p className="title-input-profile">
-                <b>Kinh nghiệm giao dịch</b>
+                <b>{t('IDS_EXPERIENCE')}</b>
               </p>
               <Form.Item>
               {getFieldDecorator('information.experience', {

@@ -5,22 +5,19 @@ import firebase from './../../utils/redux/configureFirebase';
 export const listenExperts = () =>
   (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    firestore.setListener(
-      {
-        collection: 'users',
-        where: ['role', '==', 'expert'],
-        storeAs: 'experts'
-      }
-    );
+    firestore.setListener({
+      collection: 'users',
+      where: ['role', '==', 'expert'],
+      storeAs: 'experts'
+    });
   };
 export const unlistenExperts = () =>
   (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    firestore.unsetListener(
-      {
-        collection: 'users',
-        where: ['role', '==', 'expert']
-      });
+    firestore.unsetListener({
+      collection: 'users',
+      where: ['role', '==', 'expert']
+    });
   };
 /* eslint-disable */
 export const getSignalHistory = (lastSignalHistory, eid) => async (dispatch, getState, { getFirebase, getFirestore }) => {

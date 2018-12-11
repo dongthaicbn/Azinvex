@@ -62,22 +62,18 @@ export const listenFollowedExpert = () =>
   async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     const currentUser = getState().firebase.auth;
-    firestore.setListener(
-      {
-        collection: 'relationships',
-        where: ['followerId', '==', currentUser.uid],
-        storeAs: 'followedExperts'
-      }
-    );
+    firestore.setListener({
+      collection: 'relationships',
+      where: ['followerId', '==', currentUser.uid],
+      storeAs: 'followedExperts'
+    });
   };
 export const unlistenFollowedExpert = () =>
   async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     const currentUser = getState().firebase.auth;
-    firestore.unsetListener(
-      {
-        collection: 'relationships',
-        where: ['followerId', '==', currentUser.uid]
-      }
-    );
+    firestore.unsetListener({
+      collection: 'relationships',
+      where: ['followerId', '==', currentUser.uid]
+    });
   };

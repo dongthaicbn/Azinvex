@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Form, Card, Button, Input, DatePicker, Table, Modal } from 'antd';
 import './ExpertDetail.scss';
 import { getSignalHistory } from './../../reduxModules/expert/expertActions';
+import localize from '../../utils/hocs/localize';
 
 /* eslint-disable */
 class History extends Component {
@@ -132,23 +133,24 @@ getTypeSignal = type => {
       return true;
   }
 };
-getCommand(signal) {
+getCommand = signal => {
   const { command } = signal;
+  const { t } = this.props;
   switch (command) {
     case 0:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Mở lệnh ${this.getTypeSignal(signal.type)} ${signal.symbol} tại ${signal.openPrice} với stoploss ${signal.stoploss} và takeprofit ${signal.takeprofit}`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_OPEN')} ${this.getTypeSignal(signal.type).toLowerCase()} ${signal.symbol} ${t('IDS_AT')} ${signal.openPrice} sl: ${signal.stoploss} tp: ${signal.takeprofit}`;
     case 1:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đóng lệnh tại ${signal.closePrice} lợi nhuận ${signal.profit} pips`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_CLOSE')} ${t('IDS_AT')} ${signal.closePrice} ${t('IDS_PROFIT')} ${signal.profit} pips`;
     case 2:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Hủy lệnh `;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_CANCELLED')} `;
     case 3:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Đã khớp lệnh tại ${signal.openPrice}`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_ORDER_ACTIVE')} ${t('IDS_AT')} ${signal.openPrice}`;
     case 4:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời stoploss ${signal.oldSL} -> ${signal.newSL}`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} stoploss ${signal.oldSL} -> ${signal.newSL}`;
     case 5:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Dời takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} takeprofit  ${signal.oldTP} -> ${signal.newTP}`;
     case 6:
-      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] Thay đổi giá mở cửa ${signal.oldOP} -> ${signal.newOP}`;
+      return `[${moment(signal.createAt).format('HH:mm DD/MM/YYYY')}] ${t('IDS_MOVE')} ${t('IDS_OPEN_PRICE').toLowerCase()} ${signal.oldOP} -> ${signal.newOP}`;
     default:
       break;
   }
@@ -160,6 +162,7 @@ handleCancelModal = () => {
   this.setState({ visibleModal: false });
 }
   render() {
+    const { t, signalLog } = this.props;
     const columns = [
       {
         title: 'Ticket',
@@ -212,7 +215,6 @@ handleCancelModal = () => {
     ];
     const { getFieldDecorator } = this.props.form;
     const { visibleModal } = this.state
-    const { signalLog } = this.props
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -329,5 +331,6 @@ export default compose(
   connect(
     mapStateToProps,
     {getSignalHistory}
-  )
+  ),
+  localize
 )(Form.create()(withFirestore(History)))
