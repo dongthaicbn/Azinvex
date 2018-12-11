@@ -9,7 +9,7 @@ import './Signal.scss';
 import localize from '../../utils/hocs/localize';
 import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
 import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
-
+import FollowButton from '../components/FollowButton/FollowButton'
 import avatarDefault from '../../assets/user.png';
 
 class Signal extends Component {
@@ -209,8 +209,8 @@ class Signal extends Component {
       },
       {
         title: t("IDS_ACTION"),
-        dataIndex: 'id',
-        render: ticket => <div><Button onClick={() => this.detail(ticket)} type="primary" className="follow-btn">{t("IDS_DETAIL")}</Button> <FollowButton t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={ticket} /></div>,
+        dataIndex: 'signal',
+        render: (text, signal) => <div><Button onClick={() => this.detail(signal.id)} type="primary" className="follow-btn">Chi tiết</Button> <FollowButton signal={signal} t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={signal.id} /></div>,
         key: 'follow'
       },
     ];
@@ -247,6 +247,7 @@ class Signal extends Component {
           <Table
             dataSource={list}
             bordered
+            rowKey="id"
             columns={columns}
   
           />
@@ -259,47 +260,11 @@ class Signal extends Component {
           onCancel={this.handleCancelModal}
         >
           <ul>
-            {signalLog.map(e => <li><b>{this.getCommand(e)}</b></li>)}
+            {signalLog.map(e => <li key={e.id}><b>{this.getCommand(e)}</b></li>)}
           </ul>
         </Modal>
       </div>
     );
-  }
-}
-class FollowButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFollowed: null,
-      ticket: null
-    };
-  }
-
-  async componentDidMount() {
-    this.setState({ isFollowed: await this.props.isFollowedSignal(this.props.ticket) });
-  }
-  follow(ticket) {
-    const { followSignal } = this.props;
-    followSignal(ticket);
-    this.setState({ isFollowed: true })
-  }
-  unfollow(ticket) {
-    const { unfollowSignal } = this.props;
-    unfollowSignal(ticket)
-    this.setState({ isFollowed: false })
-  }
-  render() {
-    const { isFollowed } = this.state;
-    const { ticket, t } = this.props;
-    return (
-      <span>
-        {
-          !isFollowed ?
-          <Button loading={isFollowed==null} onClick={() => this.follow(ticket)} type="primary" className="follow-btn">{t("IDS_FOLLOW")}</Button> :
-          <Button loading={isFollowed==null} onClick={() => this.unfollow(ticket)} type="default" className="follow-btn">{t("IDS_UN_FOLLOW")}</Button>
-        }
-      </span>
-    )
   }
 }
 export default compose(connect(
