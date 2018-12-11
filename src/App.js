@@ -10,7 +10,7 @@ import Navigation from './views/components/Navigation/Navigation';
 import ScrollBar from './views/components/ScrollBar/ScrollBar';
 import LandingPage from './views/pageLanding/Landing';
 import LoginPage from './views/pageLogin/Login';
-import Forgot from './views/pageLogin/Forgot';
+import Forgot from './views/pageForgot/Forgot';
 import Header from './views/components/Header/Header';
 import Loading from './views/components/Loading/Loading';
 import Register from './views/pageRegister/Register';
