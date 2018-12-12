@@ -108,7 +108,7 @@ class Posts extends Component {
 
         <p className="header-card">User Timeline </p>
         <div className="post-container">
-        {expertPosts.map((e,i) =>  <Post profileUser={this.props.profileUser} expertDetail={this.props.expertDetail} postId={e.id} header={e.title} date={moment(e.createdAt.seconds*1000).format('HH:mm DD/MM/YYYY')}>
+        {expertPosts.map((e,i) =>  <Post key={i} profileUser={this.props.profileUser} expertDetail={this.props.expertDetail} postId={e.id} header={e.title} date={moment(e.createdAt.seconds*1000).format('HH:mm DD/MM/YYYY')}>
     {e.photo && <img src={e.photo} className="image-container" /> }
             <p className="content-post-description">
              {e.content}

@@ -20,11 +20,11 @@ class Information extends Component {
               <p className="sub-text-item">{expertDetail.information && new Date(expertDetail.birthday).toLocaleDateString('en-GB')}</p>
             </div>
             <div className="item-container">
-              <p className="text-item"><a><b>Quê quán</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_BIRTHPLACE')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.birthplace}</p>
             </div>
             <div className="item-container">
-              <p className="text-item"><a><b>Sống tại</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_ADDRESS')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.address}</p>
             </div>
           </div>
@@ -52,11 +52,11 @@ class Information extends Component {
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.phone}</p>
             </div>
             <div className="item-container">
-              <p className="text-item"><a><b>Nghề nghiệp</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_OCCUPATION')}</b></a></p>
               <p className="sub-text-item">{expertDetail.information && expertDetail.information.occupation}</p>
             </div>
             <div className="item-container">
-              <p className="text-item"><a><b>Tham gia ngày</b></a></p>
+              <p className="text-item"><a><b>{t('IDS_JOINED_DATE')}</b></a></p>
               {expertDetail.createdAt &&
               <p className="sub-text-item">{new Date(expertDetail.createdAt.seconds * 1000).toLocaleDateString('en-GB')}</p>
               }

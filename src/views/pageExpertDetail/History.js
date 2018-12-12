@@ -50,7 +50,6 @@ class History extends Component {
         if (!datefixed) end = new Date(Date.now());
         start = start.getTime();
         end = end.getTime();
-        console.log('Received values of form: ', values);
         if (symbol) {
           symbol = symbol.toUpperCase();
           const signalHistoryRef = firestore.collection('signals');
@@ -170,44 +169,44 @@ handleCancelModal = () => {
         key: 'ticket'
       },
       {
-        title: 'Cặp tiền',
+        title: t('IDS_SYMBOL'),
         dataIndex: 'symbol',
         key: 'symbol'
       },
       {
-        title: 'Giá mở cửa',
+        title: t('IDS_OPEN_PRICE'),
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
-        title: 'Stop Loss',
+        title: t('IDS_STOPLOSS'),
         dataIndex: 'stoploss',
         key: 'stoploss'
       },
       {
-        title: 'Take Profit',
+        title: t('IDS_TAKEPROFIT'),
         dataIndex: 'takeprofit',
         key: 'takeprofit'
       },
       {
-        title: 'Thời gian mở',
+        title: t('IDS_OPEN_AT'),
         dataIndex: 'startAt',
         render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
         key: 'startAt'
       },
       {
-        title: 'Giá đóng cửa',
+        title: t('IDS_CLOSE_PRICE'),
         dataIndex: 'closePrice',
         key: 'closePrice'
       },
       {
-        title: 'Thời gian đóng',
+        title: t('IDS_CLOSE_AT'),
         dataIndex: 'closeAt',
         render: closeAt => moment(closeAt).format('HH:mm DD/MM/YYYY'),
         key: 'closeAt'
       },
       {
-        title: 'Kết quả',
+        title: t('IDS_RESULT'),
         dataIndex: 'profit',
         render: profit => profit + ' pips',
         key: 'profit'
@@ -219,14 +218,14 @@ handleCancelModal = () => {
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Card className="card-container">
-            <p className="header-card">Filter tín hiệu</p>
+            <p className="header-card">{t('IDS_FILTER_SIGNAL')}</p>
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
                 <div className="item-container">
-                  <p className="text-item"><a>Tổng số Pips: </a>{this.props.expertDetail.totalpips.toFixed(1)}</p>
+                  <p className="text-item"><a>{t('IDS_TOTAL_PIPS')}: </a>{this.props.expertDetail.totalpips.toFixed(1)}</p>
                 </div>
                 <div className="item-container">
-                  <p className="text-item"><a>Từ ngày</a></p>
+                  <p className="text-item"><a>{t('IDS_FROM')}</a></p>
                   <Form.Item>
                 {getFieldDecorator('dateopened', {})(
                   <DatePicker />
@@ -239,10 +238,10 @@ handleCancelModal = () => {
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
                 <div className="item-container">
-                  <p className="text-item"><a>Số lệnh thắng: </a>{this.props.expertDetail.signalWin}</p>
+                  <p className="text-item"><a>{t('IDS_COUNT_WIN')}: </a>{this.props.expertDetail.signalWin}</p>
                 </div>
                 <div className="item-container">
-                  <p className="text-item"><a>Đến ngày</a></p>
+                  <p className="text-item"><a>{t('IDS_TO')}</a></p>
                   <Form.Item>
                      {getFieldDecorator('datefixed', {})(
                   <DatePicker />
@@ -254,10 +253,10 @@ handleCancelModal = () => {
             <div className="col-12 col-md-6 col-lg-4">
               <div className="column-container">
                 <div className="item-container">
-                  <p className="text-item"><a>Số lệnh thua: </a> {this.props.expertDetail.signalLoss}</p>
+                  <p className="text-item"><a>{t('IDS_COUNT_LOSE')} </a> {this.props.expertDetail.signalLoss}</p>
                 </div>
                 <div className="item-container">
-                  <p className="text-item"><a>Cặp tiền</a></p>
+                  <p className="text-item"><a>{t('IDS_SYMBOL')}</a></p>
                   <Form.Item>
                      {getFieldDecorator('symbol', {})(
                   <Input />
@@ -268,7 +267,7 @@ handleCancelModal = () => {
             </div>
             <div className="group-btn">
               <span>
-                <Button type="primary" htmlType="submit" className="login-form-button">Tìm kiếm</Button>
+                <Button type="primary" htmlType="submit" className="login-form-button">{t('IDS_SEARCH')}</Button>
               </span>
                 <span>
                 <Button onClick={()=>this.reset()} type="danger" className="reset-btn">Reset</Button>
@@ -281,7 +280,7 @@ handleCancelModal = () => {
           {/* <Button type="primary" className="detail-command-btn">
             Form Actions On Top And Bottom Right
           </Button> */}
-          <p className="header-card">Danh sách tín hiệu</p>
+          <p className="header-card">{t('IDS_LIST_SIGNALS')}</p>
           {/* <p>
             To add form actions on top and bottom of the form add a div with.form-actions class to start and end the form. Add.right class to align the form action buttons to right.
           </p> */}
@@ -290,8 +289,9 @@ handleCancelModal = () => {
             dataSource={!this.state.isFilter ? this.state.loadedEvents : this.state.filterSignals}
             bordered
             loading={this.props.loading}
-            footer={() => <Button disabled={!this.state.moreEvents} onClick={()=>this.getNextEvents()} type="primary" className="detail-btn">Tải thêm</Button>}
+            footer={() => <Button disabled={!this.state.moreEvents} onClick={()=>this.getNextEvents()} type="primary" className="detail-btn">{t('IDS_LOAD_MORE')}</Button>}
             pagination={false}
+            rowKey="id"
             columns={columns}
             onRow={record => {
               return {
@@ -304,7 +304,7 @@ handleCancelModal = () => {
           />
         </Card>
         <Modal
-          title="CHI TIẾT TÍN HIỆU"
+          title={t('IDS_DETAIL_SIGNAL')}
           visible={visibleModal}
           centered
           onOk={this.handleOkModal}

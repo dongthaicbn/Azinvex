@@ -19,15 +19,16 @@ class SignalRoom extends Component {
       return string.charAt(0).toUpperCase() + string.slice(1);
   };
   getSignalType = string => {
+    const { t } = this.props
     switch (string) {
       case 'pending':
-        return 'Lệnh Chờ';
+        return t('IDS_STATUS_PENDING');
       case 'cancelled':
-        return 'Lệnh Đã Hủy';
+        return t('IDS_STATUS_CANCELLED');
       case 'closed':
-        return 'Lệnh Đã Đóng';
+        return t('IDS_STATUS_CLOSED');
       default:
-        return 'Lệnh Đang Chạy';
+        return t('IDS_STATUS_ACTIVE');
     }
   };
   getTypeSignal = type => {
@@ -109,17 +110,17 @@ class SignalRoom extends Component {
         key: 'type'
       },
       {
-        title: 'Symbol',
+        title: t('IDS_SYMBOL'),
         dataIndex: 'symbol',
         key: 'symbol'
       },
       {
-        title: 'Stoploss',
+        title: t('IDS_STOPLOSS'),
         dataIndex: 'stoploss',
         key: 'stoploss'
       },
       {
-        title: 'Takeprofit',
+        title: t('IDS_TAKEPROFIT'),
         dataIndex: 'takeprofit',
         key: 'takeprofit'
       },
@@ -149,7 +150,7 @@ class SignalRoom extends Component {
       {
         title: t("IDS_ACTION"),
         dataIndex: 'signal',
-        render: (text, signal) => <div><Button onClick={() => this.detail(signal.id)} type="primary" className="follow-btn">Chi tiết</Button> <FollowButton signal={signal} t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={signal.id} /></div>,
+        render: (text, signal) => <div><Button onClick={() => this.detail(signal.id)} type="primary" className="follow-btn">{t('IDS_DETAIL')}</Button> <FollowButton signal={signal} t={t} followSignal={this.props.followSignal} unfollowSignal={this.props.unfollowSignal} isFollowedSignal={this.props.isFollowedSignal}  ticket={signal.id} /></div>,
         key: 'follow'
       },
     ];
