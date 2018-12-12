@@ -34,7 +34,7 @@ class FollowButton extends Component {
         {!isFollowed ? (
           <Button
             loading={isFollowed == null}
-            disabled={signal.status === 'closed'}
+            disabled={signal.status === 'closed' || signal.status === 'cancelled'}
             onClick={() => this.follow(ticket)}
             type="primary"
             className="follow-btn"
@@ -44,7 +44,7 @@ class FollowButton extends Component {
         ) : (
           <Button
             loading={isFollowed === null}
-            disabled={signal.status === 'closed'}
+            disabled={signal.status === 'closed' || signal.status === 'cancelled'}
             onClick={() => this.unfollow(ticket)}
             type="default"
             className="follow-btn"
