@@ -169,32 +169,31 @@ class Dashboard extends Component {
           <Layout.Content>
             <DashboardCard />
             <div className="post-container">
-              <Post header="Bitcoin Panic Selling">
-                <p>BTC/USD, 3D</p>
-                <img src={example} className="image-container" />
-                <div className="pull-right right-text-container">
-                  <span className="right-text-post">12345 {t('IDS_VIEWS')}</span>
-                  <span className="right-text-post">20 giờ trước</span>
+              <div className="card">
+                <div className="card-body">
+                  <div className="card-img">
+                    <img className="card-img-top img-fluid" src="../app-assets/img/photos/14.jpg" alt="Card image cap"/>
+                      <h4 className="card-title">Card title</h4>
+                      <a className="btn btn-floating halfway-fab bg-warning"><i className="ft-plus" /></a>
+                  </div>
+                  <div className="card-block">
+                    Description content for this post.
+                  </div>
                 </div>
-                <div className="post-user-information">
-                  <img src={avatarUser} className="avatar-user-post" />
-                  <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
+              </div>
+
+              <div className="card">
+                <div className="card-body">
+                  <div className="card-img">
+                    <img className="card-img-top img-fluid" src="../app-assets/img/photos/17.jpg" alt="Card image cap"/>
+                      <h4 className="card-title">Card title</h4>
+                      <a className="btn btn-floating halfway-fab bg-warning"><i className="ft-plus" /></a>
+                  </div>
+                  <div className="card-block">
+                    Description content for this post.
+                  </div>
                 </div>
-                Description content for this post.
-              </Post>
-              <Post header="Bitcoin Panic Selling">
-                <p>BTC/USD, 3D</p>
-                <img src={example} className="image-container" />
-                <div className="pull-right right-text-container">
-                  <span className="right-text-post">12345 {t('IDS_VIEWS')}</span>
-                  <span className="right-text-post">20 giờ trước</span>
-                </div>
-                <div className="post-user-information">
-                  <img src={avatarUser} className="avatar-user-post" />
-                  <p className="user-name-text">Username<span className="pro-expert">TOP</span></p>
-                </div>
-                Description content for this post.
-              </Post>
+              </div>
             </div>
             <Timeline
               loading={loading}

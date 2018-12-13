@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, List, Avatar, Button, Modal, Icon } from 'antd';
@@ -7,11 +6,10 @@ import { compose } from 'recompose';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
 import localize from '../../utils/hocs/localize';
-import { listenFollowedExpert, unlistenFollowedExpert } from './../../reduxModules/follow/followActions';
-import { followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
-import FollowButton from '../components/FollowButton/FollowButton'
+import { listenFollowedExpert, unlistenFollowedExpert, followSignal, unfollowSignal, isFollowedSignal } from './../../reduxModules/follow/followActions';
+import FollowButton from '../components/FollowButton/FollowButton';
 import avatarDefault from '../../assets/user.png';
-
+/*eslint-disable*/
 class Signal extends Component {
   state={
     selectedExpert: undefined,
@@ -226,12 +224,23 @@ class Signal extends Component {
               <List.Item
                 key={item.id}
                 actions={[
-                  <Button
-                    disabled={this.isSelected(item.followedId)}
-                    onClick={() => this.selectExpert(item.followedId)}
-                  >
-                    {this.isSelected(item.followedId) ? t('IDS_WATCHING') : t('IDS_WATCH')}
-                  </Button>
+                  this.isSelected(item.followedId) ?
+                    <button
+                      type="button"
+                      className="btn btn-raised btn-success btn-min-width mr-1 mb-1"
+                      disabled={this.isSelected(item.followedId)}
+                      onClick={() => this.selectExpert(item.followedId)}
+                    >
+                      {t('IDS_WATCHING')}
+                    </button> :
+                    <button
+                      type="button"
+                      className="btn btn-raised btn-info btn-min-width mr-1 mb-1"
+                      disabled={this.isSelected(item.followedId)}
+                      onClick={() => this.selectExpert(item.followedId)}
+                    >
+                      {t('IDS_WATCH')}
+                    </button>
                 ]}
               >
                 <List.Item.Meta
@@ -249,7 +258,7 @@ class Signal extends Component {
             bordered
             rowKey="id"
             columns={columns}
-  
+
           />
         </div>
         <Modal

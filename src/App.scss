@@ -4,10 +4,16 @@
   height: 100vh;
 }
 .ant-menu, .ant-form, .ant-table, .ant-form-item, .ant-card {
-  font-family: Roboto;
+  //font-family: Roboto sans-serif;
+  font-family: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 p {
   margin: 0;
+  font-size: inherit;
+  //font-family: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+span {
+  //font-family: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 .content-container {
   margin: 24px 16px;

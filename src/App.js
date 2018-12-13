@@ -21,26 +21,26 @@ import * as routes from './utils/constants/routes';
 
 import { actionNavigateTo } from './reduxModules/common/routes';
 
-const { Sider, Content } = Layout;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapsed: false
+      collapsed: false,
+      isSettingTheme: false
     };
   }
 
   toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+  handleTheme = () => {
+    this.setState({ isSettingTheme: !this.state.isSettingTheme });
   }
 
   commonComponents = () => (
     <div className="app-container">
       <Layout>
-        <Sider
+        <Layout.Sider
           trigger={null}
           collapsible
           width={250}
@@ -52,14 +52,14 @@ class App extends React.Component {
             {!this.state.collapsed && <span className="app-title">AZINVEX</span>} </a>
           </div>
           <Navigation collapsed={this.state.collapsed} />
-        </Sider>
+        </Layout.Sider>
         <Layout>
           <Header profileUser={this.props.profileUser} collapsed={this.state.collapsed} toggle={this.toggle} />
-          <Content className="content-container">
+          <Layout.Content className="content-container">
             <ScrollBar>
               <Routes />
             </ScrollBar>
-          </Content>
+          </Layout.Content>
         </Layout>
       </Layout>
     </div>
@@ -95,8 +95,8 @@ class App extends React.Component {
       switch (location.type) {
         case routes.ROUTE_LOGIN:
           return <LoginPage />;
-          case routes.ROUTE_FORGOT:
-          return <Forgot />;       
+        case routes.ROUTE_FORGOT:
+          return <Forgot />;
         case routes.ROUTE_REGISTER:
           return <Register />;
         case routes.ROUTE_ERROR_403:

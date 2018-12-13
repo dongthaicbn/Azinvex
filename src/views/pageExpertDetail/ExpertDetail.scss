@@ -53,6 +53,15 @@
   .ant-tabs-ink-bar {
     background-color: #009da0;
   }
+  .ant-table-thead > tr > th {
+    background-color: #009DA0;
+    color: white;
+  }
+  .ant-pagination-item-active {
+    background-color: #009DA0;
+    border: solid 1px #009DA0;
+    color: white;
+  }
 }
 .header-card {
   color: #009da0;

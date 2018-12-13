@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import '../Dashboard.scss';
 import localize from '../../../utils/hocs/localize';
 
+/*eslint-disable*/
 class DashboardCard extends Component {
   constructor(props) {
     super(props);

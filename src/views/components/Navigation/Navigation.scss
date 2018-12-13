@@ -8,6 +8,9 @@
 .navigation-container {
   height: calc(100vh - 128px);
   background-color: #001529;
+  .menu-title {
+    letter-spacing: 0.6px;
+  }
 }
 .select-language {
   height: 64px;
@@ -26,6 +29,6 @@
 }
 .logo {
   height: 32px;
-  background: rgba(255,255,255,.2);
+  //background: rgba(255,255,255,.2);
   margin: 16px;
 }
