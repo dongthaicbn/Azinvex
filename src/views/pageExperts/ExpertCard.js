@@ -33,7 +33,7 @@ class ExpertCard extends Component {
     const { expert, t } = this.props;
     const { isFollowed } = this.state;
     return (
-      <div style={{ width: 'calc(33%)', padding: 20, display: 'inline-block' }}>
+      <div style={{ width: '33%', padding: 20, display: 'inline-block' }}>
         <div className="card">
           <div className="card-header text-center">
             <img src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL} alt="Brek" width="150" height="150"
@@ -43,7 +43,7 @@ class ExpertCard extends Component {
           <div className="card-body">
             <div className="card-block text-center">
               <h4 className="card-title">{expert.displayName}</h4>
-              <p className="category text-gray font-small-4">CEO / Co-Founder</p>
+              <p className="category text-gray font-small-4">{expert.email}</p>
               <button
                 type="button"
                 className="btn btn-raised btn-success btn-min-width mr-1 mb-1"
@@ -68,14 +68,14 @@ class ExpertCard extends Component {
               <hr className="grey" />
                 <div className="row grey">
                   <div className="col-6">
-                    <span className="description-text-left">{t('IDS_WIN_RATIO')}</span><span className="description-text-right">
+                    <span className="description-text-left">{t('IDS_WIN_RATIO')}:</span>&nbsp;<span className="description-text-right">
                       {(expert.signalLoss + expert.signalWin) !== 0 ?
                         Math.round((expert.signalWin / (expert.signalLoss + expert.signalWin)) * 100) : 0
                       } %
                     </span>
                   </div>
                   <div className="col-6">
-                    <span className="description-text-left">{t('IDS_TOTAL_PIPS')}</span><span className="description-text-right">{expert.totalpips && expert.totalpips.toFixed(1)}</span>
+                    <span className="description-text-left">{t('IDS_TOTAL_PIPS')}:</span>&nbsp;<span className="description-text-right">{expert.totalpips && expert.totalpips.toFixed(1)}</span>
                   </div>
                 </div>
             </div>

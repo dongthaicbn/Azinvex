@@ -28,11 +28,12 @@
     transition: all 0.1s ease;
   }
   .description-text-right {
-    float: right;
     color: #000;
+    font-size: 16px;
   }
   .description-text-left {
     color: #009da0;
+    font-size: 16px;
   }
   .ant-card-cover {
     padding: 20px 0;
@@ -61,5 +62,12 @@
     hr {
       border-top: 1px solid #009DA0;
     }
+  }
+  .card h1.card-title, .card h2.card-title, .card h3.card-title, .card h4.card-title, .card h5.card-title, .card h6.card-title {
+    font-size: 18px;
+    color: #009da0;
+  }
+  .text-gray {
+    font-size: 12px;
   }
 }
