@@ -28,9 +28,8 @@ class ExpertItem extends Component {
     this.setState({ isFollowed: false });
   };
   render() {
-    const { expert, t } = this.props;
+    const { expert, t, index } = this.props;
     const { isFollowed } = this.state;
-
     const action = isFollowed !== null && !isFollowed ?
       <Button onClick={() => this.follow(expert)} type="primary" className="follow-btn">{t('IDS_FOLLOW')}</Button> :
       <Button onClick={() => this.unfollow(expert.id)} type="default" className="unfollow-btn">{t('IDS_UN_FOLLOW')}</Button>;
@@ -41,7 +40,7 @@ class ExpertItem extends Component {
           title={
             <p className="account-name-text">
               {expert.displayName}
-              <span className="pro-expert">PRO</span>
+          {index < 3 && <span className="pro-expert">{index+1}</span>}
               </p>
           }
           description={

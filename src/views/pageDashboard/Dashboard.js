@@ -209,7 +209,7 @@ class Dashboard extends Component {
                 className="demo-loadmore-list"
                 itemLayout="horizontal"
                 dataSource={topExpert}
-                renderItem={item => <ExpertItem expert={item} />}
+                renderItem={(item,index) => <ExpertItem index={index} expert={item} />}
               />
             }
           </Layout.Sider>
