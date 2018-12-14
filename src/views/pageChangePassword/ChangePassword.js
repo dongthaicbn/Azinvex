@@ -34,6 +34,7 @@ class ChangePassword extends Component {
     return user.reauthenticateWithCredential(cred);
   }
   compareToFirstPassword = (rule, value, callback) => {
+    const { t } = this.props;
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
       callback(t('IDS_RETYPE_PASSWORD_SAME'));
