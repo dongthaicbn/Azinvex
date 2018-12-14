@@ -168,7 +168,7 @@ class Dashboard extends Component {
         <Layout>
           <Layout.Content>
             <DashboardCard />
-            <div className="post-container">
+            {/* <div className="post-container">
               <div className="card">
                 <div className="card-body">
                   <div className="card-img">
@@ -194,7 +194,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <Timeline
               loading={loading}
               moreEvents={moreEvents}
