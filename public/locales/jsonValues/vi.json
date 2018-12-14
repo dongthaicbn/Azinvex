@@ -83,5 +83,11 @@
   "IDS_COUNT_WIN": "Số lệnh thắng",
   "IDS_COUNT_LOSE": "Số lệnh thua",
   "IDS_SEARCH": "Tìm kiếm",
-  "IDS_LIST_EXPERT_DESCRIPTION": "Tổng Hợp Những Chuyên gia forex hàng đầu từ khắp mọi nơi"
+  "IDS_LIST_EXPERT_DESCRIPTION": "Tổng Hợp Những Chuyên gia forex hàng đầu từ khắp mọi nơi",
+  "IDS_EDIT": "Chỉnh sửa",
+  "IDS_UPDATE": "Cập nhật",
+  "IDS_CANCEL": "Hủy bỏ",
+  "IDS_CURRENT_PASSWORD": "Mật khẩu hiện tại",
+  "IDS_NEW_PASSWORD": "Mật khẩu mới",
+  "IDS_RETYPE_NEW_PASSWORD": "Nhập lại mật khẩu mới"
 }

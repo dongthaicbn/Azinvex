@@ -83,5 +83,11 @@
   "IDS_COUNT_WIN": "Count of winning",
   "IDS_COUNT_LOSE": "Count of lose",
   "IDS_SEARCH": "Search",
-  "IDS_LIST_EXPERT_DESCRIPTION": "Top forex experts from all over the world"
+  "IDS_LIST_EXPERT_DESCRIPTION": "Top forex experts from all over the world",
+  "IDS_EDIT": "Edit",
+  "IDS_UPDATE": "Update",
+  "IDS_CANCEL": "Cancel",
+  "IDS_CURRENT_PASSWORD": "Current password",
+  "IDS_NEW_PASSWORD": "New password",
+  "IDS_RETYPE_NEW_PASSWORD": "Retype new password"
 }

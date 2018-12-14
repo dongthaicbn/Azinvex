@@ -130,7 +130,7 @@ class Information extends Component {
             onClick={() => this.setState({ isEdit: true })}
             style={{ marginLeft: 'calc(99% - 126px)', width: 106 }}
           >
-            Chỉnh sửa
+            {t('IDS_EDIT')}
           </Button>
         )}
         {profile &&
@@ -261,10 +261,10 @@ class Information extends Component {
                     onClick={this.handleCancelEdit}
                     style={{ marginRight: 20, background: '#ebedf0' }}
                   >
-                    Hủy bỏ
+                  {t('IDS_CANCEL')}
                   </Button>
                   <Button type="primary" htmlType="submit">
-                    Cập nhật
+                    {t('IDS_UPDATE')}
                   </Button>
                 </Form.Item>
               )}

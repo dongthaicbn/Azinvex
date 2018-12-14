@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
 import { Form, Input, Button } from 'antd';
 import { toastr } from 'react-redux-toastr';
 import { updatePassword } from '../../reduxModules/auth/authAction';
-
+import localize from '../../utils/hocs/localize';
 import './ChangePassword.scss';
 
 /* eslint-disable */
@@ -43,6 +44,7 @@ class ChangePassword extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
+      if(!err){
         this.reauthenticate(values.currentPassword).then(async () => {
           await this.props.updatePassword({ password: values.password });
           this.props.form.resetFields()
@@ -50,7 +52,9 @@ class ChangePassword extends Component {
           this.props.form.setFieldsValue({
             currentPassword: '',
           });
-          toastr.error('Error', "Mật khẩu cũ không chính xác"); });
+          toastr.error('Error', "Mật khẩu cũ không chính xác");
+        });
+      }
     })
   };
   handleCancelEdit = () => {
@@ -58,13 +62,14 @@ class ChangePassword extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { t } = this.props;
     return (
       <div className="information-container">
-        <p className="info-header">Thay đổi mật khẩu</p>
+        <p className="info-header">{t('IDS_CHANGE_PASSWORD')}</p>
         <div className="change-password-container">
           <Form onSubmit={this.handleSubmit}>
             <p className="title-input-profile">
-              <b>Mật khẩu cũ</b>
+              <b>{t('IDS_CURRENT_PASSWORD')}</b>
             </p>
             <Form.Item>
               {getFieldDecorator("currentPassword", {
@@ -72,13 +77,13 @@ class ChangePassword extends Component {
                 rules: [
                   {
                     required: true,
-                    message: "Hãy nhập mật khẩu cũ!"
+                    // message: "Hãy nhập mật khẩu cũ!"
                   }
                 ]
               })(<Input type="password" />)}
             </Form.Item>
             <p className="title-input-profile">
-              <b>Mật khẩu mới</b>
+              <b>{t('IDS_NEW_PASSWORD')}</b>
             </p>
             <Form.Item>
               {getFieldDecorator("password", {
@@ -86,7 +91,7 @@ class ChangePassword extends Component {
                 rules: [
                   {
                     required: true,
-                    message: "Hãy nhập mật khẩu mới!"
+                    // message: "Hãy nhập mật khẩu mới!"
                   },
                   {
                     min: 6,
@@ -99,7 +104,7 @@ class ChangePassword extends Component {
               })(<Input type="password"  />)}
             </Form.Item>
             <p className="title-input-profile">
-              <b>Nhập lại mật khẩu mới</b>
+              <b>{t('IDS_RETYPE_NEW_PASSWORD')}</b>
             </p>
             <Form.Item>
               {getFieldDecorator("confirm", {
@@ -107,7 +112,7 @@ class ChangePassword extends Component {
                 rules: [
                   {
                     required: true,
-                    message: "Hãy nhập lại mật khẩu!"
+                    // message: "Hãy nhập lại mật khẩu!"
                   },
                   {
                     validator: this.compareToFirstPassword,
@@ -134,11 +139,11 @@ class ChangePassword extends Component {
   }
 }
 
-export default connect(
+export default compose(connect(
   state => ({
     loading: state.async.loading,
   }),
   {
     updatePassword
   }
-)(Form.create()(withFirebase(ChangePassword)));
+), localize)(Form.create()(withFirebase(ChangePassword)));
