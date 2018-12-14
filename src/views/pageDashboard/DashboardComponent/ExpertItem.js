@@ -16,6 +16,13 @@ class ExpertItem extends Component {
       isFollowed: null
     };
   }
+  setClass = (index) => {
+    switch (index) {
+      case 1 : return "pro-expert expert_top1"
+      case 2 : return "pro-expert expert_top2"
+      case 3 : return "pro-expert expert_top3"
+    }
+  }
   async componentDidMount() {
     this.setState({ isFollowed: await this.props.isFollowed(this.props.expert.id) });
   }
@@ -40,7 +47,7 @@ class ExpertItem extends Component {
           title={
             <p className="account-name-text">
               {expert.displayName}
-          {index < 3 && <span className="pro-expert">{index+1}</span>}
+          {index < 3 && <span className={this.setClass(index+1)}>TOP {index+1}</span>}
               </p>
           }
           description={
