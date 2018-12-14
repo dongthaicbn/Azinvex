@@ -75,6 +75,7 @@ class Timeline extends Component {
       {
         title: <span>{t('IDS_TICKET')}</span>,
         dataIndex: "ticket",
+        class: "aaa",
         key: "ticket"
       },
       {
@@ -88,7 +89,7 @@ class Timeline extends Component {
       {
         title: <span>{t('IDS_COMMANDS')}</span>,
         dataIndex: "signal",
-        render: (text, signal) => this.getCommand(signal),
+        render: (text, signal) => <span style={{fontWeight: "bold"}}>{this.getCommand(signal)}</span>,
         key: "signal"
       },
       {
