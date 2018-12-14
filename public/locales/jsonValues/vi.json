@@ -89,5 +89,10 @@
   "IDS_CANCEL": "Hủy bỏ",
   "IDS_CURRENT_PASSWORD": "Mật khẩu hiện tại",
   "IDS_NEW_PASSWORD": "Mật khẩu mới",
-  "IDS_RETYPE_NEW_PASSWORD": "Nhập lại mật khẩu mới"
+  "IDS_RETYPE_NEW_PASSWORD": "Nhập lại mật khẩu mới",
+  "IDS_REQ_EMAIL_MESS": "Vui lòng nhập địa chỉ email!",
+  "IDS_REQ_PASSWORD_MESS": "Vui lòng nhập mật khẩu!",
+  "IDS_FORGOT": "Mật khẩu mới",
+  "IDS_LENGTH_PASSWORD": "Mật khẩu phải dài hơn 6 ký tự!",
+  "IDS_RETYPE_PASSWORD_SAME": "Mật khẩu mới nhập lại không trùng mật khẩu mới!"
 }

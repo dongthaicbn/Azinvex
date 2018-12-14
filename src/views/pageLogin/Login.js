@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { login } from '../../reduxModules/auth/authAction';
 import './Login.scss';
+import localize from '../../utils/hocs/localize';
 /* eslint-disable */
 class Login extends Component {
 
@@ -19,6 +20,7 @@ class Login extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { t } = this.props;
     return (
       <div className="page-login">
         <div className="login-wrapper">
@@ -34,7 +36,7 @@ class Login extends Component {
                     <span className="lab-text">Email</span>
                     <Form.Item>
                       {getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your Email!' }]
+                        rules: [{ required: true, message: t('IDS_REQ_EMAIL_MESS') }]
                       })(
                         <Input prefix={<Icon type="user"/>} placeholder="Email"/>
                       )}
@@ -42,7 +44,7 @@ class Login extends Component {
                     <span className="lab-text">Password</span>
                     <Form.Item>
                       {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }]
+                        rules: [{ required: true, message: t('IDS_REQ_PASSWORD_MESS') }]
                       })(
                         <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password" />
                       )}
@@ -76,6 +78,7 @@ class Login extends Component {
 }
 
 export default compose(
+  localize,
   connect(
     state => ({
       loading: state.async.loading,

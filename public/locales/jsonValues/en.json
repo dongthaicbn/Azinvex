@@ -89,5 +89,9 @@
   "IDS_CANCEL": "Cancel",
   "IDS_CURRENT_PASSWORD": "Current password",
   "IDS_NEW_PASSWORD": "New password",
-  "IDS_RETYPE_NEW_PASSWORD": "Retype new password"
+  "IDS_RETYPE_NEW_PASSWORD": "Retype new password",
+  "IDS_REQ_EMAIL_MESS": "Please input your email!",
+  "IDS_REQ_PASSWORD_MESS": "Please input your password!",
+  "IDS_LENGTH_PASSWORD": "Password must be at least 6 characters!",
+  "IDS_RETYPE_PASSWORD_SAME": "Two passwords that you enter is inconsistent!"
 }

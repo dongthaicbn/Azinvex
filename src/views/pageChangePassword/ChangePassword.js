@@ -36,7 +36,7 @@ class ChangePassword extends Component {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(t('IDS_RETYPE_PASSWORD_SAME'));
     } else {
       callback();
     }
@@ -95,7 +95,7 @@ class ChangePassword extends Component {
                   },
                   {
                     min: 6,
-                    message: "Mật khẩu phải dài hơn 6 ký tự!"
+                    message: t('IDS_LENGTH_PASSWORD')
                   },
                   {
                     validator: this.validateToNextPassword,
@@ -126,10 +126,10 @@ class ChangePassword extends Component {
                 onClick={this.handleCancelEdit}
                 style={{ marginRight: 20, background: "#ebedf0" }}
               >
-                Hủy bỏ
+                {t('IDS_CANCEL')}
               </Button>
               <Button loading={this.props.loading} type="primary" htmlType="submit">
-                Lưu
+                {t('IDS_UPDATE')}
               </Button>
             </Form.Item>
           </Form>
