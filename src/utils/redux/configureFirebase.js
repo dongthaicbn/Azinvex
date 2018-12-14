@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD2_w2xCYLkNVV-s6fhEfac2OTBRmsqOgo",
