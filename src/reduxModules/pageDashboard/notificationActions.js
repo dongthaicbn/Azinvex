@@ -20,12 +20,12 @@ export const getEventsForDashboard = lastEvent => async (dispatch, getState) => 
         .where('uid', '==', currentUser.uid)
         .orderBy('createAt', 'desc')
         .startAfter(startAfter)
-        .limit(5);
+        .limit(10);
     } else {
       query = eventsRef
         .where('uid', '==', currentUser.uid)
         .orderBy('createAt', 'desc')
-        .limit(5);
+        .limit(10);
     }
 
     const querySnap = await query.get();

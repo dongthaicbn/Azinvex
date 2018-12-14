@@ -41,8 +41,8 @@ class Experts extends Component {
     const { experts, t } = this.props;
     return (
       <div className="expert-container">
-        <p className="header-text">{t('IDS_LIST_EXPERTS')}</p>
-        <p className="sub-header-text">Tổng Hợp Những Chuyên gia forex hàng đầu từ khắp mọi nơi</p>
+        <p className="header-text">{t('IDS_LIST_EXPERT_DESCRIPTION')}</p>
+        <p className="sub-header-text">{t('')}</p>
         {experts && experts.map(expert => (
           <ExpertCard key={expert.id} expert={expert} />
         ))}
