@@ -54,15 +54,7 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
       window.location.href = '#/';
       console.log(firebaseUser);
       dispatch(asyncActionFinish());
-      messaging.requestPermission().then(function () {
-        console.log('Notification permission granted.');
-        return messaging.getToken()
-      }).then(token => {
-        saveToken(firebaseUser, token)
-      })
-      .catch(function (err) {
-        console.log('Unable to get permission to notify.', err);
-      });
+  
     })
     .catch(error => {
       toastr.error('Error', error.message)

@@ -20,5 +20,16 @@ const firestore = firebase.firestore();
 const settings = {
   timestampsInSnapshots: true
 }
+const messaging = firebase.messaging();
+messaging.requestPermission().then(function () {
+  console.log('Notification permission granted.');
+  // return messaging.getToken()
+}).then(token => {
+  console.log(token)
+  // saveToken(firebaseUser, token)
+})
+.catch(function (err) {
+  console.log('Unable to get permission to notify.', err);
+});
 firestore.settings(settings)
 export default firebase;
