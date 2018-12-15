@@ -15,11 +15,19 @@ import Header from './views/components/Header/Header';
 import Loading from './views/components/Loading/Loading';
 import Register from './views/pageRegister/Register';
 import Help from './views/pageHelp/Help';
+import firbaseApp from './utils/redux/configureFirebase'
 
 import Logo from './assets/logo.png';
 import * as routes from './utils/constants/routes';
 
 import { actionNavigateTo } from './reduxModules/common/routes';
+const messaging = firbaseApp.messaging();
+const firestore = firbaseApp.firestore();
+
+const settings = {
+  timestampsInSnapshots: true
+}
+firestore.settings(settings)
 
 class App extends React.Component {
   constructor(props) {

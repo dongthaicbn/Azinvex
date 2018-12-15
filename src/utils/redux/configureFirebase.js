@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import firebase from 'firebase/app';
+import * as firebase from "firebase";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
@@ -14,22 +14,5 @@ const firebaseConfig = {
   messagingSenderId: "1057037050140"
 }
 
-firebase.initializeApp(firebaseConfig);
-const firestore = firebase.firestore();
 
-const settings = {
-  timestampsInSnapshots: true
-}
-const messaging = firebase.messaging();
-messaging.requestPermission().then(function () {
-  console.log('Notification permission granted.');
-  // return messaging.getToken()
-}).then(token => {
-  console.log(token)
-  // saveToken(firebaseUser, token)
-})
-.catch(function (err) {
-  console.log('Unable to get permission to notify.', err);
-});
-firestore.settings(settings)
-export default firebase;
+export default firebase.initializeApp(firebaseConfig);

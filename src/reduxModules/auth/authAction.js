@@ -54,7 +54,29 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
       window.location.href = '#/';
       console.log(firebaseUser);
       dispatch(asyncActionFinish());
-  
+      messaging
+      .requestPermission()
+      .then(() => {
+        console.log("Notification permission granted.");
+        messaging
+          .getToken()
+          .then(currentToken => {
+            if (currentToken) {
+              saveToken(firebaseUser,currentToken)
+              console.log("Token generated is ", currentToken);
+            } else {
+              console.log(
+                "No Instance ID token available. Request permission to generate one."
+              );
+            }
+          })
+          .catch(err => {
+            console.log("An error occurred while retrieving token. ", err);
+          });
+      })
+      .catch(err => {
+        console.log("Unable to get permission to notify.", err);
+      });
     })
     .catch(error => {
       toastr.error('Error', error.message)
