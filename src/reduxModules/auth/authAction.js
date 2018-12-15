@@ -37,7 +37,10 @@ const saveToken = (user, token) => (dispatch, getState, { getFirebase, getFirest
   const firebase = getFirebase();
   const firestore = getFirestore();
   const currentTokens = user.fcmTokens || {}
+  console.log("here")
+  console.log(currentTokens, currentTokens[token]);
   if (!currentTokens[token]) {
+    console.log("here1")
     const userRef = firestore.collection('users').doc(user.uid)
     const tokens = { ...currentTokens, [token]: true }
     userRef.update({ fcmTokens: tokens })
@@ -52,7 +55,6 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
     .then(firebaseUser => {
       toastr.success('Success', 'Đăng nhập thành công')
       window.location.href = '#/';
-      console.log(firebaseUser);
       dispatch(asyncActionFinish());
       messaging
       .requestPermission()
@@ -62,7 +64,7 @@ export const login = user => async (dispatch, getState, { getFirebase, getFirest
           .getToken()
           .then(currentToken => {
             if (currentToken) {
-              saveToken(firebaseUser,currentToken)
+              dispatch(saveToken(firebaseUser,currentToken));
               console.log("Token generated is ", currentToken);
             } else {
               console.log(
