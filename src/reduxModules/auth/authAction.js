@@ -33,58 +33,70 @@ export const register = user => async (dispatch, getState, { getFirebase, getFir
     dispatch(asyncActionError());
   }
 };
-const saveToken = (user, token) => (dispatch, getState, { getFirebase, getFirestore }) => {
+export const monitorRefresh = user => (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
+  const messaging = firebase.messaging();
+  messaging.onTokenRefresh(() => {
+    messaging.getToken()
+    .then(refreshedToken => {
+      console.log('Token refreshed.');
+      dispatch(saveToken(user, refreshedToken))
+    })
+    .catch( err => console.log(err, 'Unable to retrieve new token') )
+  });
+}
+
+const saveToken = (user, token) => (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
   const currentTokens = user.fcmTokens || {}
-  console.log("here")
-  console.log(currentTokens, currentTokens[token]);
   if (!currentTokens[token]) {
-    console.log("here1")
     const userRef = firestore.collection('users').doc(user.uid)
     const tokens = { ...currentTokens, [token]: true }
     userRef.update({ fcmTokens: tokens })
   }
 }
-export const login = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const getPermission = user => (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const messaging = firebase.messaging();
-  const firestore = getFirestore();
+  messaging
+  .requestPermission()
+  .then(() => {
+    console.log("Notification permission granted.");
+    messaging
+      .getToken()
+      .then(currentToken => {
+        if (currentToken) {
+          dispatch(saveToken(user,currentToken));
+          console.log("Token generated is ", currentToken);
+        } else {
+          console.log(
+            "No Instance ID token available. Request permission to generate one."
+          );
+        }
+      })
+      .catch(err => {
+        console.log("An error occurred while retrieving token. ", err);
+      });
+  })
+  .catch(err => {
+    console.log("Unable to get permission to notify.", err);
+  });
+}
+
+
+export const login = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firebase = getFirebase();
   dispatch(asyncActionStart());
   firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then(firebaseUser => {
       toastr.success('Success', 'Đăng nhập thành công')
       window.location.href = '#/';
       dispatch(asyncActionFinish());
-      messaging
-      .requestPermission()
-      .then(() => {
-        console.log("Notification permission granted.");
-        messaging
-          .getToken()
-          .then(currentToken => {
-            if (currentToken) {
-              dispatch(saveToken(firebaseUser,currentToken));
-              console.log("Token generated is ", currentToken);
-            } else {
-              console.log(
-                "No Instance ID token available. Request permission to generate one."
-              );
-            }
-          })
-          .catch(err => {
-            console.log("An error occurred while retrieving token. ", err);
-          });
-      })
-      .catch(err => {
-        console.log("Unable to get permission to notify.", err);
-      });
     })
     .catch(error => {
       toastr.error('Error', error.message)
       dispatch(asyncActionError());
     })
-
 };
 export const forgot = email => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();

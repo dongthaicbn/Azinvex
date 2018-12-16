@@ -16,6 +16,7 @@ import Loading from './views/components/Loading/Loading';
 import Register from './views/pageRegister/Register';
 import Help from './views/pageHelp/Help';
 import firbaseApp from './utils/redux/configureFirebase'
+import { getPermission, monitorRefresh } from './reduxModules/auth/authAction'
 
 import Logo from './assets/logo.png';
 import * as routes from './utils/constants/routes';
@@ -231,6 +232,8 @@ componentDidMount(){
         {
           if (isAuthenticated) {
             if(!this.checkRole(role, location)) {
+              this.props.getPermission(this.props.currentUser)
+              this.props.monitorRefresh(this.props.currentUser)
               return this.commonComponents();
             }
             this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
@@ -253,9 +256,12 @@ export default compose(
     isAuthenticated: !state.firebase.auth.isEmpty,
     role: state.firebase.profile.role,
     profileUser: state.firebase.profile,
+    currentUser: state.firebase.auth
   }),
   {
-    actionNavigateTo
+    actionNavigateTo,
+    getPermission,
+    monitorRefresh
   })
 )(App);
 
