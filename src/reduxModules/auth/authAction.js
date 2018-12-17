@@ -40,7 +40,6 @@ export const monitorRefresh = user => (dispatch, getState, { getFirebase, getFir
   messaging.onTokenRefresh(() => {
     messaging.getToken()
     .then(refreshedToken => {
-      console.log('Token refreshed.');
       dispatch(saveToken(user, refreshedToken))
     })
     .catch( err => console.log(err, 'Unable to retrieve new token') )
@@ -62,13 +61,11 @@ export const getPermission = user => (dispatch, getState, { getFirebase, getFire
   messaging
   .requestPermission()
   .then(() => {
-    console.log("Notification permission granted.");
     messaging
       .getToken()
       .then(currentToken => {
         if (currentToken) {
           dispatch(saveToken(user,currentToken));
-          console.log("Token generated is ", currentToken);
         } else {
           console.log(
             "No Instance ID token available. Request permission to generate one."
