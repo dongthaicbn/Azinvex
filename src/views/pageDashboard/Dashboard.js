@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as Push from 'push.js';
+
 import { compose } from 'recompose';
 import { Layout, List } from 'antd';
 import { connect } from 'react-redux';

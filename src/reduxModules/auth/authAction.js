@@ -1,6 +1,7 @@
 /* eslint-disable*/
 import { toastr } from 'react-redux-toastr'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
+import * as Push from 'push.js';
 
 export const register = user => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const { email, displayName, password, phone, prefix } = user
@@ -80,6 +81,13 @@ export const getPermission = user => (dispatch, getState, { getFirebase, getFire
   })
   .catch(err => {
     console.log("Unable to get permission to notify.", err);
+  });
+}
+export const receiveMessages = () => (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firebase = getFirebase();
+  const messaging = firebase.messaging();
+  messaging.onMessage(payload => {
+    console.log('Message received. ', payload);
   });
 }
 
