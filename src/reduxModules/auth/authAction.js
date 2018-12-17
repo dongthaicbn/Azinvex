@@ -84,7 +84,17 @@ export const receiveMessages = () => (dispatch, getState, { getFirebase, getFire
   const firebase = getFirebase();
   const messaging = firebase.messaging();
   messaging.onMessage(payload => {
+    const { notification } = payload;
     console.log('Message received. ', payload);
+    Push.create(notification.title, {
+      body: notification.body,
+      icon: notification.icon,
+      timeout: 4000,
+      onClick: function () {
+        window.focus();
+        this.close();
+      }
+    });
   });
 }
 

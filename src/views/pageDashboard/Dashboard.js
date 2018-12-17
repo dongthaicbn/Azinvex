@@ -92,11 +92,6 @@ class Dashboard extends Component {
     const db = firebase.firestore();
     this.props.getTopUser();
     this.props.getStatistics();
-    // Push.Permission.request(function () {
-    //   console.log('GRANTED');
-    // }, function () {
-    //   console.log('DENIED');
-    // });
     let next = await this.props.getEventsForDashboard();
     db.collection("notifications")
       .where('uid', '==', this.props.currentUser.uid)
@@ -104,30 +99,10 @@ class Dashboard extends Component {
       .limit(1)
       .onSnapshot((snapshot) => {
         if (!this.state.loadedEvents[0] && snapshot.docs[0]) {
-          const signal = snapshot.docs[0].data();
-          // Push.create(this.getTitle(signal.command), {
-          //   body: this.getCommand(signal),
-          //   icon: '/icon.png',
-          //   timeout: 4000,
-          //   onClick: function () {
-          //     window.focus();
-          //     this.close();
-          //   }
-          // });
           const newArr = this.state.loadedEvents;
           newArr.unshift(snapshot.docs[0].data());
           this.setState({ loadedEvents: newArr });
         } else if (this.state.loadedEvents[0] && snapshot.docs[0] && snapshot.docs[0].id !== this.state.loadedEvents[0].id) {
-          const signal = snapshot.docs[0].data();
-          // Push.create(this.getTitle(signal.command), {
-          //   body: this.getCommand(signal),
-          //   icon: '/icon.png',
-          //   timeout: 4000,
-          //   onClick: function () {
-          //     window.focus();
-          //     this.close();
-          //   }
-          // });
           const newArr = this.state.loadedEvents;
           newArr.unshift(snapshot.docs[0].data());
           this.setState({ loadedEvents: newArr });
