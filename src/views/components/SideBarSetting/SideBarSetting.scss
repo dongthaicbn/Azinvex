@@ -1,0 +1,41 @@
+.sidebar-setting {
+  position: fixed;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  top: 0;
+  background: white;
+  z-index: 1000;
+  border-left: 1px solid #cfd8dc;
+
+  bottom: 0;
+  //transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+  //transition: 0.5s;
+  backface-visibility: hidden;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+  animation: slide 0.5s forwards;
+
+  .color-contain {
+    width: 20px;
+    height: 20px;
+  }
+  .header-theme {
+    font-size: 24px;
+  }
+  .rounded {
+    &.active-img {
+      border: 2px solid #FF586B !important;
+    }
+  }
+}
+@-webkit-keyframes slide {
+  0% { right: -400px; }
+  100% { right: 0; }
+}
+
+@keyframes slide {
+  0% { right: -400px; }
+  100% { right: 0; }
+}

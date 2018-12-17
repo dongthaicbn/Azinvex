@@ -7,14 +7,16 @@
 }
 .navigation-container {
   height: calc(100vh - 128px);
-  background-color: #001529;
+  //background-color: #001529;
+  //background-color: rgba(0, 0, 0, 0.77);
   .menu-title {
     letter-spacing: 0.6px;
   }
 }
 .select-language {
   height: 64px;
-  background-color: #001529;
+  //background-color: #001529;
+  //background-color: rgba(0, 0, 0, 0.77);
   color: white;
   padding: 24px;
 }

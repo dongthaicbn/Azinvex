@@ -59,7 +59,7 @@ class ExpertCard extends Component {
                 </button> :
                 <button
                   type="button"
-                  className="btn btn-raised btn-success btn-min-width mr-1 mb-1"
+                  className="btn btn-raised btn-primary btn-min-width mr-1 mb-1"
                   onClick={() => this.unfollow(expert.id)}
                 >
                   {t('IDS_UN_FOLLOW')}

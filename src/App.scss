@@ -6,6 +6,7 @@
 .ant-menu, .ant-form, .ant-table, .ant-form-item, .ant-card {
   //font-family: Roboto sans-serif;
   font-family: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: transparent;
 }
 p {
   margin: 0;
@@ -16,12 +17,12 @@ span {
   //font-family: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 .content-container {
-  margin: 24px 16px;
   min-height: 280px;
   height: calc(100vh - 200px);
 }
 .logo-img {
   padding: 16px;
+  //background-color: rgba(0, 0, 0, 0.77);
   .app-title {
     color: white;
     font-size: 20px;
