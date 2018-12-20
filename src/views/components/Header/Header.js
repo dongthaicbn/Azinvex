@@ -46,13 +46,13 @@ class Header extends React.Component {
       <Menu style={{ padding: 10 }} onClick={this.onChangeLanguage}>
         <Menu.Item key="en">
           <a  className="dropdown-item py-1">
-            <img src="../app-assets/img/flags/us.png" className="langimg"/>
+            <img src="../app-assets/img/flags/en.png" className="langimg"/>
             <span>&nbsp;{t('IDS_ENGLISH')}</span>
           </a>
         </Menu.Item>
         <Menu.Item key="vi">
           <a  className="dropdown-item py-1">
-            <img src="../app-assets/img/flags/us.png" className="langimg"/>
+            <img src="../app-assets/img/flags/vi.png" className="langimg"/>
             <span>&nbsp;{t('IDS_VIETNAMESE')}</span>
           </a>
         </Menu.Item>
@@ -127,7 +127,7 @@ class Header extends React.Component {
         <Dropdown overlay={language} trigger={['click']} placement="bottomRight">
           <li className="dropdown nav-item user-info">
             <a data-toggle="dropdown" className="nav-link position-relative dropdown-toggle">
-              <img src="../app-assets/img/flags/us.png" className="langimg"/>
+              <img src={`../app-assets/img/flags/${languageCode}.png`} className="langimg"/>
               {languageCode}
             </a>
           </li>
