@@ -52,6 +52,7 @@
     "react": "^16.0.0",
     "react-async-script-loader": "^0.3.0",
     "react-bootstrap": "^0.32.1",
+    "react-click-outside": "^3.0.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dev-utils": "^4.1.0",
     "react-dom": "^16.0.0",
