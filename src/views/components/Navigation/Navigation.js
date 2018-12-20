@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import 'antd/dist/antd.css';
-import { Menu, Icon, Dropdown } from 'antd';
+import { Menu, Icon } from 'antd';
 import { withFirebase } from 'react-redux-firebase';
 import ScrollBar from '../ScrollBar/ScrollBar';
 import './Navigation.scss';
 import localize from '../../../utils/hocs/localize';
-import { actionSetLanguageOnMount } from '../../../reduxModules/common/systemAction';
 import Logo from '../../../assets/logo.png';
 /*eslint-disable*/
 
@@ -20,18 +19,12 @@ class Navigation extends React.Component {
     } else if (item.key === 'home') window.location.href = '#/';
     else window.location.href = `#/${item.key}`;
   };
-  onChangeLanguage = item => {
-    this.props.actionSetLanguageOnMount(item.key, item.key);
-  };
 
   render() {
-    const { collapsed, role, uid, isAuthenticated, t, languageCode, bgColor } = this.props;
-    const menuLanguage = (
-      <Menu onClick={this.onChangeLanguage}>
-        <Menu.Item key="en"><a>{t('IDS_ENGLISH')}</a></Menu.Item>
-        <Menu.Item key="vi"><a>{t('IDS_VIETNAMESE')}</a></Menu.Item>
-      </Menu>
-    );
+    const { collapsed, role, uid, isAuthenticated, t, bgColor } = this.props;
+    const IconFont = Icon.createFromIconfontCN({
+      scriptUrl: '../app-assets/fonts/feather'
+    });
     return (
       <ScrollBar>
         <div style={{ ...bgColor, opacity: 0.77 }}>
@@ -61,11 +54,6 @@ class Navigation extends React.Component {
 
             </Menu>
           </div>
-          <div className="select-language">
-            <Dropdown overlay={menuLanguage}>
-              <a className="ant-dropdown-link">{languageCode === 'vi' ? t('IDS_VIETNAMESE') : t('IDS_ENGLISH')} <Icon type="down" /></a>
-            </Dropdown>
-          </div>
         </div>
       </ScrollBar>
     );
@@ -75,14 +63,13 @@ class Navigation extends React.Component {
 const mapStateToProps = state => ({
   role: state.firebase.profile.role,
   isAuthenticated: !state.firebase.auth.isEmpty,
-  uid: state.firebase.auth.uid,
-  languageCode: state.system.languageCode
+  uid: state.firebase.auth.uid
 });
 export default compose(
   connect(
     mapStateToProps,
     {
-      actionSetLanguageOnMount
+      // action
     }
   ),
   localize

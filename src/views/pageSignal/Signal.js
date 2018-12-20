@@ -163,7 +163,7 @@ class Signal extends Component {
         align: 'center',
         render: type => (
           <button className={`button ${this.getTypeSignalClass(type)}`}>
-            <Icon type="rise" className="fa" />
+            {/*<Icon type="rise" className="fa" />*/}
             <strong>{this.getTypeSignal(type)}</strong>
           </button>
         )
@@ -258,7 +258,6 @@ class Signal extends Component {
             bordered
             rowKey="id"
             columns={columns}
-
           />
         </div>
         <Modal

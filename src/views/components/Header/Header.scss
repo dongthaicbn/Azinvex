@@ -11,7 +11,25 @@
 }
 .user-info {
   float: right;
-  margin-right: 20px;
+  list-style: none;
+  font-size: 18px;
+  line-height: 64px;
+  .badge.badge-danger {
+    margin-top: -24px;
+    margin-left: -6px;
+  }
+  .dropdown-menu .dropdown-item, .dropdown-menu li > a {
+    font-size: 14px;
+  }
+  .header-notification {
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+  }
+  .date-notification {
+    position: absolute;
+    right: 20px;
+  }
 }
 .user-info-text {
   font-size: 14px;
