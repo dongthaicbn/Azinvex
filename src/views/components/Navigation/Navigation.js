@@ -33,13 +33,13 @@ class Navigation extends React.Component {
           </div>
           <div className="navigation-container">
             <Menu theme="dark" mode="inline" onClick={this.onChangeMenu} inlineCollapsed={collapsed}>
-              {role === 'expert' && <Menu.Item key={'expert/' + uid}><i className="ft-home" />&nbsp;<span className="menu-title">{t('IDS_EXPERTS_AREA')}</span></Menu.Item>}
-              {role === 'expert' && <Menu.Item key="account"><i className="ft-box" />&nbsp;<span className="menu-title">Nền tảng giao dịch</span></Menu.Item>}
-              {role === 'member' && <Menu.Item key="dashboard"><i className="ft-home" />&nbsp;<span className="menu-title">{t('IDS_HOME')}</span></Menu.Item>}
-              {role === 'member' && <Menu.Item key="experts"><i className="ft-users" />&nbsp;<span className="menu-title">{t('IDS_LIST_EXPERTS')}</span></Menu.Item>}
+              {role === 'expert' && <Menu.Item key={'expert/' + uid}><Icon type="home" style={{ fontSize: 16 }} /><span className="menu-title">{t('IDS_EXPERTS_AREA')}</span></Menu.Item>}
+              {role === 'expert' && <Menu.Item key="account"><Icon type="code-sandbox" style={{ fontSize: 16 }} />&nbsp;<span className="menu-title">Nền tảng giao dịch</span></Menu.Item>}
+              {role === 'member' && <Menu.Item key="dashboard"><Icon type="home" style={{ fontSize: 16 }} /><span className="menu-title">{t('IDS_HOME')}</span></Menu.Item>}
+              {role === 'member' && <Menu.Item key="experts"><Icon type="team" style={{ fontSize: 16 }} /><span className="menu-title">{t('IDS_LIST_EXPERTS')}</span></Menu.Item>}
 
               {isAuthenticated &&
-                <Menu.SubMenu className="nav-item" title={<span><i className="ft-edit" />&nbsp;<span className="menu-title">{t('IDS_MANAGE')}</span></span>}>
+                <Menu.SubMenu className="nav-item" title={<span><Icon type="form" style={{ fontSize: 16 }} /><span className="menu-title">{t('IDS_MANAGE')}</span></span>}>
                   <Menu.Item key="information"><span className="menu-title">{t('IDS_PERSONAL_INFORMATION')}</span></Menu.Item>
                   {role === 'expert' && <Menu.Item key="signal/expert"><span className="menu-title">{t('IDS_SIGNAL_ROOM')}</span></Menu.Item>}
                   {role === 'member' && <Menu.Item key="signals"><span className="menu-title">{t('IDS_SIGNAL_ROOM')}</span></Menu.Item>}
@@ -48,9 +48,9 @@ class Navigation extends React.Component {
               }
               {!isAuthenticated && <Menu.Item key="login"><i className="ft-home" />&nbsp;<span className="menu-title">{t('IDS_LOGIN')}</span></Menu.Item>}
               {!isAuthenticated && <Menu.Item key="register"><i className="ft-home" />&nbsp;<span className="menu-title">{t('IDS_REGISTER')}</span></Menu.Item>}
-              <Menu.Item key="help"><i className="ft-alert-circle" />&nbsp;<span className="menu-title">{t('IDS_GUIDE')}</span></Menu.Item>
-              <Menu.Item key="support"><i className="ft-life-buoy" />&nbsp;<span className="menu-title">{t('IDS_SUPPORT')}</span></Menu.Item>
-              {isAuthenticated && <Menu.Item key="logout"><i className="ft-power" />&nbsp;<span className="menu-title">{t('IDS_LOGOUT')}</span></Menu.Item>}
+              <Menu.Item key="help"><Icon type="info-circle" style={{ fontSize: 16 }} /><span className="menu-title">{t('IDS_GUIDE')}</span></Menu.Item>
+              <Menu.Item key="support"><Icon type="deployment-unit" style={{ fontSize: 16 }} />&nbsp;<span className="menu-title">{t('IDS_SUPPORT')}</span></Menu.Item>
+              {isAuthenticated && <Menu.Item key="logout"><Icon type="logout" style={{ fontSize: 16, transform: 'rotate(-90deg)' }} />&nbsp;<span className="menu-title">{t('IDS_LOGOUT')}</span></Menu.Item>}
 
             </Menu>
           </div>
