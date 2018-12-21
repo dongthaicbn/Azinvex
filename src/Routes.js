@@ -29,7 +29,8 @@ const Routes = ({ location }) => {
     case routes.ROUTE_SIGNAL:
       return <Signal />;
     case routes.ROUTE_SIGNAL_EXPERT:
-      return <SignalExpert />;
+      return <Signal />;
+      // return <SignalExpert />;
     case routes.ROUTE_ADMIN_USER:
       return <User />;
     case routes.ROUTE_SUPPORT:

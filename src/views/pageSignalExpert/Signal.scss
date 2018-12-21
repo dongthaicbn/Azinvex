@@ -28,9 +28,9 @@
   background-image: linear-gradient(to bottom, $color, $color-dark);
   border: 1px solid hsb($h, hsb-saturate($s, 20), $b - 20);
   box-shadow: $inset-top,
-              $inset-bottom,
-              $inset,
-              0 2px 4px rgba(black, 0.2);
+  $inset-bottom,
+  $inset,
+  0 2px 4px rgba(black, 0.2);
 
   @if $light == 1 {
     color: hsb($h, hsb-saturate($s, 40), $b - 40);
@@ -45,8 +45,8 @@
     background: $color-dark;
     border-color: hsb($h, hsb-saturate($s, 40), $b - 40);
     box-shadow: $inset-top,
-                $inset-bottom,
-                $inset;
+    $inset-bottom,
+    $inset;
   }
 
   &:active {
@@ -72,40 +72,100 @@ strong{ font-weight: bold;}
 .button-yellow{ @include buttonize(49, 54, 99, 1);}
 .button .fa{ float: left; font-size: 14px; line-height: 20px; margin: -1px 8px 0 -4px; vertical-align: top;}
 
-.manage-left-container {
-  background: white;
-  width: 33%;
-  float: left;
-  border-radius: 4px;
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
-  padding: 20px;
-  .title-input {
-    font-size: 16px;
+.signal-container {
+  display: flex;
+  .manage-left-container {
+    //background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+    width: 25%;
+    border-radius: 4px;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+    padding: 20px;
+    .ant-list {
+      font-family: sans-serif;
+      letter-spacing: 0.6px;
+      color: #252525;
+      .ant-list-item-meta-content {
+        margin-top: 10px;
+      }
+      .ant-list-item-meta-title > a {
+        font-family: sans-serif;
+        letter-spacing: 0.6px;
+        //color: #EABF3F;
+      }
+      .ant-list-item {
+        //background: #001529;
+        //background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+      }
+    }
+    .title-input {
+      font-size: 16px;
+    }
+    .sell-btn {
+      margin-left: 10px;
+      background: #6D4C41;
+      border: #6D4C41;
+    }
+    .ant-form-item-control {
+      text-align: center;
+      font-size: 16px;
+    }
   }
-  .sell-btn {
-    margin-left: 10px;
-    background: #6D4C41;
-    border: #6D4C41;
+  .ant-table-placeholder {
+    font-family: sans-serif;
+    letter-spacing: 0.6px;
   }
-  .ant-form-item-control {
-    text-align: center;
-    font-size: 16px;
+  .manage-right-container {
+    //background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+    margin-left: 1%;
+    width: 75%;
+    display: inline-block;
+    border-radius: 4px;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+    padding: 20px;
+    .ant-table-thead > tr > th {
+      background-color: #009DA0;
+      color: white;
+    }
+    td {
+      font-family: sans-serif;
+      letter-spacing: 0.6px;
+    }
+    .ant-table-bordered.ant-table-fixed-header .ant-table-placeholder {
+      border: 1px solid #e8e8e8;
+    }
+  }
+  .header-manage-box {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #009da0;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 }
-.manage-right-container {
-  background: white;
-  margin-left: 1%;
-  width: 66%;
-  display: inline-block;
-  border-radius: 4px;
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
-  padding: 20px;
+.button-green {
+  background-color: #97cc76;
+  text-align: center;
 }
-.header-manage-box {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #009da0;
-  font-weight: 700;
-  text-transform: uppercase;
+@media (max-width: 767px) {
+  .signal-container {
+    display: block;
+    .manage-left-container {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .manage-right-container {
+      width: 100%;
+      padding: 15px;
+      .ant-table {
+        min-width: 992px;
+        overflow: auto;
+      }
+    }
+    .ant-table-wrapper {
+      .ant-spin-nested-loading {
+        width: 100%;
+        overflow: auto;
+      }
+    }
+  }
 }
-

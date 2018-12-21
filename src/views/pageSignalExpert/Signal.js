@@ -5,7 +5,9 @@ import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import './Signal.scss';
 import { listenExperts, unlistenExperts } from './../../reduxModules/expert/expertActions';
+import localize from '../../utils/hocs/localize';
 
+/*eslint-disable*/
 class Signal extends Component {
   state={
     selectedExpert: undefined,
@@ -132,79 +134,67 @@ class Signal extends Component {
   }
   render() {
     const { visibleModal } = this.state;
-    const { activeSignals, pendingSignals, signalLog } = this.props;
+    const { activeSignals, pendingSignals, signalLog, t } = this.props;
     const list = activeSignals.concat(pendingSignals);
     const columns = [
       {
         title: 'Ticket',
         dataIndex: 'id',
-        width: 100,
-        fixed: 'left',
         render: id => <strong>{id}</strong>,
         key: 'id'
       },
       {
-        title: 'Loại lệnh',
+        title: t("IDS_TYPE_COMMAND"),
         dataIndex: 'type',
-        width: 180,
         key: 'type',
         align: 'center',
         render: type => (
           <button className={`button ${this.getTypeSignalClass(type)}`}>
-            <Icon type="rise" className="fa" />
+            {/*<Icon type="rise" className="fa" />*/}
             <strong>{this.getTypeSignal(type)}</strong>
           </button>
         )
       },
       {
-        title: 'Cặp tiền',
+        title: t("IDS_SYMBOL"),
         dataIndex: 'symbol',
-        width: 100,
-        className: 'aaa',
-        render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>,
-        key: 'symbol'
+        key: 'symbol',
+        render: symbol => <strong style={{ color: '#42b0e3' }}>{symbol}</strong>
       },
       {
-        title: 'Giá mở cửa ',
-        width: 120,
+        title: t("IDS_OPEN_PRICE"),
         dataIndex: 'openPrice',
         key: 'openPrice'
       },
       {
-        title: 'Thời gian vào',
-        width: 160,
+        title: t("IDS_CREATE_TIME"),
         dataIndex: 'startAt',
         render: startAt => moment(startAt).format('HH:mm DD/MM/YYYY'),
         key: 'startAt'
       },
       {
-        title: 'Chốt lời',
-        width: 120,
+        title: t("IDS_TAKEPROFIT"),
         dataIndex: 'takeprofit',
         render: takeprofit => <strong style={{ color: 'green' }}>{takeprofit}</strong>,
         key: 'takeprofit'
       },
       {
-        title: 'Cắt lỗ',
-        width: 120,
+        title: t("IDS_STOPLOSS"),
         dataIndex: 'stoploss',
-        render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>,
-        key: 'stoploss'
+        key: 'stoploss',
+        render: stoploss => <strong style={{ color: 'red' }}>{stoploss}</strong>
       },
       {
-        title: 'Trạng thái',
+        title: t("IDS_STATUS"),
         dataIndex: 'status',
-        width: 100,
-        fixed: 'right',
-        key: 'status',
-        align: 'center',
-        render: status => (
-          status === 'pending' ? <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> : <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
+        render: status => (status === 'pending' ?
+          <img src="https://i.gifer.com/7plk.gif" alt="" height="40px" width="40px" /> :
+          <img src="https://thumbs.gfycat.com/ImmaculateUnacceptableArizonaalligatorlizard-size_restricted.gif" alt="" height="40px" width="40px" />
         )
       }
     ];
     return (
-      <div>
+      <div className="signal-container">
         <div className="manage-left-container">
           <p className="header-manage-box">Danh sách chuyên gia</p>
           <List
@@ -266,18 +256,14 @@ class Signal extends Component {
 export default connect(
   state => ({
     experts: state.firestore.ordered.experts,
-    activeSignals: state.firestore.ordered.selectedActiveSignals
-      ? state.firestore.ordered.selectedActiveSignals
-      : [],
-    pendingSignals: state.firestore.ordered.selectedPendingSignals
-      ? state.firestore.ordered.selectedPendingSignals
-      : [],
-    signalLog: state.firestore.ordered.signalLog
-      ? state.firestore.ordered.signalLog
-      : []
+    followedExperts: state.firestore.ordered.followedExperts,
+    activeSignals: state.firestore.ordered.selectedActiveSignals ? state.firestore.ordered.selectedActiveSignals : [],
+    pendingSignals: state.firestore.ordered.selectedPendingSignals ? state.firestore.ordered.selectedPendingSignals : [],
+    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
   }),
   {
     listenExperts,
     unlistenExperts
-  }
+  },
+  localize
 )(withFirestore(Signal));
