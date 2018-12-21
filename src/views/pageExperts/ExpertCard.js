@@ -33,7 +33,7 @@ class ExpertCard extends Component {
     const { expert, t } = this.props;
     const { isFollowed } = this.state;
     return (
-      <div style={{ width: '33%', padding: 20, display: 'inline-block' }}>
+      <div className="card-container">
         <div className="card">
           <div className="card-header text-center">
             <img src={expert.photoURL === '/assets/user.png' ? avatarUser : expert.photoURL} alt="Brek" width="150" height="150"

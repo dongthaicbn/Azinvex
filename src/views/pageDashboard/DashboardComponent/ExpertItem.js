@@ -47,11 +47,11 @@ class ExpertItem extends Component {
           title={
             <p className="account-name-text">
               {expert.displayName}
-          {index < 3 && <span className={this.setClass(index+1)}>TOP {index+1}</span>}
-              </p>
+              {index < 3 && <span className={this.setClass(index+1)}>TOP {index+1}</span>}
+            </p>
           }
           description={
-            <p>
+            <p style={{ fontFamily: 'sans-serif' }}>
               <Icon type="user" />&nbsp;{expert.followedCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Icon type="bar-chart" />&nbsp;{expert.totalpips.toFixed(1)} pips&nbsp;
             </p>

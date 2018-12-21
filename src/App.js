@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 import './App.scss';
 import Routes from './Routes';
 import Navigation from './views/components/Navigation/Navigation';
+import NavigationMobile from './views/components/Navigation/NavigationMobile';
 import ScrollBar from './views/components/ScrollBar/ScrollBar';
 import LandingPage from './views/pageLanding/Landing';
 import LoginPage from './views/pageLogin/Login';
@@ -73,8 +74,8 @@ componentDidMount(){
   handleTheme = () => {
     this.setState({ isSettingTheme: !this.state.isSettingTheme });
   };
-  handleChangeBGImage = imageSelect => { this.setState({ imgName: imageSelect }) };
-  handleChangeBGColor = colorSelect => { this.setState({ bgColor: colorSelect }) };
+  // handleChangeBGImage = imageSelect => { this.setState({ imgName: imageSelect }) };
+  // handleChangeBGColor = colorSelect => { this.setState({ bgColor: colorSelect }) };
 
   commonComponents = () => (
     <div className="app-container">
@@ -86,7 +87,7 @@ componentDidMount(){
           collapsed={this.state.collapsed}
           style={{
             height: '100vh',
-            backgroundImage: `url("../app-assets/img/sidebar-bg/${this.state.imgName}.jpg")`,
+            backgroundImage: 'url("../app-assets/img/sidebar-bg/04.jpg")',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
@@ -94,6 +95,7 @@ componentDidMount(){
         >
           <Navigation collapsed={this.state.collapsed} bgColor={this.state.bgColor} />
         </Layout.Sider>
+        <NavigationMobile collapsed={this.state.collapsed} toggle={this.toggle} bgColor={this.state.bgColor} />
         <Layout>
           <Header profileUser={this.props.profileUser} collapsed={this.state.collapsed} toggle={this.toggle} />
           <Layout.Content className="content-container">
@@ -107,14 +109,12 @@ componentDidMount(){
       </Layout>
       <div className="customizer border-left-blue-grey border-left-lighten-4 d-none d-sm-none d-md-block">
         <a id="customizer-toggle-icon" className="customizer-toggle bg-danger" onClick={this.handleTheme}>
-          <i className="ft-settings font-medium-4 fa fa-spin white align-middle" />
+          {/*<i className="ft-settings font-medium-4 fa fa-spin white align-middle" />*/}
+          <i className="ft-bell font-medium-4 white align-middle"/>
         </a>
         {this.state.isSettingTheme &&
           <SideBarSetting
-            imgName={this.state.imgName}
-            handleTheme={this.handleTheme}
-            handleChangeBGImage={this.handleChangeBGImage}
-            handleChangeBGColor={this.handleChangeBGColor}
+            handleClose={this.handleTheme}
           />
         }
       </div>

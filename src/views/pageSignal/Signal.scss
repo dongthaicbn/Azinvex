@@ -81,13 +81,15 @@ strong{ font-weight: bold;}
     box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
     padding: 20px;
     .ant-list {
-      font-family: Roboto sans-serif;
+      font-family: sans-serif;
+      letter-spacing: 0.6px;
       color: #252525;
       .ant-list-item-meta-content {
         margin-top: 10px;
       }
       .ant-list-item-meta-title > a {
-        font-family: Roboto sans-serif;
+        font-family: sans-serif;
+        letter-spacing: 0.6px;
         //color: #EABF3F;
       }
       .ant-list-item {
@@ -108,6 +110,10 @@ strong{ font-weight: bold;}
       font-size: 16px;
     }
   }
+  .ant-table-placeholder {
+    font-family: sans-serif;
+    letter-spacing: 0.6px;
+  }
   .manage-right-container {
     //background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
     margin-left: 1%;
@@ -119,6 +125,10 @@ strong{ font-weight: bold;}
     .ant-table-thead > tr > th {
       background-color: #009DA0;
       color: white;
+    }
+    td {
+      font-family: sans-serif;
+      letter-spacing: 0.6px;
     }
     .ant-table-bordered.ant-table-fixed-header .ant-table-placeholder {
       border: 1px solid #e8e8e8;
@@ -145,8 +155,15 @@ strong{ font-weight: bold;}
     }
     .manage-right-container {
       width: 100%;
+      padding: 15px;
       .ant-table {
         min-width: 992px;
+        overflow: auto;
+      }
+    }
+    .ant-table-wrapper {
+      .ant-spin-nested-loading {
+        width: 100%;
         overflow: auto;
       }
     }

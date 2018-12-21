@@ -221,3 +221,18 @@
     }
   }
 }
+@media (max-width: 767px) {
+  .expert-container {
+    margin-top: 0;
+    padding: 15px;
+    .card-container {
+      width: 100%;
+      display: block;
+      padding: 10px 0;
+    }
+    .ant-spin-nested-loading {
+      width: 100%;
+      overflow: auto;
+    }
+  }
+}

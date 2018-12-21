@@ -170,6 +170,20 @@ class Dashboard extends Component {
                 </div>
               </div>
             </div> */}
+
+            {/*just only show for mobile*/}
+            <div className="top-user-mobile">
+              <div className="top-expert-header">{t('IDS_TOP_EXPERTS')}</div>
+              {!isEmpty(topExpert) &&
+              <List
+                className="demo-loadmore-list"
+                itemLayout="horizontal"
+                dataSource={topExpert}
+                renderItem={(item,index) => <ExpertItem index={index} expert={item} />}
+              />
+              }
+            </div>
+
             <Timeline
               loading={loading}
               moreEvents={moreEvents}
@@ -177,6 +191,7 @@ class Dashboard extends Component {
               getNextEvents={this.getNextEvents}
             />
           </Layout.Content>
+
           <Layout.Sider className="side-bar-right-container">
             <div className="top-expert-header">{t('IDS_TOP_EXPERTS')}</div>
             {!isEmpty(topExpert) &&

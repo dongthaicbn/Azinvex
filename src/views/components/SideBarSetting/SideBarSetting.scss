@@ -29,6 +29,20 @@
       border: 2px solid #FF586B !important;
     }
   }
+  .header-notification {
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+  }
+  .date-notification {
+    position: absolute;
+    right: 20px;
+  }
+  .badge.badge-danger {
+    background-color: #f44336;
+    border: solid 1px white;
+    margin-top: -16px;
+  }
 }
 @-webkit-keyframes slide {
   0% { right: -400px; }

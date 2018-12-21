@@ -22,9 +22,6 @@ class Navigation extends React.Component {
 
   render() {
     const { collapsed, role, uid, isAuthenticated, t, bgColor } = this.props;
-    const IconFont = Icon.createFromIconfontCN({
-      scriptUrl: '../app-assets/fonts/feather'
-    });
     return (
       <ScrollBar>
         <div style={{ ...bgColor, opacity: 0.77 }}>

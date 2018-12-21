@@ -3,8 +3,20 @@
   border-radius: 4px;
   box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
   padding: 20px;
+  font-family: sans-serif;
+  letter-spacing: 0.6px;
+  .header-information {
+    display: flex;
+    padding: 0 38px 0 0;
+  }
+  .ant-input {
+    font-family: sans-serif;
+    letter-spacing: 0.6px;
+    opacity: 0.77;
+  }
   .info-header {
     font-size: 20px;
+    width: 100%;
     font-weight: 600;
   }
   .title-input-profile {
@@ -110,5 +122,29 @@
   }
   .ant-input-disabled {
     color: #111;
+  }
+}
+
+@media (max-width: 767px) {
+  .information-container {
+    .header-information {
+      padding: 0;
+    }
+    .card-info-contain {
+      width: 100%;
+      display: block;
+      padding: 15px;
+    }
+    .end-card-info {
+      width: 100%;
+      display: block;
+      padding: 15px;
+    }
+    .grid-container {
+      width: 100%;
+      display: block;
+      padding: 15px;
+    }
+
   }
 }

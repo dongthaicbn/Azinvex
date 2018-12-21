@@ -123,16 +123,17 @@ class Information extends Component {
     };
     return (
       <div className="information-container">
-        <p className="info-header">{t('IDS_PERSONAL_INFORMATION')}</p>
-        {!isEdit && (
-          <Button
-            type="primary"
-            onClick={() => this.setState({ isEdit: true })}
-            style={{ marginLeft: 'calc(99% - 126px)', width: 106 }}
-          >
-            {t('IDS_EDIT')}
-          </Button>
-        )}
+        <div className="header-information">
+          <p className="info-header">{t('IDS_PERSONAL_INFORMATION')}</p>
+          {!isEdit && (
+            <Button
+              type="primary"
+              onClick={() => this.setState({ isEdit: true })}
+            >
+              {t('IDS_EDIT')}
+            </Button>
+          )}
+        </div>
         {profile &&
           <Form onSubmit={this.handleSubmit}>
             <div className="card-info-contain">

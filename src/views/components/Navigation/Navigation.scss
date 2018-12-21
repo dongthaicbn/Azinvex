@@ -34,3 +34,43 @@
   //background: rgba(255,255,255,.2);
   margin: 16px;
 }
+// mobile
+.navigation-mobile-container {
+  width: 100vw;
+  //height: calc(100vh - 64px);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.1);
+  .ant-layout-sider {
+    display: block;
+  }
+  .navigation-content {
+    overflow: auto;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    .nav-item {
+      color: white;
+      margin: 0;
+    }
+    .ant-menu-item-selected {
+      background-color: #EABF3F;
+    }
+  }
+}
+.hide {
+  display: none;
+}
+@media (min-width: 768px) {
+  .navigation-mobile-container {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .ant-layout-sider {
+    display: none;
+  }
+}

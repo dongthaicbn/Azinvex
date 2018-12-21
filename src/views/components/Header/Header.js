@@ -13,7 +13,7 @@ import Notification from './Notification';
 
 class Header extends React.Component {
   state = {
-    isNotification: false
+    // isNotification: false
   }
   handleSelectItem = (item, key, keyPath) => {
     if(item.key === "logout") {
@@ -23,7 +23,7 @@ class Header extends React.Component {
   onChangeLanguage = item => {
     this.props.actionSetLanguageOnMount(item.key, item.key);
   };
-  toggleNotification = () => this.setState({ isNotification: !this.state.isNotification });
+  // toggleNotification = () => this.setState({ isNotification: !this.state.isNotification });
   render() {
     const { collapsed, t, languageCode } = this.props;
     const { isNotification } = this.state;
@@ -77,13 +77,13 @@ class Header extends React.Component {
             </li>
           </Dropdown>
         }
-        <li className="dropdown nav-item user-info">
-          <a data-toggle="dropdown" className="nav-link position-relative dropdown-toggle" onClick={this.toggleNotification}>
-            <i className="ft-bell blue-grey darken-4"/>
-            <span className="notification badge badge-pill badge-danger">4</span>
-          </a>
-          {isNotification && <Notification handleClose={this.toggleNotification} />}
-        </li>
+        {/*<li className="dropdown nav-item user-info">*/}
+          {/*<a data-toggle="dropdown" className="nav-link position-relative dropdown-toggle" onClick={this.toggleNotification}>*/}
+            {/*<i className="ft-bell blue-grey darken-4"/>*/}
+            {/*<span className="notification badge badge-pill badge-danger">4</span>*/}
+          {/*</a>*/}
+          {/*{isNotification && <Notification handleClose={this.toggleNotification} />}*/}
+        {/*</li>*/}
         <Dropdown overlay={language} trigger={['click']} placement="bottomRight">
           <li className="dropdown nav-item user-info">
             <a data-toggle="dropdown" className="nav-link position-relative dropdown-toggle">
