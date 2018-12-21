@@ -70,7 +70,7 @@ class ExpertDetail extends Component {
     if(profile.role === 'expert' && expertId !== currentUser.uid)  return(<div>401 Error. You do not have Sufficient Permissions to Access This Page</div>);
     if(expertDetail.role === 'member')  return(<div>{t('IDS_ERROR_MEMBER_IS_NOT_EXPERT')}</div>);
     return (
-      <div>
+      <div className="detail-expert-wrapper">
         <div className="profile-container">
           <div className="card-img-profile" />
           <div className="profile-info">

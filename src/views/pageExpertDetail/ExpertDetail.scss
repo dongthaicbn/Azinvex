@@ -1,238 +1,246 @@
-.profile-container {
-  border-radius: 4px;
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
-  background: white;
-  .card-img-profile {
-    width: 100%;
-    height: 300px;
-    background: url("http://www.design-outsource.com/img/ui-design-banner.jpg") 50%;
-    border-top-left-radius: calc(.25rem - 1px);
-    border-top-right-radius: -webkit-calc(.25rem - 1px);
-    border-top-right-radius: -moz-calc(.25rem - 1px);
-  }
-  .profile-info {
-    height: 120px;
-    .avatar-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
-      padding: 5px;
-      margin-left: calc(50% - 50px);
-      margin-top: -50px;
-      background: white;
+.detail-expert-wrapper {
+  .profile-container {
+    border-radius: 4px;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+    background: white;
+    .card-img-profile {
+      width: 100%;
+      height: 300px;
+      background: url("http://www.design-outsource.com/img/ui-design-banner.jpg") 50%;
+      border-top-left-radius: calc(.25rem - 1px);
+      border-top-right-radius: -webkit-calc(.25rem - 1px);
+      border-top-right-radius: -moz-calc(.25rem - 1px);
     }
-    .title-profile {
+    .profile-info {
+      height: 120px;
+      .avatar-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        padding: 5px;
+        margin-left: calc(50% - 50px);
+        margin-top: -50px;
+        background: white;
+      }
+      .title-profile {
+        font-weight: 600;
+        text-align: center;
+        margin-top: 5px;
+        font-size: 16px;
+      }
+      .sub-profile {
+        text-align: center;
+        color: #9e9e9e;
+        font-size: 12px;
+      }
+    }
+  }
+  .expert-container {
+    border-radius: 4px;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    .card-container {
+      width: 100%;
+    }
+    .ant-tabs-nav {
+      width: 100%;
+    }
+    .ant-tabs-nav .ant-tabs-tab {
+      width: calc(25% - 32px);
+      color: #009da0;
+      font-size: 16px;
       font-weight: 600;
       text-align: center;
-      margin-top: 5px;
-      font-size: 16px;
     }
-    .sub-profile {
-      text-align: center;
-      color: #9e9e9e;
-      font-size: 12px;
+    .ant-tabs-ink-bar {
+      background-color: #009da0;
+    }
+    .ant-table-thead > tr > th {
+      background-color: #009DA0;
+      color: white;
+    }
+    .ant-pagination-item-active {
+      background-color: #009DA0;
+      border: solid 1px #009DA0;
+      color: white;
     }
   }
-}
-.expert-container {
-  border-radius: 4px;
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
-  background: white;
-  margin-top: 20px;
-  padding: 20px;
-  .ant-tabs-nav {
-    width: 100%;
-  }
-  .ant-tabs-nav .ant-tabs-tab {
-    width: calc(25% - 32px);
+  .header-card {
     color: #009da0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    text-align: center;
+    margin-bottom: 15px;
   }
-  .ant-tabs-ink-bar {
-    background-color: #009da0;
-  }
-  .ant-table-thead > tr > th {
-    background-color: #009DA0;
-    color: white;
-  }
-  .ant-pagination-item-active {
-    background-color: #009DA0;
-    border: solid 1px #009DA0;
-    color: white;
-  }
-}
-.header-card {
-  color: #009da0;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-.card-container {
-  border-radius: 4px;
-  margin-bottom: 20px;
-  &.chat-content-container {
-    max-height: 300px;
-    overflow: auto;
-    .chat-text-item {
-      height: 50px;
-      padding: 5px 0;
-      .chat-left-content {
-        padding: 8px 15px;
-        color: #252525;
-        background-color: #ebedf0;
-        margin-left: 10px;
-        border-bottom-left-radius: 15px;
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
-      }
-      .chat-right-content {
-        float: right;
-        padding: 8px 15px;
-        color: #fff;
-        background-color: #009da0;
-        margin-right: 10px;
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
-        border-top-right-radius: 15px;
-      }
-    }
-  }
-  .column-container {
-    padding: 10px 0;
-    .item-container {
-      margin-bottom: 10px;
-      .text-item {
-        color: #009da0;
-        font-size: 17px;
-        margin-bottom: 5px;
-      }
-      .sub-text-item {
-        font-size: 15px;
-        margin-bottom: 5px;
-      }
-    }
-  }
-  .create-notice-btn {
-    border-radius: 30px;
-    margin-bottom: 10px;
-    float: right;
-    font-size: 16px;
-  }
-  .detail-command-btn {
-    border-radius: 30px;
-    margin-bottom: 10px;
-    float: right;
-    margin-right: 15px;
-    font-size: 16px;
-  }
-  .group-btn {
-    margin-bottom: 30px;
-    padding: 0 15px;
-  }
-  .reset-btn {
-    margin-left: 20px;
-  }
-  .chat-container {
-    background-color: #FAFAFA;
-  }
-}
-.text-title {
-  color: #009da0;
-  font-size: 17px;
-  margin-bottom: 5px;
-}
-.text-area-content {
-  resize: none;
-}
-.post-container {
-  display: block;
-  margin: 0 -10px;
-  .card-dashboard-container {
-    font-family: inherit;
-    width: calc(50% - 20px);
-    margin: 0 10px;
-    float: left;
+  .card-container {
+    border-radius: 4px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 1px 0 rgba(60,64,67,.08), 0 1px 3px 1px rgba(60,64,67,.16);
-    transition: box-shadow 135ms cubic-bezier(.4,0,.2,1);
-    border-radius: 6px;
-    .header-post {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    .date-post {
-      color: #6c757d;
-      margin-top: -10px;
-      margin-bottom: 10px;
-    }
-    .content-post {
-      color: #252525;
-      .image-container {
-        width: 100%;
-        margin: 20px 0 10px 0;
-        border-radius: 4px;
-      }
-      .content-post-description {
-        margin-bottom: 10px;
-      }
-      .comment-header {
-        font-size: 16px;
-        font-weight: 700;
-        text-transform: uppercase;
-        border-top: solid 1px #009da0;
-        padding-top: 10px;
-        color: #009da0;
-      }
-      .list-comment {
-        max-height: 200px;
-        overflow: auto;
-        margin-bottom: 10px;
-        .post-user-information {
-          height: 64px;
-          display: flex;
-          padding: 12px 12px 12px 0;
-          border-bottom: solid 1px #ebedf0;
-          .avatar-user-post {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            margin-right: 10px;
-          }
-          .user-name-text {
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-          }
+    &.chat-content-container {
+      max-height: 300px;
+      overflow: auto;
+      width: 100%;
+      .chat-text-item {
+        height: 50px;
+        padding: 5px 0;
+        .chat-left-content {
+          padding: 8px 15px;
+          color: #252525;
+          background-color: #ebedf0;
+          margin-left: 10px;
+          border-bottom-left-radius: 15px;
+          border-top-right-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+        .chat-right-content {
+          float: right;
+          padding: 8px 15px;
+          color: #fff;
+          background-color: #009da0;
+          margin-right: 10px;
+          border-top-left-radius: 15px;
+          border-bottom-left-radius: 15px;
+          border-top-right-radius: 15px;
         }
       }
-      .ant-input-group > .ant-input:last-child, .ant-input-group-addon:last-child {
-        background: #009da0;
-        color: white;
-        border: 1px solid #009da0;
-        cursor: pointer;
+    }
+    .column-container {
+      padding: 10px 0;
+      .item-container {
+        margin-bottom: 10px;
+        .text-item {
+          color: #009da0;
+          font-size: 17px;
+          margin-bottom: 5px;
+        }
+        .sub-text-item {
+          font-size: 15px;
+          margin-bottom: 5px;
+        }
       }
-      .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
-        border: 1px solid #009da0;
+    }
+    .create-notice-btn {
+      border-radius: 30px;
+      margin-bottom: 10px;
+      float: right;
+      font-size: 16px;
+    }
+    .detail-command-btn {
+      border-radius: 30px;
+      margin-bottom: 10px;
+      float: right;
+      margin-right: 15px;
+      font-size: 16px;
+    }
+    .group-btn {
+      margin-bottom: 30px;
+      padding: 0 15px;
+    }
+    .reset-btn {
+      margin-left: 20px;
+    }
+    .chat-container {
+      background-color: #FAFAFA;
+    }
+  }
+  .text-title {
+    color: #009da0;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  .text-area-content {
+    resize: none;
+  }
+  .post-container {
+    display: block;
+    margin: 0 -10px;
+    .card-dashboard-container {
+      font-family: inherit;
+      width: calc(50% - 20px);
+      margin: 0 10px;
+      float: left;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 1px 0 rgba(60,64,67,.08), 0 1px 3px 1px rgba(60,64,67,.16);
+      transition: box-shadow 135ms cubic-bezier(.4,0,.2,1);
+      border-radius: 6px;
+      .header-post {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .date-post {
+        color: #6c757d;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+      .content-post {
+        color: #252525;
+        .image-container {
+          width: 100%;
+          margin: 20px 0 10px 0;
+          border-radius: 4px;
+        }
+        .content-post-description {
+          margin-bottom: 10px;
+        }
+        .comment-header {
+          font-size: 16px;
+          font-weight: 700;
+          text-transform: uppercase;
+          border-top: solid 1px #009da0;
+          padding-top: 10px;
+          color: #009da0;
+        }
+        .list-comment {
+          max-height: 200px;
+          overflow: auto;
+          margin-bottom: 10px;
+          .post-user-information {
+            height: 64px;
+            display: flex;
+            padding: 12px 12px 12px 0;
+            border-bottom: solid 1px #ebedf0;
+            .avatar-user-post {
+              width: 40px;
+              height: 40px;
+              border-radius: 4px;
+              margin-right: 10px;
+            }
+            .user-name-text {
+              font-size: 16px;
+              font-weight: 600;
+              width: 100%;
+            }
+          }
+        }
+        .ant-input-group > .ant-input:last-child, .ant-input-group-addon:last-child {
+          background: #009da0;
+          color: white;
+          border: 1px solid #009da0;
+          cursor: pointer;
+        }
+        .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+          border: 1px solid #009da0;
+        }
       }
     }
   }
 }
 @media (max-width: 767px) {
-  .expert-container {
-    margin-top: 0;
-    padding: 15px;
-    .card-container {
-      width: 100%;
-      display: block;
-      padding: 10px 0;
-    }
-    .ant-spin-nested-loading {
-      width: 100%;
-      overflow: auto;
+  .detail-expert-wrapper {
+    .expert-container {
+      margin-top: 0;
+      padding: 15px;
+      .card-container {
+        width: 100%;
+        display: block;
+        padding: 10px 0;
+      }
+      .ant-spin-nested-loading {
+        width: 100%;
+        overflow: auto;
+      }
     }
   }
 }
