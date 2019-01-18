@@ -39,6 +39,7 @@ class Information extends Component {
       if(!values.information.address) values.information.address = ''
       if(!values.information.birthplace) values.information.birthplace = ''
       if(!values.information.experience) values.information.experience = ''
+      if(!values.information.occupation) values.information.occupation = ''
       if(!values.information.phone) values.information.phone = ''
       console.log(values)
       let { birthday, ...updatedUser } = values;
