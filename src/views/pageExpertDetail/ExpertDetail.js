@@ -81,7 +81,7 @@ class ExpertDetail extends Component {
         </div>
         <div className="expert-container">
           <Tabs>
-            <Tabs.TabPane tab={<span>{t('IDS_SIGNAL_ROOM')}</span>} key="1"><SignalRoom activeList={activeList} pendingList={pendingList} todayList={todayList}/></Tabs.TabPane>
+            <Tabs.TabPane tab={<span>{t('IDS_SIGNAL_ROOM')}</span>} key="1"><SignalRoom expertId={expertId} activeList={activeList} pendingList={pendingList} todayList={todayList}/></Tabs.TabPane>
             <Tabs.TabPane tab={<span>{t('IDS_INFORMATION')}</span>} key="2"><Information expertDetail={expertDetail} /></Tabs.TabPane>
             <Tabs.TabPane tab={<span>{t('IDS_HISTORY')}</span>} key="3"><History expertDetail={expertDetail} /></Tabs.TabPane>
             <Tabs.TabPane tab={<span>{t('IDS_POST')}</span>} key="4"><Posts expertDetail={expertDetail} /></Tabs.TabPane>

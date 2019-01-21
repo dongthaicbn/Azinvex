@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { withFirestore } from 'react-redux-firebase';
+import { withFirestore, firebaseConnect, isEmpty } from 'react-redux-firebase';
 import { compose } from 'recompose';
-import { Table, Button, Card, Icon, Input, Avatar, Modal } from 'antd';
+import { Table, Button, Card, Icon, Input, Avatar, Modal, Form } from 'antd';
+import { addEventComment } from '../../reduxModules/expert/expertActions';
 import './ExpertDetail.scss';
 import avatarUser from '../../assets/user.png';
 import localize from '../../utils/hocs/localize';
@@ -15,6 +16,17 @@ class SignalRoom extends Component {
   state={
     visibleModal: false
   }
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => { 
+      if (!err) {
+         console.log(this.props.expertId,values);
+        this.props.addEventComment(this.props.expertId, values)
+        this.props.form.resetFields();
+      }
+    });
+  };
+
   capitalizeFirstLetter = string => {
       return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -94,8 +106,9 @@ class SignalRoom extends Component {
       this.getSignalLog(ticket);
   }
   render() {
+    const { getFieldDecorator } = this.props.form;
     const { visibleModal } = this.state;
-    const { activeList, pendingList, todayList, t, signalLog } = this.props;
+    const { activeList, pendingList, todayList, t, signalLog, expertChat } = this.props;
     const list = activeList.concat(pendingList).concat(todayList);
     const columns = [
       {
@@ -155,6 +168,7 @@ class SignalRoom extends Component {
       },
     ];
     const suffix = <Icon type="picture" theme="outlined" />;
+    console.log(expertChat);
     const fakeListChat = [
       { type: 'left', text: 'Hello' },
       { type: 'right', text: 'Ok' },
@@ -188,13 +202,13 @@ class SignalRoom extends Component {
         <p className="header-card">{t('IDS_CHAT')}</p>
         <div className="chat-container">
           <Card className="card-container chat-content-container common-scroll">
-            {fakeListChat.map((item, index) => (
-              item.type === 'left' ?
+            {expertChat && expertChat.map((item, index) => (
+              index % 2 ?
                 <div className="chat-text-item" key={index}>
                   <Avatar
                     style={{ verticalAlign: 'middle' }}
                     size="large"
-                    src={avatarUser}
+                    src={item.photoURL}
                   />
                   <span className="chat-left-content">{item.text}</span>
                 </div> :
@@ -202,18 +216,27 @@ class SignalRoom extends Component {
                   <Avatar
                     style={{ verticalAlign: 'middle', float: 'right' }}
                     size="large"
-                    src={avatarUser}
+                    src={item.photoURL}
                   />
                   <span className="chat-right-content">{item.text}</span>
                 </div>
             ))}
           </Card>
-          <Button type="primary" style={{ float: 'right' }}>{t('IDS_SEND')}</Button>
-          <Input
+          <Form onSubmit={this.handleSubmit}>
+         
+       <Form.Item>
+       <Button htmlType="submit" type="primary" style={{ float: 'right' }}>{t('IDS_SEND')}</Button>
+                      {getFieldDecorator('comment', {
+                        rules: [{ required: true, message: 'Please type message' }]
+                      })(
+                        <Input
             style={{ float: 'left', width: 'calc(100% - 80px)' }}
             prefix={<Icon type="smile" theme="outlined" />}
             suffix={suffix}
           />
+                      )}
+                    </Form.Item>
+          </Form>
         </div>
         <Modal
           title={t('IDS_DETAIL_SIGNAL')}
@@ -230,12 +253,23 @@ class SignalRoom extends Component {
     );
   }
 }
-
-export default compose(connect(
-  state => ({
-    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : []
-  }),
-{
-  followSignal, unfollowSignal, isFollowedSignal
+const objectToArray = (object) => {
+  if (object) {
+    return Object.entries(object).map(e => Object.assign(e[1], {id: e[0]}))
+  }
 }
-),localize)(withFirestore(SignalRoom));
+
+const mapState = (state, ownProps) => {
+  return {
+    loading: state.async.loading,
+    signalLog: state.firestore.ordered.signalLog ? state.firestore.ordered.signalLog : [],
+    expertChat: !isEmpty(state.firebase.data.expert_chat) &&
+     objectToArray(state.firebase.data.expert_chat[ownProps.expertId])
+  }
+};
+
+const actions = {
+  followSignal, unfollowSignal, isFollowedSignal,addEventComment
+};
+
+export default compose(connect(mapState,actions),Form.create(),localize,firebaseConnect(props => [`expert_chat/${props.expertId}`]))(withFirestore(SignalRoom));
