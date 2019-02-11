@@ -53,20 +53,20 @@ class Information extends Component {
     this.setState({ fileList: [fileList[fileList.length - 1]] });
     const image = fileList[fileList.length - 1].originFileObj;
     const formData = new FormData();
-    formData.append('photo', image);
+    formData.append('file', image);
     const axiosConfig = {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*'
       }
     };
-    const url = 'https://api.congtruyendich.com/upload';
+    const url = 'https://api2.azinvex.com/upload';
     this.setState({
       uploading: true,
     });
     try {
       const data = await axios.post(url, formData, axiosConfig);
-      firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: data.data.full });
+      firestore.update({ collection: 'users', doc: currentUser.uid }, { photoURL: 'https://api2.azinvex.com/uploads/'+data.data.filename });
       this.setState({
         uploading: false,
       });

@@ -27,7 +27,7 @@ class Posts extends Component {
         'Access-Control-Allow-Origin': '*'
       }
     };
-    const url = 'https://api.congtruyendich.com/upload';
+    const url = 'https://api2.azinvex.com/upload';
     this.setState({
       uploading: true,
     });
@@ -37,7 +37,7 @@ class Posts extends Component {
         uploadResult: data.data.full,
         uploading: false
       });
-      this.props.form.setFields( { "photo" : {value : data.data.full} } );
+      this.props.form.setFields( { "file" : {value : 'https://api2.azinvex.com/uploads/'+data.data.filename} } );
       message.success('upload successfully.');
     } catch (error) {
       console.log(error)
