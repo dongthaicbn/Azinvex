@@ -19,7 +19,7 @@ import Help from './views/pageHelp/Help';
 import SideBarSetting from './views/components/SideBarSetting/SideBarSetting';
 import firbaseApp from './utils/redux/configureFirebase'
 import { getPermission, monitorRefresh, receiveMessages } from './reduxModules/auth/authAction'
-
+import firebase from "firebase/app";
 import * as routes from './utils/constants/routes';
 
 import { actionNavigateTo } from './reduxModules/common/routes';
@@ -178,9 +178,11 @@ componentDidMount(){
         {
           if (isAuthenticated) {
             if(!this.checkRole(role, location)) {
-              this.props.getPermission(this.props.currentUser);
-              this.props.monitorRefresh(this.props.currentUser);
-              this.props.receiveMessages();
+              if(firebase.messaging.isSupported()){
+                this.props.getPermission(this.props.currentUser);
+                this.props.monitorRefresh(this.props.currentUser);
+                this.props.receiveMessages();
+              }
               return this.commonComponents();
             }
             this.props.actionNavigateTo(routes.ROUTE_ERROR_403);
